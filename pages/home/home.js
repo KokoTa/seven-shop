@@ -13,7 +13,7 @@ Page({
   onLoad: function(options) {
     Theme.getHomeLoacationA(data => {
       this.setData({
-        topTheme: data.entrance_img
+        topTheme: data[0].entrance_img
       })
     })
   },
