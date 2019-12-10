@@ -1,20 +1,32 @@
 import { Theme } from '../../model/theme'
+import { Banner } from '../../model/banner'
+import { Category } from '../../model/category'
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    topTheme: ''
+    themeA: '',
+    bannerB: [],
+    grid: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    Theme.getHomeLoacationA(data => {
-      this.setData({
-        topTheme: data[0].entrance_img
-      })
+    this.initialData()
+  },
+
+  async initialData() {
+    const themeA = await Theme.getHomeLoacationA()
+    const bannerB = await Banner.getHomeLocationB()
+    const grid = await Category.getGridCategory()
+
+    this.setData({
+      themeA: themeA[0],
+      bannerB: bannerB.items,
+      grid
     })
   },
 

@@ -1,7 +1,9 @@
 import { config } from '../config/config'
+import { promisic } from '../miniprogram_npm/lin-ui/utils/util';
+
 class Http {
-  static request({ url, data, callback, method = 'GET' }) {
-    wx.request({
+  static request({ url, data, method = 'GET' }) {
+    return promisic(wx.request)({
       url: `${config.apiBaseUrl}${url}`,
       data,
       method,
@@ -12,12 +14,6 @@ class Http {
       method: 'GET',
       dataType: 'json',
       responseType: 'text',
-      success: result => {
-        callback(result.data)
-      },
-      fail: () => {
-        console.log('请求失败')
-      }
     })
   }
 }

@@ -1,3 +1,14 @@
 <view>
-  <image class="top-theme" src="{{topTheme}}" />
+  <!-- 主题 -->
+  <image class="top-theme" src="{{themeA.entrance_img}}" />
+  <!-- 轮播 -->
+  <swiper class="swiper" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" indicator-active-color="#157658" duration="{{500}}" circular="{{true}}">
+    <block wx:for="{{bannerB}}" wx:key="{{index}}">
+      <swiper-item>
+        <image class="swiper" src="{{item.img}}" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <!-- 分类 -->
+  <s-category-grid grid="{{grid}}"></s-category-grid>
 </view>
