@@ -1,6 +1,7 @@
 import { Theme } from '../../model/theme'
 import { Banner } from '../../model/banner'
 import { Category } from '../../model/category'
+import { Activity } from '../../model/activity';
 Page({
   /**
    * 页面的初始数据
@@ -8,7 +9,8 @@ Page({
   data: {
     themeA: '',
     bannerB: [],
-    grid: []
+    grid: [],
+    activityD: {}
   },
 
   /**
@@ -19,14 +21,25 @@ Page({
   },
 
   async initialData() {
-    const themeA = await Theme.getHomeLoacationA()
+    const theme = new Theme()
+    await theme.getThemes()
+
+    const themeA = theme.getHomeLocationA()
+    const themeE = theme.getHomeLocationE()
+    const themeF = theme.getHomeLocationF()
+    const themeH = theme.getHomeLocationH()
     const bannerB = await Banner.getHomeLocationB()
-    const grid = await Category.getGridCategory()
+    const gridC = await Category.getHomeLocationC()
+    const activityD = await Activity.getHomeLocationD()
 
     this.setData({
-      themeA: themeA[0],
+      themeA,
       bannerB: bannerB.items,
-      grid
+      gridC,
+      activityD,
+      themeE,
+      themeF,
+      themeH
     })
   },
 

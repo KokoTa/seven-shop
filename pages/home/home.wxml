@@ -10,5 +10,7 @@
     </block>
   </swiper>
   <!-- 分类 -->
-  <s-category-grid grid="{{grid}}"></s-category-grid>
+  <s-category-grid grid="{{gridC}}"></s-category-grid>
+  <!-- 优惠券 -->
+  <image class="activity" src="{{activityD.entrance_img}}" />
 </view>
