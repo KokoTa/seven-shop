@@ -1,7 +1,7 @@
 <view>
-  <!-- 主题 -->
+  <!-- 折扣季 -->
   <image class="top-theme" src="{{themeA.entrance_img}}" />
-  <!-- 轮播 -->
+  <!-- 商品轮播 -->
   <swiper class="swiper" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" indicator-active-color="#157658" duration="{{500}}" circular="{{true}}">
     <block wx:for="{{bannerB}}" wx:key="{{index}}">
       <swiper-item>
@@ -9,8 +9,16 @@
       </swiper-item>
     </block>
   </swiper>
-  <!-- 分类 -->
+  <!-- 商品分类 -->
   <s-category-grid grid="{{gridC}}"></s-category-grid>
   <!-- 优惠券 -->
   <image class="activity" src="{{activityD.entrance_img}}" />
+  <!-- 每周上新 -->
+  <s-spu-scroll wx:if="{{themeE.online}}" theme="{{themeE}}" spu-list="{{themeESpu}}"></s-spu-scroll>
+  <!-- 精选甄选 -->
+  <image class="quality" src="{{themeF.entrance_img}}"></image>
+  <!-- 热门榜单 -->
+  <s-hot-list banner="{{bannerG}}"></s-hot-list>
+  <!-- 时尚穿搭 -->
+  <image src="{{themeH.entrance_img}}" class="fashion" />
 </view>

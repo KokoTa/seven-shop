@@ -1,0 +1,6 @@
+.view-hover {
+  position: relative;
+  top: 3rpx;
+  left: 3rpx;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1) inset;
+}

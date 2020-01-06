@@ -26,9 +26,18 @@ Page({
 
     const themeA = theme.getHomeLocationA()
     const themeE = theme.getHomeLocationE()
+    // 判断是否是上架状态
+    let themeESpu = []
+    if (themeE.online) {
+      const data = await Theme.getHomeLocationESpu()
+      if (data) {
+        themeESpu = data.spu_list.slice(0, 8)
+      }
+    }
     const themeF = theme.getHomeLocationF()
     const themeH = theme.getHomeLocationH()
     const bannerB = await Banner.getHomeLocationB()
+    const bannerG = await Banner.getHomeLocationG()
     const gridC = await Category.getHomeLocationC()
     const activityD = await Activity.getHomeLocationD()
 
@@ -38,7 +47,9 @@ Page({
       gridC,
       activityD,
       themeE,
+      themeESpu,
       themeF,
+      bannerG,
       themeH
     })
   },

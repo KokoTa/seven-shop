@@ -1,22 +1,27 @@
-// components/category-grid/index.js
+// components/spu-scroll/index.js
 /**
- * 九宫格组件
+ * spu横向滚动组件
  */
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-    grid: Array
+    theme: Object,
+    spuList: Array
   },
 
   /**
    * 组件的初始数据
    */
-  data: {},
+  data: {
+
+  },
 
   /**
    * 组件的方法列表
    */
-  methods: {}
+  methods: {
+
+  }
 })

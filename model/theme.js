@@ -11,14 +11,18 @@ class Theme {
 
   themes = []
 
+  /**
+   * 获取主题详情
+   */
   async getThemes() {
     const names = `${Theme.locationA},${Theme.locationE},${Theme.locationF},${Theme.locationH}`
-    this.themes = await Http.request({
+    const data = await Http.request({
       url: `/theme/by/names`,
       data: {
         names
       }
     })
+    this.themes = data.data
   }
 
   getHomeLocationA() {
@@ -32,6 +36,20 @@ class Theme {
   }
   getHomeLocationH() {
     return this.themes.find(t => t.name === Theme.locationH)
+  }
+
+  /**
+   * 获取主题详情(带SPU)
+   */
+  static async getThemeSpuByName(name) {
+    const data = await Http.request({
+      url: `/theme/name/${name}/with_spu`
+    })
+    return data.data
+  }
+
+  static async getHomeLocationESpu() {
+    return Theme.getThemeSpuByName(Theme.locationE)
   }
 }
 
