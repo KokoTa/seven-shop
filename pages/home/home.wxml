@@ -21,4 +21,10 @@
   <s-hot-list banner="{{bannerG}}"></s-hot-list>
   <!-- 时尚穿搭 -->
   <image src="{{themeH.entrance_img}}" class="fashion" />
+  <!-- 瀑布流 -->
+  <view class="spu-bottom">
+    <image class="title-spu-bottom" src="/assets/img/recommend.png"></image>
+    <!-- https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/generics.html -->
+    <l-water-flow generic:l-water-flow-item=""></l-water-flow>
+  </view>
 </view>

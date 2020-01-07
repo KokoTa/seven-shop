@@ -2,6 +2,7 @@ import { Theme } from '../../model/theme'
 import { Banner } from '../../model/banner'
 import { Category } from '../../model/category'
 import { Activity } from '../../model/activity';
+import { SpuPage } from '../../model/spu-page';
 Page({
   /**
    * 页面的初始数据
@@ -18,6 +19,13 @@ Page({
    */
   onLoad: function(options) {
     this.initialData()
+  },
+
+  async initSpuList() {
+    const paging = await SpuPage.getLatestPaging()
+    const data = paging.getMoreData()
+
+    if (!data) return
   },
 
   async initialData() {
@@ -40,6 +48,8 @@ Page({
     const bannerG = await Banner.getHomeLocationG()
     const gridC = await Category.getHomeLocationC()
     const activityD = await Activity.getHomeLocationD()
+
+    this.initSpuList()
 
     this.setData({
       themeA,
