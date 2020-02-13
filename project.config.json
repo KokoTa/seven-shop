@@ -23,7 +23,7 @@
 		"nodeModules": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.10.0",
+	"libVersion": "2.10.1",
 	"appid": "wx1b13619a00914149",
 	"projectname": "seven-shop",
 	"debugOptions": {

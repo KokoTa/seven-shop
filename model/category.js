@@ -6,7 +6,6 @@ class Category {
     const data = await Http.request({
       url: '/category/grid/all'
     })
-
     return data.data
   }
 }

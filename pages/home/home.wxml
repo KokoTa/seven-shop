@@ -3,7 +3,7 @@
   <image class="top-theme" src="{{themeA.entrance_img}}" />
   <!-- 商品轮播 -->
   <swiper class="swiper" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" indicator-active-color="#157658" duration="{{500}}" circular="{{true}}">
-    <block wx:for="{{bannerB}}" wx:key="{{index}}">
+    <block wx:for="{{bannerB}}" wx:key="index">
       <swiper-item>
         <image class="swiper" src="{{item.img}}" />
       </swiper-item>

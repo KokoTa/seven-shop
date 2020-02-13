@@ -2,8 +2,9 @@
 <view class="container">
   <image class="title" src="{{theme.title_img}}"></image>
   <scroll-view scroll-x class="scroll-view">
+    <!-- 注意这里嵌套了一层 -->
     <view class="inner">
-      <block wx:for="{{spuList}}" key="{{index}}">
+      <block wx:for="{{spuList}}" wx:key="index">
         <view class="spu-container">
           <image class="spu-img" src="{{item.img}}" />
           <text class="spu-title">

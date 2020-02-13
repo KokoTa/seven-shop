@@ -8,7 +8,6 @@ class Activity {
     const data = await Http.request({
       url: `/activity/name/${this.locationD}`
     })
-
     return data.data
   }
 }

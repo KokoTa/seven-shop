@@ -3,6 +3,7 @@ import { promisic } from '../miniprogram_npm/lin-ui/utils/util';
 
 class Http {
   static request({ url, data, method = 'GET' }) {
+    console.log(url)
     return promisic(wx.request)({
       url: `${config.apiBaseUrl}${url}`,
       data,
@@ -10,10 +11,7 @@ class Http {
       header: {
         'content-type': 'application/json',
         appKey: config.appKey
-      },
-      method: 'GET',
-      dataType: 'json',
-      responseType: 'text',
+      }
     })
   }
 }

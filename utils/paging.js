@@ -2,14 +2,18 @@ import { Http } from './http';
 
 /**
  * 分页工具类
+ *
+ * 需要考虑的因素：
+ * 1. 加载状态：正在加载、加载完成、没有更多数据
+ * 2. 加载控制：防抖节流
  */
 class Paging {
 
-  req // 可能包含 url/data/method
-  start
-  count
+  req // 包含 url、data、method
+  start // 索引
+  count // 单位数量
   locker = false // true 已锁 false 未锁
-  moreData = true
+  moreData = true // 是否有更多数据
   accumulator = []
 
   constructor(req, count = 10, start = 0) {
@@ -18,8 +22,9 @@ class Paging {
     this.start = start
   }
 
+  // 获取更多数据
   async getMoreData() {
-    if (!this._getLocker || !this.moreData) return
+    if (this.locker || !this.moreData) return
     const data = await this._actualGetData()
     this._releaseLocker()
     return data
@@ -28,11 +33,13 @@ class Paging {
   // 获取数据
   async _actualGetData() {
     const { count, start } = this
+    const { url, data, method } = this.req
 
     const paging = await Http.request({
-      ...this.req,
+      url,
+      method,
       data: {
-        ...this.req.data,
+        ...data,
         count,
         start
       }
@@ -49,26 +56,26 @@ class Paging {
       }
     }
 
+    this._accumulate(paging.items)
+
     this.moreData = this._moreData(paging.totalPage, paging.page)
 
     if (this.moreData) {
       this.start += this.count
     }
 
-    this._accumulate(paging.items)
-
     return {
-      empty: true,
+      empty: false,
       items: paging.items,
       moreData: this.moreData,
-      accumulator: []
+      accumulator: this.accumulator
     }
 
     // return {
-    //   empty: false, // 压根就没有数据
+    //   empty: false, // 是否为空
     //   items: [], // 请求得到的 item 集合
     //   moreData: true, // 是否有更多数据
-    //   accumulator: [] // 当前已存在的 item 集合
+    //   accumulator: [] // 累加后的d item 集合
     // }
   }
 
@@ -78,6 +85,7 @@ class Paging {
   }
 
   // 通过页码判断是否有更多数据
+  // 这里 pageNum 从 0 开始计算，totalPage - 1 是为了配合 pageNum 使用
   _moreData(totalPage, pageNum) {
     return pageNum <  totalPage - 1
   }
