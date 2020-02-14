@@ -1,30 +1,32 @@
-<view>
-  <!-- 折扣季 -->
-  <image class="top-theme" src="{{themeA.entrance_img}}" />
-  <!-- 商品轮播 -->
-  <swiper class="swiper" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" indicator-active-color="#157658" duration="{{500}}" circular="{{true}}">
-    <block wx:for="{{bannerB}}" wx:key="index">
-      <swiper-item>
-        <image class="swiper" src="{{item.img}}" />
-      </swiper-item>
-    </block>
-  </swiper>
-  <!-- 商品分类 -->
-  <s-category-grid grid="{{gridC}}"></s-category-grid>
-  <!-- 优惠券 -->
-  <image class="activity" src="{{activityD.entrance_img}}" />
-  <!-- 每周上新 -->
-  <s-spu-scroll wx:if="{{themeE.online}}" theme="{{themeE}}" spu-list="{{themeESpu}}"></s-spu-scroll>
-  <!-- 精选甄选 -->
-  <image class="quality" src="{{themeF.entrance_img}}"></image>
-  <!-- 热门榜单 -->
-  <s-hot-list banner="{{bannerG}}"></s-hot-list>
-  <!-- 时尚穿搭 -->
-  <image src="{{themeH.entrance_img}}" class="fashion" />
-  <!-- 瀑布流 -->
-  <view class="spu-bottom">
-    <image class="title-spu-bottom" src="/assets/img/recommend.png"></image>
-    <!-- https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/generics.html -->
-    <l-water-flow generic:l-water-flow-item=""></l-water-flow>
+<l-loadmore show type="{{loadingType}}">
+  <view slot="content">
+    <!-- 折扣季 -->
+    <image class="top-theme" src="{{themeA.entrance_img}}" />
+    <!-- 商品轮播 -->
+    <swiper class="swiper" indicator-dots="{{true}}" autoplay="{{true}}" interval="{{5000}}" indicator-active-color="#157658" duration="{{500}}" circular="{{true}}">
+      <block wx:for="{{bannerB}}" wx:key="index">
+        <swiper-item>
+          <image class="swiper" src="{{item.img}}" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <!-- 商品分类 -->
+    <s-category-grid grid="{{gridC}}"></s-category-grid>
+    <!-- 优惠券 -->
+    <image class="activity" src="{{activityD.entrance_img}}" />
+    <!-- 每周上新 -->
+    <s-spu-scroll wx:if="{{themeE.online}}" theme="{{themeE}}" spu-list="{{themeESpu}}"></s-spu-scroll>
+    <!-- 精选甄选 -->
+    <image class="quality" src="{{themeF.entrance_img}}"></image>
+    <!-- 热门榜单 -->
+    <s-hot-list banner="{{bannerG}}"></s-hot-list>
+    <!-- 时尚穿搭 -->
+    <image src="{{themeH.entrance_img}}" class="fashion" />
+    <!-- 瀑布流 -->
+    <view class="spu-bottom">
+      <image class="title-spu-bottom" src="/assets/img/recommend.png"></image>
+      <!-- https://developers.weixin.qq.com/miniprogram/dev/framework/custom-component/generics.html -->
+      <l-water-flow generic:l-water-flow-item="s-spu-preview"></l-water-flow>
+    </view>
   </view>
-</view>
+</l-loadmore>

@@ -24,7 +24,7 @@ class Paging {
 
   // 获取更多数据
   async getMoreData() {
-    if (this.locker || !this.moreData) return
+    if (this.locker || !this.moreData) return null
     const data = await this._actualGetData()
     this._releaseLocker()
     return data
@@ -35,7 +35,7 @@ class Paging {
     const { count, start } = this
     const { url, data, method } = this.req
 
-    const paging = await Http.request({
+    const result = await Http.request({
       url,
       method,
       data: {
@@ -44,6 +44,8 @@ class Paging {
         start
       }
     })
+
+    const paging = result.data
 
     if (!paging) return null
 
@@ -58,7 +60,7 @@ class Paging {
 
     this._accumulate(paging.items)
 
-    this.moreData = this._moreData(paging.totalPage, paging.page)
+    this.moreData = this._moreData(paging.total_page, paging.page)
 
     if (this.moreData) {
       this.start += this.count
@@ -85,7 +87,7 @@ class Paging {
   }
 
   // 通过页码判断是否有更多数据
-  // 这里 pageNum 从 0 开始计算，totalPage - 1 是为了配合 pageNum 使用
+  // 注意这里 pageNum 从 0 开始计算
   _moreData(totalPage, pageNum) {
     return pageNum <  totalPage - 1
   }

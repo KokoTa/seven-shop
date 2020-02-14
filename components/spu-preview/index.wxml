@@ -1,2 +1,21 @@
-<!--components/spu-preview/index.wxml-->
-<text>components/spu-preview/index.wxml</text>
+<wxs src="../../wxs/price.wxs" module="p"></wxs>
+<view class="container">
+  <image mode="widthFix" class="img" src="{{data.img}}" />
+  <view class="content">
+    <!-- 标题 -->
+    <text class="title">{{data.title}}</text>
+    <!-- 标签 -->
+    <view class="tags">
+      <block wx:for="{{tags}}" wx:key="index">
+        <l-tag l-class="l-tag" size="super-mini" type="reading">{{item}}</l-tag>
+      </block>
+    </view>
+    <!-- 价格 -->
+    <view class="price">
+      <l-price value="{{p.mainPrice(data.price, data.discount_price)}}" value-size="28" unit-size="20" color="#157658" bold="900" autofix></l-price>
+      <l-price wx:if="{{data.discount_price}}" l-class="discount-price" deleted value="{{p.slashedPrice(data.price, data.discount_price)}}" color="#999" value-size="28" unit-size="20" autofix></l-price>
+    </view>
+    <!-- 描述 -->
+    <text class="subtitle">{{data.subtitle}}</text>
+  </view>
+</view>

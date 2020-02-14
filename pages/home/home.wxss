@@ -29,10 +29,12 @@
 }
 
 .spu-bottom {
-  margin-top: 20rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 30rpx;
+  margin-top: 20rpx;
+  background: #fff;
 }
 
 .title-spu-bottom {

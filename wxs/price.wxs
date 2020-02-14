@@ -1,0 +1,21 @@
+/**
+ * 如果有原价和折扣价，那么主显示价格就是折扣价，划线价格就是原价
+ * 如果只有原价没有折扣价，那么主线是价格为原价，划线价格不显示
+ */
+
+// 主显示价格
+function mainPrice(price, discountPrice) {
+  if (price && discountPrice) return discountPrice
+  return price
+}
+
+// 划线价格
+function slashedPrice(price, discountPrice) {
+  if (price && discountPrice) return price
+  return null
+}
+
+module.exports = {
+  mainPrice: mainPrice,
+  slashedPrice: slashedPrice
+}

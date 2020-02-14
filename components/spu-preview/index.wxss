@@ -1,1 +1,49 @@
-/* components/spu-preview/index.wxss */
+.container {
+  width: 340rpx;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
+  margin-bottom: 30rpx;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 16rpx 16rpx 22rpx 16rpx;
+}
+
+.img {
+  width: 100%;
+}
+
+.tags {
+  display: flex;
+  flex-direction: row;
+  margin-top: 6rpx;
+  margin-bottom: 8rpx;
+  flex-wrap: wrap;
+}
+
+.title {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.l-tag {
+  background-color: #DCEBE6 !important;
+  color: #157658 !important;
+  height: 36rpx !important;
+  margin-right: 10rpx !important;
+}
+
+.discount-price {
+  margin-left: 20rpx;
+}
+
+.subtitle {
+  font-size: 24rpx;
+  font-weight: 300;
+  margin-top: 6rpx;
+  color: #888;
+}

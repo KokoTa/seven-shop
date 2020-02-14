@@ -7,7 +7,10 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    paging: null,
+    loadingType: 'loading'
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -18,9 +21,13 @@ Page({
 
   async initSpuList() {
     const paging = await SpuPage.getLatestPaging()
+    this.setData({ paging })
     const data = await paging.getMoreData()
 
     if (!data) return
+    // 把数据传入瀑布流组件中
+    // 不需要传累加后的数据，组件内部会自动累加
+    wx.lin.renderWaterFlow(data.items)
   },
 
   async initialData() {
@@ -87,7 +94,13 @@ Page({
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {},
+  onReachBottom: async function () {
+    const data = await this.data.paging.getMoreData()
+    if (data) wx.lin.renderWaterFlow(data.items)
+    if (!this.data.paging.moreData) {
+      this.setData({ loadingType: 'end' })
+    }
+  },
 
   /**
    * 用户点击右上角分享
