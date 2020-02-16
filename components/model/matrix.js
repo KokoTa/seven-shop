@@ -19,9 +19,8 @@ class Matrix {
     return this.m[0].length
   }
 
-  // 遍历矩阵所有元素
-  // 先遍历列，再遍历行
-  forEach(cb) {
+  // 遍历矩阵元素(先遍历列，再遍历行)
+  each(cb) {
     for (let j = 0; j < this.colNum; j++) {
       for (let i = 0; i < this.rowNum; i++) {
         const element = this.m[i][j]
@@ -34,6 +33,7 @@ class Matrix {
   transpose() {
     const arr = []
     for (let j = 0; j < this.colNum; j++) {
+      arr[j] = []
       for (let i = 0; i < this.rowNum; i++) {
         arr[j][i]= this.m[i][j]
       }

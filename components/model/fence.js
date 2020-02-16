@@ -1,12 +1,22 @@
+import { Cell } from './cell';
 /**
- * 规格行操作
+ * 规格行
  */
 
 class Fence {
-  valueTitles = [] // 规格值
+  specs = []
+  cells = []
 
-  pushValueTitle(title) {
-    this.valueTitles.push(title)
+  constructor(spec) {
+    this.specs = spec
+    this.init()
+  }
+
+  init() {
+    this.specs.forEach(spec => {
+      const cell = new Cell(spec)
+      this.cells.push(cell)
+    })
   }
 }
 

@@ -1,7 +1,8 @@
 import { Matrix } from './matrix';
 /**
- * 规格行统筹操作
+ * 规格行集合
  * 数据结构见 data.json
+ * 组件嵌套关系： fence-group > fence > cell
  */
 import { Fence } from './fence';
 
@@ -17,16 +18,11 @@ class FenceGroup {
   initFences() {
     const matrix = this._createMatrix(this.skuList)
     const fences = [] // 规格行数组
-    let currentJ = -1 // 用于判断是否遍历到下一列
+    const newMatrix = matrix.transpose() // 矩阵转置
 
-    // 遍历从列先遍历的
-    matrix.forEach((element, i, j) => {
-      if (currentJ !== j) {
-        currentJ = j
-        // 矩阵转置，此时的列就是行
-        fences[currentJ] = this._createFence()
-      }
-      fences[currentJ].pushValueTitle(element.value)
+    newMatrix.forEach((arr) => {
+      const fence = new Fence(arr)
+      fences.push(fence)
     })
 
     return fences;
@@ -35,16 +31,12 @@ class FenceGroup {
   // 创建矩阵对象
   _createMatrix(skuList) {
     let m = []
+
     skuList.forEach(sku => {
       m.push(sku.specs)
     })
-    return new Matrix(m)
-  }
 
-  // 创建规格行
-  _createFence() {
-    const fence = new Fence()
-    return fence
+    return new Matrix(m)
   }
 }
 
