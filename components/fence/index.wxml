@@ -1,0 +1,5 @@
+<!-- SKU 选项 -->
+<view class="container">
+  <view class="title"></view>
+  <view class="row"></view>
+</view>

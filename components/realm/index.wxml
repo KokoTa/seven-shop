@@ -1,0 +1,14 @@
+<!-- SPU -->
+<view class="container">
+  <!-- 商品概览 -->
+  <view class="">
+    <image />
+  </view>
+  <!-- SKU 选择 -->
+  <block>
+    <s-fence></s-fence>
+  </block>
+  <!-- 购买数量 -->
+  <view class="counter"></view>
+  <!-- 加入购物车/购买 -->
+</view>
