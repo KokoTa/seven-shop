@@ -9,6 +9,7 @@ import { Fence } from './fence';
 class FenceGroup {
   spu
   skuList = []
+  fences = []
 
   constructor(spu) {
     this.spu = spu
@@ -25,7 +26,7 @@ class FenceGroup {
       fences.push(fence)
     })
 
-    return fences;
+    this.fences = fences
   }
 
   // 创建矩阵对象

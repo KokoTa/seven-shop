@@ -1,5 +1,9 @@
 import { FenceGroup } from '../model/fence-group';
 // components/realm/realm.js
+
+/**
+ * 组件关系：realm > fence > cell
+ */
 Component({
   /**
    * 组件的属性列表
@@ -17,7 +21,8 @@ Component({
       if (!spu) return
 
       const fenceGroup = new FenceGroup(spu)
-      console.log(fenceGroup.initFences())
+      fenceGroup.initFences()
+      this.bindInitData(fenceGroup)
     }
   },
 
@@ -32,6 +37,11 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    bindInitData(fenceGroup) {
+      console.log(fenceGroup)
+      this.setData({
+        fences: fenceGroup.fences
+      })
+    }
   }
 })

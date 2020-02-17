@@ -7,15 +7,30 @@ class Fence {
   specs = []
   cells = []
 
-  constructor(spec) {
-    this.specs = spec
+  title
+  id
+
+  constructor(specs) {
+    this.specs = specs
+    this.title = specs[0].key
+    this.id = specs[0].key_id
     this.init()
   }
 
   init() {
+    this._initCells()
+  }
+
+  _initCells() {
     this.specs.forEach(spec => {
-      const cell = new Cell(spec)
-      this.cells.push(cell)
+      const existed = this.cells.some(cell => {
+        return cell.id === spec.value_id
+      })
+
+      if (!existed) {
+        const cell = new Cell(spec)
+        this.cells.push(cell)
+      }
     })
   }
 }

@@ -5,8 +5,8 @@
     <image />
   </view>
   <!-- SKU 选择 -->
-  <block>
-    <s-fence></s-fence>
+  <block wx:for="{{fences}}" wx:key="index">
+    <s-fence fence="{{item}}"></s-fence>
   </block>
   <!-- 购买数量 -->
   <view class="counter"></view>

@@ -15,7 +15,7 @@
   "sku_list": [
     {
       "id": 30,
-      "price": 1399.00,
+      "price": 1399.0,
       "discount_price": null,
       "online": true,
       "img": "http://i2.sleeve.7yue.pro/n12.png",
@@ -42,7 +42,7 @@
     },
     {
       "id": 31,
-      "price": 1399.00,
+      "price": 1399.0,
       "discount_price": null,
       "online": true,
       "img": "http://i2.sleeve.7yue.pro/n14.png",
@@ -64,12 +64,12 @@
           "value": "中号 M"
         }
       ],
-      "code": "23$1-30#4-15",
+      "code": "23$1-30#4-15  (注释：这里23是 spu id，$ 是分隔符 1-30 是一个 spec 的 key-value id)",
       "stock": 7
     },
     {
       "id": 32,
-      "price": 1399.00,
+      "price": 1399.0,
       "discount_price": null,
       "online": true,
       "img": "http://i2.sleeve.7yue.pro/n13.png",
