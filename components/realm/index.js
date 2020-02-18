@@ -1,5 +1,6 @@
 import { FenceGroup } from '../model/fence-group';
 // components/realm/realm.js
+import { Judger } from '../model/judger';
 
 /**
  * 组件关系：realm > fence > cell
@@ -20,9 +21,14 @@ Component({
     'spu': function (spu) {
       if (!spu) return
 
+      // 生成规格集合并赋值
       const fenceGroup = new FenceGroup(spu)
       fenceGroup.initFences()
       this.bindInitData(fenceGroup)
+
+      // 生成判断类
+      const judger = new Judger(fenceGroup)
+      judger.initPathDict()
     }
   },
 
