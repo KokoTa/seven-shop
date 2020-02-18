@@ -14,7 +14,6 @@ class Fence {
     this.specs = specs
     this.title = specs[0].key
     this.id = specs[0].key_id
-    this.init()
   }
 
   init() {
@@ -22,7 +21,7 @@ class Fence {
   }
 
   _initCells() {
-    this.specs.forEach(spec => {
+    this.specs.forEach((spec) => {
       const existed = this.cells.some(cell => {
         return cell.id === spec.value_id
       })

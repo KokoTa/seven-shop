@@ -1,14 +1,31 @@
 /* components/cell/index.wxss */
 
 .container {
+  height: 60rpx;
+  padding: 2rpx;
   border: 2rpx solid #333;
+  box-sizing: border-box;
 }
 
 .inner-container {
-  height: 60rpx;
+  height: 100%;
   padding: 0 15rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
   background: #fff;
+  font-size: 24rpx;
+}
+
+.forbidden {
+  color: #bbb;
+  border: 2rpx dashed #bbb;
+}
+
+.selected {
+  color: #fff;
+  border: 2rpx solid #157658;
+}
+.selected .inner-container {
+  background: #157658;
 }

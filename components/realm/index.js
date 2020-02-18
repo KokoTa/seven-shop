@@ -28,7 +28,7 @@ Component({
 
       // 生成判断类
       const judger = new Judger(fenceGroup)
-      judger.initPathDict()
+      this.setData({ judger })
     }
   },
 
@@ -36,7 +36,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    judger: null
   },
 
   /**
@@ -44,9 +44,17 @@ Component({
    */
   methods: {
     bindInitData(fenceGroup) {
-      console.log(fenceGroup)
       this.setData({
         fences: fenceGroup.fences
+      })
+    },
+    onCellTap(e) {
+      const cell = e.detail.cell
+      const judger = this.data.judger
+      judger.judge(cell) // 改变 cell 状态
+      console.log(e)
+      this.setData({
+        fences: judger.fenceGroup.fences
       })
     }
   }

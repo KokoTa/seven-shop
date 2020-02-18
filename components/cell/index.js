@@ -1,10 +1,13 @@
+import { Cell } from '../model/cell';
 // components/cell/index.js
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-    cell: Object
+    cell: Object,
+    x: Number,
+    y: Number
   },
 
   /**
@@ -18,6 +21,13 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    onTap(e) {
+      console.log(e)
+      this.triggerEvent('cellTap', {
+        cell: this.properties.cell,
+        x: this.properties.x,
+        y: this.properties.y
+      }, { bubbles: true, composed: true })
+    }
   }
 })

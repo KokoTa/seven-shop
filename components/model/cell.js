@@ -1,3 +1,4 @@
+import { CellStatus } from '../../core/enum';
 /**
  * 规格单元
  */
@@ -5,6 +6,7 @@
 class Cell {
   title
   id
+  status = CellStatus.WAITING
 
   constructor(spec) {
     this.title = spec.value

@@ -6,7 +6,7 @@
   </view>
   <!-- SKU 选择 -->
   <block wx:for="{{fences}}" wx:key="index">
-    <s-fence fence="{{item}}"></s-fence>
+    <s-fence fence="{{item}}" x="{{index}}" bind:cellTap="onCellTap"></s-fence>
   </block>
   <!-- 购买数量 -->
   <view class="counter"></view>
