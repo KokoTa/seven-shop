@@ -1,5 +1,4 @@
 import { FenceGroup } from '../model/fence-group';
-// components/realm/realm.js
 import { Judger } from '../model/judger';
 
 /**
@@ -21,12 +20,12 @@ Component({
     'spu': function (spu) {
       if (!spu) return
 
-      // 生成规格集合并赋值
+      // 规格集合
       const fenceGroup = new FenceGroup(spu)
       fenceGroup.initFences()
-      this.bindInitData(fenceGroup)
+      this.setData({ fences: fenceGroup.fences })
 
-      // 生成判断类
+      // 判断类
       const judger = new Judger(fenceGroup)
       this.setData({ judger })
     }
@@ -43,16 +42,10 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    bindInitData(fenceGroup) {
-      this.setData({
-        fences: fenceGroup.fences
-      })
-    },
     onCellTap(e) {
-      const cell = e.detail.cell
+      const detail = e.detail
       const judger = this.data.judger
-      judger.judge(cell) // 改变 cell 状态
-      console.log(e)
+      judger.judge(detail) // 改变 cell 状态
       this.setData({
         fences: judger.fenceGroup.fences
       })

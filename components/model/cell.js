@@ -4,11 +4,13 @@ import { CellStatus } from '../../core/enum';
  */
 
 class Cell {
+  spec
   title
   id
   status = CellStatus.WAITING
 
   constructor(spec) {
+    this.spec = spec
     this.title = spec.value
     this.id = spec.value_id
   }

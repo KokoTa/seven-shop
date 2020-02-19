@@ -22,7 +22,6 @@ Component({
    */
   methods: {
     onTap(e) {
-      console.log(e)
       this.triggerEvent('cellTap', {
         cell: this.properties.cell,
         x: this.properties.x,
