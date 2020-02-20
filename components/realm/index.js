@@ -27,7 +27,10 @@ Component({
 
       // 判断类
       const judger = new Judger(fenceGroup)
-      this.setData({ judger })
+      this.setData({
+        judger,
+        fences: judger.fenceGroup.fences
+      })
     }
   },
 

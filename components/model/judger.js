@@ -26,16 +26,25 @@ class Judger {
     })
   }
 
-  // 初始化记录类
+  // 初始化默认记录
   _initSkuPending() {
     const skuPending = new SkuPending()
     this.skuPending = skuPending
+    // 检查是否有默认记录，有的话就插入记录，然后更改默认记录的 cell 状态为 selected，最后进行潜在路径判断
+    const defaultSku = this.fenceGroup.getDefaultSku()
+    if (!defaultSku) return
+    this.skuPending.initSkuPending(defaultSku)
+    this.skuPending.pending.forEach(cell => this.fenceGroup.setCellStatusById(cell.id, CellStatus.SELECTED))
+    this.judge({}, true)
   }
 
-  judge({ cell, x, y }) {
-    // 先改变选择 cell 的状态
-    this._changeCellStatus(cell, x, y)
-    // 再改变其他 cell 的状态
+  judge({ cell, x, y }, isInit = false) {
+    // 如果不是初始化默认记录，则说明是用户点击 cell 触发了该函数
+    if (!isInit) {
+      // 改变点击的 cell 的状态
+      this._changeCellStatus(cell, x, y)
+    }
+    // 改变其他 cell 的状态
     this._eachCell((cell, i, j) => {
       this._changeOtherCellStatus(cell, i, j)
     })
@@ -53,33 +62,33 @@ class Judger {
 
   _changeCellStatus(cell, x, y) {
     if (cell.status === CellStatus.WAITING) {
-      this.fenceGroup.fences[x].cells[y].status = CellStatus.SELECTED // 改变状态
+      this.fenceGroup.setCellStatusByXY(x, y, CellStatus.SELECTED) // 改变状态
       this.skuPending.insertCell(cell, x) // 记录选择
     } else if (cell.status === CellStatus.SELECTED) {
-      this.fenceGroup.fences[x].cells[y].status = CellStatus.WAITING
+      this.fenceGroup.setCellStatusByXY(x, y, CellStatus.WAITING)
       this.skuPending.removeCell(x)
     }
   }
 
   _changeOtherCellStatus(cell, x, y) {
+    // 查找潜在路径
     const path = this._findPotentialPath(cell, x)
     // console.log(path)
-    // 选中的 cell 不需要判断潜在路径
+    // 选中的 cell 不需要查找潜在路径
     if (!path) return
 
     // 潜在路径是否存在于路径字典中
     const pathExisted = this._isInPathDict(path)
     if (pathExisted) {
-      this.fenceGroup.fences[x].cells[y].status = CellStatus.WAITING
+      this.fenceGroup.setCellStatusByXY(x, y, CellStatus.WAITING)
     } else {
-      this.fenceGroup.fences[x].cells[y].status = CellStatus.FORBIDDEN
+      this.fenceGroup.setCellStatusByXY(x, y, CellStatus.FORBIDDEN)
     }
-
   }
 
   /**
   * 当前 cell 的潜在路径为：当前 cell 路径 + 其他行已选中 cell 的路径
-  * 当前选中的 cell 不需要判断潜在路径
+  * 当前选中的 cell 不需要查找潜在路径
   *
   * 举个例子：
   * A B C
@@ -91,10 +100,9 @@ class Judger {
     const fences = this.fenceGroup.fences
     const joiner = new Joiner('#')
 
-    // cell 为选中状态时，不需要继续判断了，因为它已经被选中了，不需要潜在路径来进行字典判断了
+    // cell 为选中状态时，不需要继续判断了，因为它已经被选中了，路径就是它本身
     // 这里判断条件不能为 cell.status === CellStatus.SELECTED
-    // 假如我选择了 E，E 为 selected，然后选择了 F，此时由于 _changeCellStatus 只会改变选中的那个 cell 而不会重置之前选择的 cell
-    // 因此就会产生同一行选中两个的情况
+    // 假如我选择了 E，E 为 selected，然后选择了 F，此时由于 _changeCellStatus 只会改变选中的那个 cell 而不会重置之前选择的 cell，会产生同一行选中两个的情况
     // 解决方法是使用 skuPending 类，用它来找到当前选择的 cell
     if (this.skuPending.isSelected(cell, rowNum)) return
 

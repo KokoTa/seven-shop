@@ -1,4 +1,4 @@
-{
+const data = {
   "id": 2,
   "title": "林间有风自营针织衫",
   "subtitle": "秋日冬款，浪漫满屋",
@@ -129,6 +129,6 @@
       "index": 4
     }
   ],
-  "default_sku_id": 2,
-  "sketch_spec_id": 1
+  "default_sku_id": 2, // ---> 默认选中的 Sku id
+  "sketch_spec_id": 1 // ---> 可视规格编号，让图片和 cell 绑定
 }

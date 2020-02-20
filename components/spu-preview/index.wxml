@@ -12,8 +12,8 @@
     </view>
     <!-- 价格 -->
     <view class="price">
-      <l-price value="{{p.mainPrice(data.price, data.discount_price)}}" value-size="28" unit-size="20" color="#157658" bold="900" autofix></l-price>
-      <l-price wx:if="{{data.discount_price}}" l-class="discount-price" deleted value="{{p.slashedPrice(data.price, data.discount_price)}}" color="#999" value-size="28" unit-size="20" autofix></l-price>
+      <l-price value="{{p.mainPrice(data.price, data.discount_price)}}" value-size="28" color="#157658" autofix></l-price>
+      <l-price wx:if="{{data.discount_price}}" l-class="discount-price" deleted value="{{p.slashedPrice(data.price, data.discount_price)}}" value-size="26" color="#999"></l-price>
     </view>
     <!-- 描述 -->
     <text class="subtitle">{{data.subtitle}}</text>

@@ -1,13 +1,10 @@
+import { Cell } from './cell';
 /**
  * 记录路径
  */
 
 class SkuPending {
   pending = []
-
-  constructor() {
-
-  }
 
   // 插入用户的选择，x 用于标识选择的行，一行只能选一项
   insertCell(cell, x) {
@@ -28,6 +25,13 @@ class SkuPending {
     const pendingCell = this.pending[x]
     if (!pendingCell) return false
     return cell.id === pendingCell.id
+  }
+
+  initSkuPending(defaultSku) {
+    defaultSku.specs.forEach((s, x) => {
+      const cell = new Cell(s)
+      this.insertCell(cell, x)
+    })
   }
 }
 

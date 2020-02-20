@@ -1,7 +1,7 @@
 import { Matrix } from './matrix';
 /**
  * 规格行集合
- * 数据结构见 data.json
+ * 数据结构见 data.js
  * 组件嵌套关系： fence-group > fence > cell
  */
 import { Fence } from './fence';
@@ -39,6 +39,38 @@ class FenceGroup {
     })
 
     return new Matrix(m)
+  }
+
+  // 查找是否有默认记录
+  getDefaultSku() {
+    const defaultSkuId = this.spu.default_sku_id
+    if (!defaultSkuId) return
+    const defaultSku = this.skuList.find((s) => s.id === defaultSkuId)
+    return defaultSku
+  }
+
+  // 通过坐标改变某个 cell 的状态
+  setCellStatusByXY(x, y, status) {
+    this.fences[x].cells[y].status = status
+  }
+
+  // 通过 id 改变某个 cell 的状态
+  setCellStatusById(cellId, status) {
+    this._eachCell((cell) => {
+      if (cell.id === cellId) {
+        cell.status = status
+      }
+    })
+  }
+
+  _eachCell(cb) {
+    const fences = this.fences
+    for (let i = 0; i < fences.length; i++) {
+      for (let j = 0; j < fences[i].cells.length; j++) {
+        const cell = fences[i].cells[j]
+        cb(cell, i, j)
+      }
+    }
   }
 }
 

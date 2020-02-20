@@ -1,9 +1,22 @@
 <!-- SPU -->
 <view class="container">
   <!-- 商品概览 -->
-  <view class="">
-    <image />
+  <view class="sku-preview">
+    <image class="sku-img" />
+    <view class="sku-desc">
+      <text class="title">测试</text>
+      <view>
+        <view class="price-row">
+          <l-price value="100" value-size="28" color="#157658" autofix></l-price>
+          <l-price l-class="discount-price" deleted value="999" value-size="26" color="#999"></l-price>
+        </view>
+        <view class="sku-pending">
+          <text>请选择：</text>
+        </view>
+      </view>
+    </view>
   </view>
+  <view class="hr"></view>
   <!-- SKU 选择 -->
   <block wx:for="{{fences}}" wx:key="index">
     <s-fence fence="{{item}}" x="{{index}}" bind:cellTap="onCellTap"></s-fence>
