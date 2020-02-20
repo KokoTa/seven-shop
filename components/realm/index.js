@@ -42,6 +42,7 @@ Component({
    * 组件的方法列表
    */
   methods: {
+    // 接收 cell 组件冒泡上来的事件
     onCellTap(e) {
       const detail = e.detail
       const judger = this.data.judger

@@ -33,7 +33,9 @@ class Judger {
   }
 
   judge({ cell, x, y }) {
+    // 先改变选择 cell 的状态
     this._changeCellStatus(cell, x, y)
+    // 再改变其他 cell 的状态
     this._eachCell((cell, i, j) => {
       this._changeOtherCellStatus(cell, i, j)
     })
@@ -61,7 +63,7 @@ class Judger {
 
   _changeOtherCellStatus(cell, x, y) {
     const path = this._findPotentialPath(cell, x)
-    console.log(path)
+    // console.log(path)
     // 选中的 cell 不需要判断潜在路径
     if (!path) return
 
