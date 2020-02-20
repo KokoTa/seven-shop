@@ -19,18 +19,22 @@ Component({
   observers: {
     'spu': function (spu) {
       if (!spu) return
-
       // 规格集合
       const fenceGroup = new FenceGroup(spu)
       fenceGroup.initFences()
-      this.setData({ fences: fenceGroup.fences })
-
       // 判断类
       const judger = new Judger(fenceGroup)
       this.setData({
         judger,
         fences: judger.fenceGroup.fences
       })
+      // 头部信息，如果有默认记录，那么就赋值默认记录的信息，如果没有，则赋值 spu 的信息
+      const defaultSku = fenceGroup.getDefaultSku()
+      if (defaultSku) {
+        this.bindSkuData(defaultSku)
+      } else {
+        this.bindSpuData(spu)
+      }
     }
   },
 
@@ -38,7 +42,11 @@ Component({
    * 组件的初始数据
    */
   data: {
-    judger: null
+    judger: Object,
+    previewImg: String,
+    title: String,
+    price: Number,
+    discountPrice: Number
   },
 
   /**
@@ -52,6 +60,24 @@ Component({
       judger.judge(detail) // 改变 cell 状态
       this.setData({
         fences: judger.fenceGroup.fences
+      })
+    },
+
+    bindSkuData(sku) {
+      this.setData({
+        previewImg: sku.img,
+        title: sku.title,
+        price: sku.price,
+        discountPrice: sku.discount_price
+      })
+    },
+    bindSpuData() {
+      const spu = this.properties.spu
+      this.setData({
+        previewImg: spu.img,
+        title: spu.title,
+        price: spu.price,
+        discountPrice: spu.discount_price
       })
     }
   }

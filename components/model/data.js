@@ -129,6 +129,6 @@ const data = {
       "index": 4
     }
   ],
-  "default_sku_id": 2, // ---> 默认选中的 Sku id
-  "sketch_spec_id": 1 // ---> 可视规格编号，让图片和 cell 绑定
+  "default_sku_id": 2, // ---> 默认选中的记录
+  "sketch_spec_id": 1 // ---> 可视规格编号
 }
