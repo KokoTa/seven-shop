@@ -1,5 +1,6 @@
 import { FenceGroup } from '../model/fence-group';
 import { Judger } from '../model/judger';
+import { Spu } from '../../model/spu';
 
 /**
  * 组件关系：realm > fence > cell
@@ -9,7 +10,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    spu: Object // spu 数据
+    spu: Object, // spu 数据
   },
 
   /**
@@ -19,6 +20,16 @@ Component({
   observers: {
     'spu': function (spu) {
       if (!spu) return
+
+      // 如果该商品是无规格的，那么就不需要后续的 sku 操作了
+      if (Spu.isNoSpec(spu)) {
+        this.setData({
+          noSpec: true
+        })
+        this.bindSkuData(spu.sku_list[0])
+        return
+      }
+
       // 规格集合
       const fenceGroup = new FenceGroup(spu)
       fenceGroup.initFences()
@@ -33,7 +44,7 @@ Component({
       if (defaultSku) {
         this.bindSkuData(defaultSku)
       } else {
-        this.bindSpuData(spu)
+        this.bindSpuData()
       }
     }
   },
@@ -46,7 +57,9 @@ Component({
     previewImg: String,
     title: String,
     price: Number,
-    discountPrice: Number
+    discountPrice: Number,
+    stock: Number,
+    noSpec: Boolean
   },
 
   /**
@@ -68,7 +81,8 @@ Component({
         previewImg: sku.img,
         title: sku.title,
         price: sku.price,
-        discountPrice: sku.discount_price
+        discountPrice: sku.discount_price,
+        stock: sku.stock
       })
     },
     bindSpuData() {
@@ -77,7 +91,8 @@ Component({
         previewImg: spu.img,
         title: spu.title,
         price: spu.price,
-        discountPrice: spu.discount_price
+        discountPrice: spu.discount_price,
+        stock: spu.stock
       })
     }
   }
