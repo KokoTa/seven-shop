@@ -14,6 +14,7 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 
+// 组合算法
 const combination = function(arr1, num) {
   var result = [];
   var range = function(r, arr2) {

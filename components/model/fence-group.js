@@ -1,6 +1,6 @@
 import { Matrix } from './matrix';
 /**
- * 规格行集合
+ * 规格集合类
  * 数据结构见 data.js
  * 组件嵌套关系： fence-group > fence > cell
  */

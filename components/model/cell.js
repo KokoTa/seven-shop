@@ -14,6 +14,10 @@ class Cell {
     this.title = spec.value
     this.id = spec.value_id
   }
+
+  static getCellCode(spec) {
+    return `${spec.key_id}-${spec.value_id}`
+  }
 }
 
 export {

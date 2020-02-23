@@ -13,10 +13,12 @@
           <l-price wx:if="{{discountPrice}}" value="{{p.slashedPrice(price, discountPrice)}}" l-class="discount-price" deleted value-size="26" color="#999"></l-price>
           <!-- 库存 -->
           <view wx:if="{{stock >= 10}}" class="stock">库存：{{stock}} 件</view>
-          <view wx:if="{{stock >=0 && stock < 10}}" class="stock-pinch">仅剩：{{stock}} 件</view>
+          <view wx:if="{{stock > 0 && stock < 10}}" class="stock-pinch">仅剩：{{stock}} 件</view>
         </view>
-        <view class="sku-pending">
-          <text>请选择：</text>
+        <!-- 无规格就不显示 -->
+        <view wx:if="{{!noSpec}}" class="sku-pending">
+          <text wx:if="{{!isSkuIntact}}" class="sku-pending-text">请选择：{{missingSpecKeys}}</text>
+          <text wx:else class="sku-pending-text">已选择：{{intactSpecValues}}</text>
         </view>
       </view>
     </view>

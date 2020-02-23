@@ -1,11 +1,12 @@
 /**
- * 路径字典判断类
+ * 数据判断与操作类
  * 拆解 SKU，检查路径
  */
 import { SkuCode } from './sku-code';
 import { CellStatus } from '../../core/enum';
 import { SkuPending } from './sku-pending';
 import { Joiner } from '../../utils/joiner';
+import { Cell } from './cell';
 
 class Judger {
   fenceGroup
@@ -28,7 +29,8 @@ class Judger {
 
   // 初始化默认记录
   _initSkuPending() {
-    const skuPending = new SkuPending()
+    const fencesLength = this.fenceGroup.fences.length
+    const skuPending = new SkuPending(fencesLength)
     this.skuPending = skuPending
     // 检查是否有默认记录，有的话就插入记录，然后更改默认记录的 cell 状态为 selected，最后进行潜在路径判断
     const defaultSku = this.fenceGroup.getDefaultSku()
@@ -109,13 +111,13 @@ class Judger {
     for (let i = 0; i < fences.length; i++) {
       // cell行 等于 遍历索引（当前行）时，加入自己的路径
       if (rowNum === i) {
-        const cellCode = this._getCellCode(cell.spec)
+        const cellCode = Cell.getCellCode(cell.spec)
         joiner.join(cellCode)
       } else {
         // cell行 不等于 遍历索引（当前行）时，检查是否有已选中 cell，有就加入已选中 cell 的路径
         const selectedCell = this.skuPending.findSelectedCellByX(i)
         if (selectedCell) {
-          const selectedCellCode = this._getCellCode(selectedCell.spec)
+          const selectedCellCode = Cell.getCellCode(selectedCell.spec)
           joiner.join(selectedCellCode)
         }
       }
@@ -124,12 +126,34 @@ class Judger {
     return joiner.getStr()
   }
 
-  _getCellCode(spec) {
-    return `${spec.key_id}-${spec.value_id}`
-  }
-
   _isInPathDict(path) {
     return this.pathDict.includes(path)
+  }
+
+  // 是否选择了一条完整路径
+  isSkuIntact() {
+    return this.skuPending.isIntact()
+  }
+
+  // 获取 sku
+  getDeterminateSku() {
+    const code = this.skuPending.getSkuPendingCode()
+    const fullCode = `${this.fenceGroup.spu.id}$${code}`
+    const sku = this.fenceGroup.spu.sku_list.find(sku => sku.code === fullCode)
+    return sku ? sku : null
+  }
+
+  // 获取未选的规格名
+  getMissingSpecKeys() {
+    const missingIndex = this.skuPending.getMissingSpecKeysIndex()
+    return missingIndex.map((index) => {
+      return this.fenceGroup.fences[index].title
+    })
+  }
+
+  // 获取已选择的规格值
+  getIntactSpecValues() {
+    return this.skuPending.getIntactSpecValues()
   }
 }
 

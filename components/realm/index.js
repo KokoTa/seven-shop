@@ -21,30 +21,10 @@ Component({
     'spu': function (spu) {
       if (!spu) return
 
-      // 如果该商品是无规格的，那么就不需要后续的 sku 操作了
       if (Spu.isNoSpec(spu)) {
-        this.setData({
-          noSpec: true
-        })
-        this.bindSkuData(spu.sku_list[0])
-        return
-      }
-
-      // 规格集合
-      const fenceGroup = new FenceGroup(spu)
-      fenceGroup.initFences()
-      // 判断类
-      const judger = new Judger(fenceGroup)
-      this.setData({
-        judger,
-        fences: judger.fenceGroup.fences
-      })
-      // 头部信息，如果有默认记录，那么就赋值默认记录的信息，如果没有，则赋值 spu 的信息
-      const defaultSku = fenceGroup.getDefaultSku()
-      if (defaultSku) {
-        this.bindSkuData(defaultSku)
+        this.processNoSpec(spu)
       } else {
-        this.bindSpuData()
+        this.processHasSpec(spu)
       }
     }
   },
@@ -53,29 +33,68 @@ Component({
    * 组件的初始数据
    */
   data: {
-    judger: Object,
-    previewImg: String,
-    title: String,
-    price: Number,
-    discountPrice: Number,
-    stock: Number,
-    noSpec: Boolean
+    judger: {},
+    previewImg: '',
+    title: '',
+    price: 0,
+    discountPrice: 0,
+    stock: 0,
+    noSpec: false,
+    isSkuIntact: false
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
+    processNoSpec(spu) {
+      this.setData({ noSpec: true })
+      this.bindSkuData(spu.sku_list[0])
+    },
+    processHasSpec(spu) {
+      // 规格集合类
+      const fenceGroup = new FenceGroup(spu)
+      fenceGroup.initFences()
+
+      // 数据判断与操作类
+      const judger = new Judger(fenceGroup)
+      this.setData({ judger })
+      this.bindTipData()
+
+      // 头部信息，如果有默认记录，那么就赋值默认记录的信息，如果没有，则赋值 spu 的信息
+      const defaultSku = fenceGroup.getDefaultSku()
+      if (defaultSku) {
+        this.bindSkuData(defaultSku)
+      } else {
+        this.bindSpuData()
+      }
+    },
+
     // 接收 cell 组件冒泡上来的事件
     onCellTap(e) {
       const detail = e.detail
       const judger = this.data.judger
       judger.judge(detail) // 改变 cell 状态
-      this.setData({
-        fences: judger.fenceGroup.fences
-      })
+      this.bindTipData()
+
+      // 检查是否选择了一条完整 sku 路径
+      const sku = judger.getDeterminateSku()
+      if (sku) {
+        this.bindSkuData(sku)
+      } else {
+        this.bindSpuData()
+      }
     },
 
+    bindTipData() {
+      const judger = this.data.judger
+      this.setData({
+        fences: judger.fenceGroup.fences,
+        isSkuIntact: judger.isSkuIntact(),
+        missingSpecKeys: judger.getMissingSpecKeys(), // 未选择的规格名
+        intactSpecValues: judger.getIntactSpecValues() // 已选择的规格值
+      })
+    },
     bindSkuData(sku) {
       this.setData({
         previewImg: sku.img,
@@ -92,7 +111,7 @@ Component({
         title: spu.title,
         price: spu.price,
         discountPrice: spu.discount_price,
-        stock: spu.stock
+        stock: spu.stock ? spu.stock : 0 // 当有规格选择时，spu.stock 不存在，小程序不能赋值 undefined
       })
     }
   }
