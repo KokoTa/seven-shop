@@ -1,50 +1,54 @@
 <wxs src="../../wxs/price.wxs" module="p"></wxs>
 <!-- SPU -->
 <view class="container">
-  <!-- 商品概览 -->
-  <view class="sku-preview">
-    <image src="{{previewImg}}" class="sku-img" />
-    <view class="sku-desc">
-      <text class="title">{{title}}</text>
-      <view>
-        <view class="price-row">
-          <!-- 价格 -->
-          <l-price
-            value="{{p.mainPrice(price, discountPrice)}}"
-            value-size="28"
-            color="#157658"
-            autofix
-          ></l-price>
-          <l-price
-            wx:if="{{discountPrice}}"
-            value="{{p.slashedPrice(price, discountPrice)}}"
-            l-class="discount-price"
-            deleted
-            value-size="26"
-            color="#999"
-          ></l-price>
-          <!-- 库存 -->
-          <view wx:if="{{stock >= 10}}" class="stock">库存：{{stock}} 件</view>
-          <view wx:if="{{stock > 0 && stock < 10}}" class="stock-pinch">仅剩：{{stock}} 件</view>
-        </view>
-        <!-- 无规格就不显示 -->
-        <view wx:if="{{!noSpec}}" class="sku-pending">
-          <text wx:if="{{!isSkuIntact}}" class="sku-pending-text">请选择：{{missingSpecKeys}}</text>
-          <text wx:else class="sku-pending-text">已选择：{{intactSpecValues}}</text>
+  <scroll-view class="scroll-view" scroll-y="{{true}}">
+    <view class="inner-container">
+      <!-- 商品概览 -->
+      <view class="sku-preview">
+        <image src="{{previewImg}}" class="sku-img" />
+        <view class="sku-desc">
+          <text class="title">{{title}}</text>
+          <view>
+            <view class="price-row">
+              <!-- 价格 -->
+              <l-price
+                value="{{p.mainPrice(price, discountPrice)}}"
+                value-size="28"
+                color="#157658"
+                autofix
+              ></l-price>
+              <l-price
+                wx:if="{{discountPrice}}"
+                value="{{p.slashedPrice(price, discountPrice)}}"
+                l-class="discount-price"
+                deleted
+                value-size="26"
+                color="#999"
+              ></l-price>
+              <!-- 库存 -->
+              <view wx:if="{{stock >= 10}}" class="stock">库存：{{stock}} 件</view>
+              <view wx:if="{{stock > 0 && stock < 10}}" class="stock-pinch">仅剩：{{stock}} 件</view>
+            </view>
+            <!-- 无规格就不显示 -->
+            <view wx:if="{{!noSpec}}" class="sku-pending">
+              <text wx:if="{{!isSkuIntact}}" class="sku-pending-text">请选择：{{missingSpecKeys}}</text>
+              <text wx:else class="sku-pending-text">已选择：{{intactSpecValues}}</text>
+            </view>
+          </view>
         </view>
       </view>
+      <view class="hr"></view>
+      <!-- SKU 选择 -->
+      <block wx:for="{{fences}}" wx:key="index">
+        <s-fence fence="{{item}}" x="{{index}}" bind:cellTap="onCellTap"></s-fence>
+      </block>
+      <!-- 购买数量 -->
+      <view class="counter">
+        <text>购买数量</text>
+        <s-counter bind:lintap="onSelectCount"></s-counter>
+      </view>
     </view>
-  </view>
-  <view class="hr"></view>
-  <!-- SKU 选择 -->
-  <block wx:for="{{fences}}" wx:key="index">
-    <s-fence fence="{{item}}" x="{{index}}" bind:cellTap="onCellTap"></s-fence>
-  </block>
-  <!-- 购买数量 -->
-  <view class="counter">
-    <text>购买数量</text>
-    <s-counter bind:lintap="onSelectCount"></s-counter>
-  </view>
+  </scroll-view>
   <!-- 加入购物车/购买 -->
   <view wx:if="{{!outStock}}" class="bottom-btn">
     <text>加入购物车</text>

@@ -1,2 +1,13 @@
-<!-- <s-realm spu="{{spu}}"></s-rea<lm> -->
-<s-tabbar></s-tabbar>
+<!-- SKU 选择 -->
+<l-popup content-align="bottom" show="{{showRealm}}">
+  <s-realm spu="{{spu}}"></s-realm>
+</l-popup>
+
+<!-- 底部栏 -->
+<s-tabbar
+  class="tabbar"
+  bind:goToHome="onGoToHome"
+  bind:goToCart="onGoToCart"
+  bind:addToCart="onAddToCart"
+  bind:buy="onBuy"
+></s-tabbar>

@@ -24,5 +24,9 @@ image {
 }
 
 .l-icon-home::before {
-  content: '\e612';
+  content: '\e612' !important;
+}
+
+.l-icon-cart::before {
+  content: '\e649' !important;
 }
