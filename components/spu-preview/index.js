@@ -33,7 +33,7 @@ Component({
   methods: {
     onItemTap() {
       const { id } = this.data.data
-      wx.navigateTo({ url: `/pages/detail/detail?pid=${id}` });
+      wx.navigateTo({ url: `/pages/detail/index?pid=${id}` });
     }
   }
 })

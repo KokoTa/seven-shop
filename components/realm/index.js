@@ -12,6 +12,7 @@ Component({
    */
   properties: {
     spu: Object, // spu 数据
+    shoppingWay: String
   },
 
   /**

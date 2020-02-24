@@ -1,5 +1,6 @@
 import { Spu } from '../../model/spu';
 // pages/detail.js
+import { ShoppingWay } from '../../core/enum';
 Page({
 
   /**
@@ -23,12 +24,24 @@ Page({
   onGoToCart() {},
   onAddToCart() {
     this.setData({
-      showRealm: true
+      showRealm: true,
+      shoppingWay: ShoppingWay.CART
     })
   },
   onBuy() {
     this.setData({
-      showRealm: true
+      showRealm: true,
+      shoppingWay: ShoppingWay.BUY
+    })
+  },
+  onGoToHome() {
+    wx.wx.switchTab({
+      url: '/pages/home/index'
+    })
+  },
+  onGoToCart() {
+    wx.switchTab({
+      url: '/pages/cart/index'
     })
   },
 })

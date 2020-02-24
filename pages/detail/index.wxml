@@ -1,6 +1,6 @@
 <!-- SKU 选择 -->
 <l-popup content-align="bottom" show="{{showRealm}}">
-  <s-realm spu="{{spu}}"></s-realm>
+  <s-realm spu="{{spu}}" shoppingWay="{{shoppingWay}}"></s-realm>
 </l-popup>
 
 <!-- 底部栏 -->
