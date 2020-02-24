@@ -1,6 +1,7 @@
 import { FenceGroup } from '../model/fence-group';
 import { Judger } from '../model/judger';
 import { Spu } from '../../model/spu';
+import { Cart } from '../model/cart';
 
 /**
  * 组件关系：realm > fence > cell
@@ -26,6 +27,8 @@ Component({
       } else {
         this.processHasSpec(spu)
       }
+
+      this.outStockStatus()
     }
   },
 
@@ -40,7 +43,9 @@ Component({
     discountPrice: 0,
     stock: 0,
     noSpec: false,
-    isSkuIntact: false
+    isSkuIntact: false,
+    outStock: false,
+    currentSkuCount: Cart.SKU_MIN_COUNT
   },
 
   /**
@@ -84,6 +89,8 @@ Component({
       } else {
         this.bindSpuData()
       }
+
+      this.outStockStatus()
     },
 
     bindTipData() {
@@ -113,6 +120,18 @@ Component({
         discountPrice: spu.discount_price,
         stock: spu.stock ? spu.stock : 0 // 当有规格选择时，spu.stock 不存在，小程序不能赋值 undefined
       })
+    },
+
+    onSelectCount(e) {
+      this.setData({ currentSkuCount: e.detail.count })
+      this.outStockStatus()
+    },
+    // 判断缺货状态
+    outStockStatus() {
+      const { stock, currentSkuCount } = this.data
+      const outStock = stock < currentSkuCount
+      console.log(stock, currentSkuCount)
+      this.setData({ outStock })
     }
   }
 })

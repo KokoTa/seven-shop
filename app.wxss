@@ -6,3 +6,23 @@ page {
 image {
   display: flex;
 }
+
+@font-face {
+  font-family: 'iconfont'; /* project id 1653640 */
+  src: url('//at.alicdn.com/t/font_1653640_i0fjta0can.eot');
+  src: url('//at.alicdn.com/t/font_1653640_i0fjta0can.eot?#iefix')
+      format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_1653640_i0fjta0can.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_1653640_i0fjta0can.woff') format('woff'),
+    url('//at.alicdn.com/t/font_1653640_i0fjta0can.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_1653640_i0fjta0can.svg#iconfont') format('svg');
+}
+
+.icon-font {
+  font-family: 'iconfont' !important;
+  color: #157658 !important;
+}
+
+.l-icon-home::before {
+  content: '\e612';
+}
