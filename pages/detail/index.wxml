@@ -27,6 +27,12 @@
   <view class="explain">
     <s-sale-explain texts="{{explain}}"></s-sale-explain>
   </view>
+  <!-- 商品详情图 -->
+  <view class="detail-img-container">
+    <block wx:for="{{spu.spu_detail_img_list}}" wx:key="index">
+      <image class="detail-img" src="{{item.img}}" />
+    </block>
+  </view>
 </view>
 
 <!-- SKU 选择 -->

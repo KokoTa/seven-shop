@@ -1,12 +1,21 @@
 /* components/sale-explain/index.wxss */
 .container {
+  margin-top: 10rpx;
+  background: #fff;
+  padding: 20rpx 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.explain {
   box-sizing: border-box;
-  width: 100%;
+  width: 710rpx;
   border: 2rpx dashed #dcebe6;
   display: flex;
   flex-direction: column;
   padding: 5rpx 25rpx;
-  background: #fff;
 }
 
 .inner {
@@ -17,4 +26,13 @@
   justify-content: center;
   font-size: 25rpx;
   color: #333;
+}
+
+.inner text::before {
+  content: '·';
+  margin-right: 26rpx;
+}
+
+.inner:last-child {
+  border: 0;
 }

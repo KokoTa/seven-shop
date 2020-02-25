@@ -48,3 +48,8 @@
   color: #157659;
   font-size: 24rpx;
 }
+
+.detail-img {
+  display: flex;
+  width: 100%;
+}
