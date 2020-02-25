@@ -1,12 +1,15 @@
 import { Spu } from '../../model/spu';
 // pages/detail.js
 import { ShoppingWay } from '../../core/enum';
+import { SaleExplain } from '../../model/sale-explain';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    spu: {},
+    saleExplain: [],
     showRealm: false
   },
 
@@ -16,8 +19,9 @@ Page({
   onLoad: async function (options) {
     const pid = options.pid
     const spu = await Spu.getDetail(pid)
+    const explain = await SaleExplain.getFixed()
 
-    this.setData({ spu })
+    this.setData({ spu, explain })
   },
 
   onGoToHome() {},
@@ -35,7 +39,7 @@ Page({
     })
   },
   onGoToHome() {
-    wx.wx.switchTab({
+    wx.switchTab({
       url: '/pages/home/index'
     })
   },
@@ -44,4 +48,10 @@ Page({
       url: '/pages/cart/index'
     })
   },
+  onSkuChoice(data) {
+    console.log(data.detail)
+    this.setData({
+      ...data.detail
+    })
+  }
 })

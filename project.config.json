@@ -58,8 +58,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/detail/detail",
-					"pathName": "pages/detail/detail",
+					"name": "pages/detail/index",
+					"pathName": "pages/detail/index",
 					"query": "pid=11",
 					"scene": null
 				},

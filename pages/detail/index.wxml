@@ -1,6 +1,37 @@
+<view class="container">
+  <!-- 轮播 -->
+  <swiper class="top" autoplay="{{true}}" indicator-dots="{{true}}">
+    <swiper-item wx:for="{{spu.spu_img_list}}" wx:key="index">
+      <image class="top-img" mode="aspectFill" src="{{item.img}}" />
+    </swiper-item>
+  </swiper>
+  <!-- 描述 -->
+  <s-spu-description spu="{{spu}}"></s-spu-description>
+  <!-- 规格显示 -->
+  <view wx:if="{{!noSpec}}" class="sku-pending" bind:tap="onAddToCart">
+    <view class="specs">
+      <text wx:if="{{!isSkuIntact}}" class="sku-pending-text">
+        <text class="sku-pending-text-title">请选择：</text>
+        <text class="sku-pending-text-content">{{missingSpecKeys}}</text>
+      </text>
+      <text wx:else class="sku-pending-text">
+        <text class="sku-pending-text-title">已选择：</text>
+        <text class="sku-pending-text-content">{{intactSpecValues}}</text>
+      </text>
+    </view>
+    <view class="arrow-right">
+      <l-icon name="right" color="#157658" size="24"></l-icon>
+    </view>
+  </view>
+  <!-- 商品说明 -->
+  <view class="explain">
+    <s-sale-explain texts="{{explain}}"></s-sale-explain>
+  </view>
+</view>
+
 <!-- SKU 选择 -->
 <l-popup content-align="bottom" show="{{showRealm}}">
-  <s-realm spu="{{spu}}" shoppingWay="{{shoppingWay}}"></s-realm>
+  <s-realm spu="{{spu}}" shoppingWay="{{shoppingWay}}" bind:skuChoice="onSkuChoice"></s-realm>
 </l-popup>
 
 <!-- 底部栏 -->

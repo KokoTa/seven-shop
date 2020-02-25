@@ -22,6 +22,7 @@ Component({
   observers: {
     'spu': function (spu) {
       if (!spu) return
+      if (!spu.title) return
 
       if (Spu.isNoSpec(spu)) {
         this.processNoSpec(spu)
@@ -55,6 +56,7 @@ Component({
   methods: {
     processNoSpec(spu) {
       this.setData({ noSpec: true })
+      this.triggerEvent('skuChoice', { noSpec: true })
       this.bindSkuData(spu.sku_list[0])
     },
     processHasSpec(spu) {
@@ -96,11 +98,22 @@ Component({
 
     bindTipData() {
       const judger = this.data.judger
+      const isSkuIntact = judger.isSkuIntact() // 是否选择了完整路径
+      const missingSpecKeys = judger.getMissingSpecKeys() // 未选择的规格名
+      const intactSpecValues = judger.getIntactSpecValues() // 已选择的规格值
+
       this.setData({
         fences: judger.fenceGroup.fences,
-        isSkuIntact: judger.isSkuIntact(),
-        missingSpecKeys: judger.getMissingSpecKeys(), // 未选择的规格名
-        intactSpecValues: judger.getIntactSpecValues() // 已选择的规格值
+        isSkuIntact,
+        missingSpecKeys,
+        intactSpecValues
+      })
+
+      this.triggerEvent('skuChoice', {
+        noSpec: this.data.noSpec,
+        isSkuIntact,
+        missingSpecKeys,
+        intactSpecValues
       })
     },
     bindSkuData(sku) {
