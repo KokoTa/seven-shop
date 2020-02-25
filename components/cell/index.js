@@ -1,4 +1,3 @@
-import { Cell } from '../model/cell';
 // components/cell/index.js
 Component({
   /**

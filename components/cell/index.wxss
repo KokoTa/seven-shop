@@ -29,3 +29,9 @@
 .selected .inner-container {
   background: #157658;
 }
+
+.sku-img {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 15rpx;
+}

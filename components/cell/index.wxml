@@ -1,3 +1,6 @@
 <view class="container {{cell.status}}" bind:tap="onTap">
-  <view class="inner-container">{{cell.title}}</view>
+  <view class="inner-container">
+    <image wx:if="{{cell.skuImg}}" class="sku-img" src="{{cell.skuImg}}" />
+    <text>{{cell.title}}</text>
+  </view>
 </view>

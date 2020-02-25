@@ -24,6 +24,11 @@ class FenceGroup {
     newMatrix.forEach((arr, index) => {
       const fence = new Fence(arr)
       fence.init()
+
+      if (this._isSketchFence(fence.id)) {
+        fence.setCellSkuImg(this.skuList)
+      }
+
       fences.push(fence)
     })
 
@@ -71,6 +76,13 @@ class FenceGroup {
         cb(cell, i, j)
       }
     }
+  }
+
+  // 是否是可视规格
+  _isSketchFence(fenceId) {
+    const specId = this.spu.sketch_spec_id // 是否指定了可视规格
+    if (fenceId === specId) return true
+    return false
   }
 }
 

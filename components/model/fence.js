@@ -20,6 +20,17 @@ class Fence {
     this._initCells()
   }
 
+  setCellSkuImg(skuList) {
+    this.cells.forEach(cell => {
+      const cellCode = Cell.getCellCode(cell.spec)
+      skuList.forEach(sku => {
+        if (sku.code.indexOf(cellCode) !== -1) {
+          cell.skuImg = sku.img
+        }
+      })
+    })
+  }
+
   _initCells() {
     this.specs.forEach((spec) => {
       const existed = this.cells.some(cell => {
