@@ -34,3 +34,9 @@ image {
 .l-icon-star::before {
   content: '\e625' !important;
 }
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}

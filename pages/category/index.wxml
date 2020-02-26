@@ -1,2 +1,43 @@
-<!--pages/category/index.wxml-->
-<text>pages/category/index.wxml</text>
+<view class="container">
+  <view class="search-container">
+    <l-button
+      shap="square"
+      width="710"
+      height="60"
+      icon="research"
+      icon-size="24"
+      icon-color="#c4c9d2"
+      l-class="search-btn"
+      bind:lintap="onGoToSearch"
+    >搜索商品</l-button>
+  </view>
+  <view class="main">
+    <view class="left">
+      <!-- 这里设置不了高度 100% 因为该组件内部包含了多层 -->
+      <l-segment
+        placement="left"
+        width="160"
+        height="{{height}}"
+        item-height="90"
+        even="{{false}}"
+        l-active-class="segment-item-active"
+        l-inactive-class="segment-item"
+        l-line-class="l-seg-line"
+        scrollable
+        active-key="{{defaultRootId}}"
+        bind:linchange="onSegmentChange"
+      >
+        <block wx:for="{{roots}}" wx:key="index">
+          <l-segment-item key="{{item.id}}" tab="{{item.name}}"></l-segment-item>
+        </block>>
+      </l-segment>
+    </view>
+    <view class="right">
+      <s-sub-category
+        subCategories="{{currentSubs}}"
+        bannerImg="{{currentBannerImg}}"
+        bind:itemTap="onGridItemTap"
+      ></s-sub-category>
+    </view>
+  </view>
+</view>
