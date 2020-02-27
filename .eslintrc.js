@@ -21,11 +21,5 @@ module.exports = {
     "Component": true,
     "App": true
   },
-  rules: {
-    "no-prototype-builtins": "off",
-    "prefer-promise-reject-errors": "off",
-    "eqeqeq": "off",
-    "no-useless-call": "off",
-    "no-unused-expressions": "off"
-  },
+  rules: {},
 };

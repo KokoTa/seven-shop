@@ -5,24 +5,49 @@
     maxlength="10"
     bg-color="#f1f1f1"
     bind:linconfirm="onSearch"
+    bind:lincancel="onCancel"
   />
 </view>
 
 <view class="container">
-  <view>
-    <view class="history-container">
+  <!-- 搜索面板 -->
+  <view wx:if="{{!searchFlag}}">
+    <!-- 历史搜索 -->
+    <view class="history-container" wx:if="{{historyTags.length > 0}}">
       <view class="history-title">
         <view class="slide"></view>
         <text>历史搜索</text>
-        <view class="delete">
+        <view class="delete" bind:tap="onDelHistory">
           <l-icon name="delete" color="#999" size="32"></l-icon>
         </view>
       </view>
       <view class="history-tags">
         <block wx:for="{{historyTags}}" wx:key="index">
-          <l-tag name="{{item}}"></l-tag>
+          <l-tag l-class="tag" name="{{item}}" bind:lintap="onSearch">{{item}}</l-tag>
         </block>
       </view>
     </view>
+    <!-- 热门搜索 -->
+    <view class="history-container">
+      <view class="history-title">
+        <view class="slide"></view>
+        <text>热门搜索</text>
+      </view>
+      <view class="history-tags">
+        <block wx:for="{{hotTags}}" wx:key="index">
+          <l-tag
+            l-class="tag"
+            l-select-class="tag-selected"
+            name="{{item.title}}"
+            select="{{item.highlight === 1 ? true : false}}"
+            bind:lintap="onSearch"
+          >{{item.title}}</l-tag>
+        </block>
+      </view>
+    </view>
+  </view>
+  <!-- 搜索结果 -->
+  <view wx:else class="spu-list">
+    <l-water-flow generic:l-water-flow-item="s-spu-preview"></l-water-flow>
   </view>
 </view>

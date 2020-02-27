@@ -6,6 +6,10 @@ class HistoryKeyword {
 
   keywords = []
 
+  constructor () {
+    this.keywords = this._getFromLocal()
+  }
+
   save (keyword) {
     const existed = this.keywords.indexOf(keyword) !== -1
     if (existed) return
@@ -13,6 +17,7 @@ class HistoryKeyword {
       this.keywords.pop()
     }
     this.keywords.unshift(keyword)
+    this._setToLocal()
   }
 
   get () {
@@ -21,10 +26,16 @@ class HistoryKeyword {
 
   clear () {
     this.keywords = []
+    this._setToLocal()
   }
 
   _setToLocal () {
     wx.setStorageSync(HistoryKeyword.KEYWORDS, this.keywords)
+  }
+
+  _getFromLocal () {
+    const keywords = wx.getStorageSync(HistoryKeyword.KEYWORDS)
+    return keywords || []
   }
 }
 
