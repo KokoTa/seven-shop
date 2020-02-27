@@ -5,7 +5,7 @@ Component({
     name: String,
     cell: Object,
     // 标签颜色
-    type:{
+    type: {
       type: String,
       value: 'touch'
     },
@@ -47,17 +47,17 @@ Component({
     height: Number
   },
   methods: {
-    handleTap() {
-      if (this.properties.disabled) return false;
-      let options = {
+    handleTap () {
+      if (this.properties.disabled) return false
+      const options = {
         name: this.properties.name,
         cell: this.properties.cell,
         select: this.properties.select
-      };
+      }
       this.triggerEvent('lintap', options, {
         bubbles: true,
         composed: true
-      });
+      })
     }
   }
-});
+})

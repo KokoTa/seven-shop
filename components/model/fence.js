@@ -1,4 +1,4 @@
-import { Cell } from './cell';
+import { Cell } from './cell'
 /**
  * 规格行
  */
@@ -10,17 +10,17 @@ class Fence {
   title
   id
 
-  constructor(specs) {
+  constructor (specs) {
     this.specs = specs
     this.title = specs[0].key
     this.id = specs[0].key_id
   }
 
-  init() {
+  init () {
     this._initCells()
   }
 
-  setCellSkuImg(skuList) {
+  setCellSkuImg (skuList) {
     this.cells.forEach(cell => {
       const cellCode = Cell.getCellCode(cell.spec)
       skuList.forEach(sku => {
@@ -31,7 +31,7 @@ class Fence {
     })
   }
 
-  _initCells() {
+  _initCells () {
     this.specs.forEach((spec) => {
       const existed = this.cells.some(cell => {
         return cell.id === spec.value_id

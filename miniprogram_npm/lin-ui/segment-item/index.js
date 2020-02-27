@@ -9,9 +9,9 @@ Component({
   relations: {
     '../segment/index': {
       type: 'parent',
-      linked() { },
-      unlinked() { }
-    },
+      linked () { },
+      unlinked () { }
+    }
   },
 
   properties: {
@@ -29,7 +29,7 @@ Component({
     },
     dotBadge: Boolean,
     badgeCount: {
-      type: Number,
+      type: Number
     },
     badgeMaxCount: {
       type: Number,
@@ -38,11 +38,11 @@ Component({
     badgeCountType: {
       type: String,
       value: 'overflow'
-    },
+    }
   },
   observers: {
     '**': function (filed) {
-      this.updateData(filed);
+      this.updateData(filed)
     }
   },
   /**
@@ -54,21 +54,20 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    updateData(filed) {
-      let parent = this.getRelationNodes('../segment/index')[0];
-      if (!parent) return;
-      const tabList = parent.data.tabList;
-      if (!(tabList && tabList.length > 0)) return;
-      const index = tabList.findIndex(tab => tab.key === this.data.key);
-      tabList[index] = filed;
+    updateData (filed) {
+      const parent = this.getRelationNodes('../segment/index')[0]
+      if (!parent) return
+      const tabList = parent.data.tabList
+      if (!(tabList && tabList.length > 0)) return
+      const index = tabList.findIndex(tab => tab.key === this.data.key)
+      tabList[index] = filed
       parent.setData({
         tabList: tabList
       }, () => {
         if (parent.data.scrollable) {
-          parent.queryMultipleNodes();
+          parent.queryMultipleNodes()
         }
-      });
-
-    },
+      })
+    }
   }
-});
+})

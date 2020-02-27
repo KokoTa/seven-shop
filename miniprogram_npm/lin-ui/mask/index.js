@@ -1,10 +1,10 @@
-import zIndex from '../behaviors/zIndex';
+import zIndex from '../behaviors/zIndex'
 Component({
   /**
    * 组件的属性列表
    */
   behaviors: [zIndex],
-  externalClasses: ['l-class','l-mask-class'],
+  externalClasses: ['l-class', 'l-mask-class'],
   properties: {
     // 显示与隐藏
     show: {
@@ -14,18 +14,18 @@ Component({
     // 不透明度
     opacity: {
       type: [String, Number],
-      value: .4
+      value: 0.4
     },
     // mask的z-index值
     zIndex: {
       type: Number,
-      value: 99,
+      value: 99
 
     },
     // slot是否居中
     center: {
       type: Boolean,
-      value: false,
+      value: false
     },
     // 锁定
     locked: {
@@ -41,7 +41,7 @@ Component({
     NavColor: {
       type: String,
       value: ''
-    },
+    }
 
   },
 
@@ -57,28 +57,26 @@ Component({
    */
   methods: {
     // 阻止滑动
-    doNothingMove() {
+    doNothingMove () {
       // do nothing……
     },
 
     // 点击事件
-    onMaskTap() {
-
-      let detail = true;
-      let option = { bubbles: true, composed: true };
+    onMaskTap () {
+      const detail = true
+      const option = { bubbles: true, composed: true }
 
       if (this.data.locked !== true) {
         this.setData({
           // fullScreen: 'hide',
-          show: false,
-        });
+          show: false
+        })
       }
-      this.triggerEvent('lintap', detail, option);
+      this.triggerEvent('lintap', detail, option)
     }
   },
 
   attached: function () {
-  },
+  }
 
-
-});
+})

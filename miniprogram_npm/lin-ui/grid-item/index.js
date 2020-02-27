@@ -2,45 +2,45 @@ Component({
   relations: {
     '../grid/index': {
       type: 'parent'
-    },
+    }
   },
   externalClasses: ['l-grid-item', 'l-grid-item-class'],
   properties: {
     key: String,
-    cell:{
-      type:Object,
-      value:{}
-    },
+    cell: {
+      type: Object,
+      value: {}
+    }
   },
   data: {
-    index:0,
+    index: 0
   },
-  attached() {
+  attached () {
 
   },
   observers: {
-    'key': function() {
-      const parent = this.getRelationNodes('../grid/index')[0];
+    key: function () {
+      const parent = this.getRelationNodes('../grid/index')[0]
       if (parent) {
         parent.setData({
           gridItems: [],
           childNum: 0
-        });
-        parent.initGrids();
+        })
+        parent.initGrids()
       }
     }
   },
 
   lifetimes: {
-    show() {
+    show () {
 
-    },
+    }
   },
   methods: {
-    tapGridItem() {
+    tapGridItem () {
       this.triggerEvent('linitemtap', {
         ...this.data
-      }, { bubbles: true, composed: true });
-    },
+      }, { bubbles: true, composed: true })
+    }
   }
-});
+})

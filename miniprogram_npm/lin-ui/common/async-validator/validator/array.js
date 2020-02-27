@@ -1,5 +1,5 @@
-import rules from '../rule/index.js';
-import { isEmptyValue } from '../util';
+import rules from '../rule/index.js'
+import { isEmptyValue } from '../util'
 /**
  *  Validates an array.
  *
@@ -10,20 +10,20 @@ import { isEmptyValue } from '../util';
  *  @param options The validation options.
  *  @param options.messages The validation messages.
  */
-function array(rule, value, callback, source, options) {
-  const errors = [];
-  const validate = rule.required || (!rule.required && source.hasOwnProperty(rule.field));
+function array (rule, value, callback, source, options) {
+  const errors = []
+  const validate = rule.required || (!rule.required && source.hasOwnProperty(rule.field))
   if (validate) {
     if (isEmptyValue(value, 'array') && !rule.required) {
-      return callback();
+      return callback()
     }
-    rules.required(rule, value, source, errors, options, 'array');
+    rules.required(rule, value, source, errors, options, 'array')
     if (!isEmptyValue(value, 'array')) {
-      rules.type(rule, value, source, errors, options);
-      rules.range(rule, value, source, errors, options);
+      rules.type(rule, value, source, errors, options)
+      rules.range(rule, value, source, errors, options)
     }
   }
-  callback(errors);
+  callback(errors)
 }
 
-export default array;
+export default array

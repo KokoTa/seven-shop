@@ -1,4 +1,4 @@
-import { Http } from './http';
+import { Http } from './http'
 
 /**
  * 分页工具类
@@ -8,7 +8,6 @@ import { Http } from './http';
  * 2. 加载控制：防抖节流
  */
 class Paging {
-
   req // 包含 url、data、method
   start // 索引
   count // 单位数量
@@ -16,14 +15,14 @@ class Paging {
   moreData = true // 是否有更多数据
   accumulator = []
 
-  constructor(req, count = 10, start = 0) {
+  constructor (req, count = 10, start = 0) {
     this.req = req
     this.count = count
     this.start = start
   }
 
   // 获取更多数据
-  async getMoreData() {
+  async getMoreData () {
     if (this.locker || !this.moreData) return null
     const data = await this._actualGetData()
     this._releaseLocker()
@@ -31,7 +30,7 @@ class Paging {
   }
 
   // 获取数据
-  async _actualGetData() {
+  async _actualGetData () {
     const { count, start } = this
     const { url, data, method } = this.req
 
@@ -82,18 +81,18 @@ class Paging {
   }
 
   // 累加
-  _accumulate(items) {
+  _accumulate (items) {
     this.accumulator = this.accumulator.concat(items)
   }
 
   // 通过页码判断是否有更多数据
   // 注意这里 pageNum 从 0 开始计算
-  _moreData(totalPage, pageNum) {
-    return pageNum <  totalPage - 1
+  _moreData (totalPage, pageNum) {
+    return pageNum < totalPage - 1
   }
 
   // 加锁
-  _getLocker() {
+  _getLocker () {
     if (this.locker) {
       return false
     }
@@ -102,7 +101,7 @@ class Paging {
   }
 
   // 解锁
-  _releaseLocker() {
+  _releaseLocker () {
     this.locker = false
   }
 }

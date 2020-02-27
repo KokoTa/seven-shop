@@ -51,8 +51,8 @@ Component({
   },
 
   observers: {
-    'value': function () {
-      this.reserveNumber();
+    value: function () {
+      this.reserveNumber()
     }
   },
 
@@ -60,19 +60,19 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    reserveNumber() {
-      const countToNumber = Number(this.data.value);
-      const isText = isNaN(Number(countToNumber)) || (this.data.mode === 'text');
+    reserveNumber () {
+      const countToNumber = Number(this.data.value)
+      const isText = isNaN(Number(countToNumber)) || (this.data.mode === 'text')
       if (!isText && this.data.autofix) {
-        const result = countToNumber.toFixed(this.data.reserveDigit);
+        const result = countToNumber.toFixed(this.data.reserveDigit)
         this.setData({
           result
-        });
+        })
       } else {
         this.setData({
           result: this.data.value
-        });
+        })
       }
     }
   }
-});
+})

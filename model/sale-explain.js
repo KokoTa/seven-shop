@@ -1,10 +1,10 @@
-import { Http } from '../utils/http';
+import { Http } from '../utils/http'
 /**
  * 商品补充说明
  */
 
 class SaleExplain {
-  static async getFixed() {
+  static async getFixed () {
     const data = await Http.request({
       url: '/sale_explain/fixed'
     })

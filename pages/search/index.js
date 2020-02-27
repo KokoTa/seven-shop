@@ -15,7 +15,8 @@ Page({
 
   },
 
-  onSearch(e) {
+  onSearch (e) {
     const value = e.detail.value
+    console.log(value)
   }
 })

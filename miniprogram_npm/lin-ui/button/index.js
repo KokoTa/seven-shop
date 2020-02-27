@@ -1,5 +1,5 @@
 Component({
-  externalClasses: ['l-class', 'l-hover-class', 'l-img-class','l-icon-class'],
+  externalClasses: ['l-class', 'l-hover-class', 'l-img-class', 'l-icon-class'],
   properties: {
     // button组建标识
     name: {
@@ -8,28 +8,28 @@ Component({
     },
     type: {
       type: String,
-      value: 'default',
+      value: 'default'
     },
     plain: Boolean,
     size: {
       type: String,
-      value: 'medium',
+      value: 'medium'
     },
     shape: {
       type: String,
-      value: 'circle',
+      value: 'circle'
     },
     disabled: {
       type: Boolean,
-      value: false,
+      value: false
     },
     special: {
       type: Boolean,
-      value: false,
+      value: false
     },
     loading: {
       type: Boolean,
-      value: false,
+      value: false
     },
     // 微信原生接口
     width: Number,
@@ -63,16 +63,16 @@ Component({
   },
   methods: {
     // button点击事件
-    handleTap() {
-      if (this.data.disabled || this.data.loading) return false;
+    handleTap () {
+      if (this.data.disabled || this.data.loading) return false
       this.triggerEvent('lintap', {}, {
         bubbles: true,
         composed: true
-      });
+      })
     },
     // 开放能力事件回调
-    openTypeEvent(data) {
-      this.triggerEvent(data.type, data.detail, {});
+    openTypeEvent (data) {
+      this.triggerEvent(data.type, data.detail, {})
     }
   }
-});
+})

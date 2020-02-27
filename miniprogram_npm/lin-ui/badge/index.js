@@ -37,51 +37,51 @@ Component({
     finalCount: 0
   },
   observers: {
-    'value': function () {
-      this.finalCount();
+    value: function () {
+      this.finalCount()
     }
   },
   methods: {
     // 最终数字
-    finalCount() {
+    finalCount () {
       if (isNaN(Number(this.data.value)) || (this.data.mode === 'text')) {
         this.setData({
           finalCount: this.data.value
-        });
+        })
       } else {
-        this.switchType();
+        this.switchType()
       }
     },
-    switchType() {
+    switchType () {
       switch (this.data.numberType) {
-      case 'overflow':
-        this.setData({
-          finalCount: Number(this.data.value) > Number(this.data.maxCount) ? `${this.data.maxCount}+` : this.data.value
-        });
-        break;
-      case 'ellipsis':
-        this.setData({
-          finalCount: Number(this.data.value) > Number(this.data.maxCount) ? `...` : this.data.value
-        });
-        break;
-      case 'limit':
-        this.setData({
-          finalCount: Number(this.data.value) > 999 ? `${ Number.isInteger(this.data.value / 1000)? (this.data.value/1000) : (this.data.value/1000).toFixed(1) }k` : this.data.value
-        });
-        break;
-      default:
-        this.setData({
-          finalCount: Number(this.data.value)
-        });
-        break;
+        case 'overflow':
+          this.setData({
+            finalCount: Number(this.data.value) > Number(this.data.maxCount) ? `${this.data.maxCount}+` : this.data.value
+          })
+          break
+        case 'ellipsis':
+          this.setData({
+            finalCount: Number(this.data.value) > Number(this.data.maxCount) ? '...' : this.data.value
+          })
+          break
+        case 'limit':
+          this.setData({
+            finalCount: Number(this.data.value) > 999 ? `${Number.isInteger(this.data.value / 1000) ? (this.data.value / 1000) : (this.data.value / 1000).toFixed(1)}k` : this.data.value
+          })
+          break
+        default:
+          this.setData({
+            finalCount: Number(this.data.value)
+          })
+          break
       }
     },
     // 点击事件
-    handleTap() {
+    handleTap () {
       this.triggerEvent('lintap', {}, {
         bubbles: true,
         composed: true
-      });
-    },
+      })
+    }
   }
-});
+})

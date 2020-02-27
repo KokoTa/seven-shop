@@ -1,11 +1,12 @@
 
-
 class HistoryKeyword {
   static MAX_ITEM_COUNT = 20
 
+  static KEYWORDS = 'keywords'
+
   keywords = []
 
-  save(keyword) {
+  save (keyword) {
     const existed = this.keywords.indexOf(keyword) !== -1
     if (existed) return
     if (this.keywords.length >= HistoryKeyword.MAX_ITEM_COUNT) {
@@ -14,11 +15,19 @@ class HistoryKeyword {
     this.keywords.unshift(keyword)
   }
 
-  get() {
-
+  get () {
+    return this.keywords
   }
 
-  clear() {
-
+  clear () {
+    this.keywords = []
   }
+
+  _setToLocal () {
+    wx.setStorageSync(HistoryKeyword.KEYWORDS, this.keywords)
+  }
+}
+
+export {
+  HistoryKeyword
 }

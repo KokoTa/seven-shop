@@ -51,71 +51,70 @@ Component({
     }
   },
   data: {},
-  attached() {},
+  attached () {},
 
   methods: {
-    switchTab(e) {
-      const data = e.currentTarget.dataset;
-      const url = data.path;
+    switchTab (e) {
+      const data = e.currentTarget.dataset
+      const url = data.path
       if (this.data.isNav) {
         if (this.data.isRedirectToTab) {
           wx.switchTab({
             url
-          });
+          })
         } else {
           wx.switchTab({
             url
-          });
+          })
         }
       }
 
-
-      this.showItem(data.index);
+      this.showItem(data.index)
     },
-    show() {
+    show () {
       this.setData({
         show: true
-      });
+      })
     },
-    hide() {
+    hide () {
       this.setData({
         show: false
-      });
+      })
     },
-    showItem(idx) {
+    showItem (idx) {
       this.setData({
         selected: idx
-      });
-      let detail = {
+      })
+      const detail = {
         idx,
-        path:this.route
-      };
-      let option = { bubbles: true, composed: true };
-      this.triggerEvent('lintap', detail, option);
+        path: this.route
+      }
+      const option = { bubbles: true, composed: true }
+      this.triggerEvent('lintap', detail, option)
     },
-    showRedDot(idx) {
-      const redDot = `list[${idx}].redDot`;
+    showRedDot (idx) {
+      const redDot = `list[${idx}].redDot`
       this.setData({
         [redDot]: true
-      });
+      })
     },
-    hideRedDot(idx) {
-      const redDot = `list[${idx}].redDot`;
+    hideRedDot (idx) {
+      const redDot = `list[${idx}].redDot`
       this.setData({
         [redDot]: false
-      });
+      })
     },
-    setTabBarBadge(idx, text) {
-      const badge = `list[${idx}].badge`;
+    setTabBarBadge (idx, text) {
+      const badge = `list[${idx}].badge`
       this.setData({
         [badge]: text
-      });
+      })
     },
-    removeTabBarBadge(idx) {
-      const badge = `list[${idx}].badge`;
+    removeTabBarBadge (idx) {
+      const badge = `list[${idx}].badge`
       this.setData({
         [badge]: ''
-      });
+      })
     }
   }
-});
+})

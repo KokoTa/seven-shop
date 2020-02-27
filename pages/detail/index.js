@@ -1,7 +1,7 @@
-import { Spu } from '../../model/spu';
+import { Spu } from '../../model/spu'
 // pages/detail.js
-import { ShoppingWay } from '../../core/enum';
-import { SaleExplain } from '../../model/sale-explain';
+import { ShoppingWay } from '../../core/enum'
+import { SaleExplain } from '../../model/sale-explain'
 Page({
 
   /**
@@ -24,31 +24,29 @@ Page({
     this.setData({ spu, explain })
   },
 
-  onGoToHome() {},
-  onGoToCart() {},
-  onAddToCart() {
+  onAddToCart () {
     this.setData({
       showRealm: true,
       shoppingWay: ShoppingWay.CART
     })
   },
-  onBuy() {
+  onBuy () {
     this.setData({
       showRealm: true,
       shoppingWay: ShoppingWay.BUY
     })
   },
-  onGoToHome() {
+  onGoToHome () {
     wx.switchTab({
       url: '/pages/home/index'
     })
   },
-  onGoToCart() {
+  onGoToCart () {
     wx.switchTab({
       url: '/pages/cart/index'
     })
   },
-  onSkuChoice(data) {
+  onSkuChoice (data) {
     console.log(data.detail)
     this.setData({
       ...data.detail

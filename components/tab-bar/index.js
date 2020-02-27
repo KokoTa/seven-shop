@@ -18,17 +18,17 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    goToHome() {
+    goToHome () {
       this.triggerEvent('goToHome', {})
     },
-    goToCart() {
+    goToCart () {
       this.triggerEvent('goToCart')
     },
-    onAddToCart() {
+    onAddToCart () {
       this.triggerEvent('addToCart')
     },
-    onBuy() {
+    onBuy () {
       this.triggerEvent('buy')
-    },
+    }
   }
 })

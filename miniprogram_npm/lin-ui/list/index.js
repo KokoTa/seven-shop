@@ -1,17 +1,17 @@
-import hover from '../behaviors/hover';
+import hover from '../behaviors/hover'
 
 Component({
-  behaviors:[hover],
+  behaviors: [hover],
   relations: {
     '../list/index': {
       type: 'parent', // 关联的目标节点应为子节点
-      linked() {
+      linked () {
         // 每次有custom-li被插入时执行，target是该节点实例对象，触发在该节点attached生命周期之后
       },
-      linkChanged() {
+      linkChanged () {
         // 每次有custom-li被移动后执行，target是该节点实例对象，触发在该节点moved生命周期之后
       },
-      unlinked() {
+      unlinked () {
         // 每次有custom-li被移除时执行，target是该节点实例对象，触发在该节点detached生命周期之后
       }
     }
@@ -77,7 +77,7 @@ Component({
     rightGap: Number,
     isLink: {
       type: Boolean,
-      value: true,
+      value: true
     },
     linkType: {
       type: String,
@@ -92,15 +92,15 @@ Component({
       const {
         linkType,
         url
-      } = e.currentTarget.dataset;
+      } = e.currentTarget.dataset
       if (url) {
         wx[linkType]({
           url
-        });
+        })
       }
       this.triggerEvent('lintap', {
         e
-      }, { bubbles: true, composed: true });
+      }, { bubbles: true, composed: true })
     }
   }
-});
+})

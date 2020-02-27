@@ -1,4 +1,4 @@
-import * as util from '../util';
+import * as util from '../util'
 
 /**
  *  Rule for validating required fields.
@@ -11,11 +11,11 @@ import * as util from '../util';
  *  @param options The validation options.
  *  @param options.messages The validation messages.
  */
-function required(rule, value, source, errors, options, type) {
+function required (rule, value, source, errors, options, type) {
   if (rule.required &&
     (!source.hasOwnProperty(rule.field) || util.isEmptyValue(value, type || rule.type))) {
-    errors.push(util.format(options.messages.required, rule.fullField));
+    errors.push(util.format(options.messages.required, rule.fullField))
   }
 }
 
-export default required;
+export default required

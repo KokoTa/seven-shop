@@ -1,4 +1,4 @@
-import * as util from '../util';
+import * as util from '../util'
 
 /**
  *  Rule for validating a regular expression pattern.
@@ -11,26 +11,25 @@ import * as util from '../util';
  *  @param options The validation options.
  *  @param options.messages The validation messages.
  */
-function pattern(rule, value, source, errors, options) {
+function pattern (rule, value, source, errors, options) {
   if (rule.pattern) {
     if (rule.pattern instanceof RegExp) {
       // if a RegExp instance is passed, reset `lastIndex` in case its `global`
       // flag is accidentally set to `true`, which in a validation scenario
       // is not necessary and the result might be misleading
-      rule.pattern.lastIndex = 0;
+      rule.pattern.lastIndex = 0
       if (!rule.pattern.test(value)) {
         errors.push(util.format(options.messages.pattern.mismatch,
-          rule.fullField, value, rule.pattern));
+          rule.fullField, value, rule.pattern))
       }
     } else if (typeof rule.pattern === 'string') {
-      
-      const _pattern = new RegExp(rule.pattern.replace(/^\/|\/$/g,''));
+      const _pattern = new RegExp(rule.pattern.replace(/^\/|\/$/g, ''))
       if (!_pattern.test(value)) {
         errors.push(util.format(options.messages.pattern.mismatch,
-          rule.fullField, value, rule.pattern));
+          rule.fullField, value, rule.pattern))
       }
     }
   }
 }
 
-export default pattern;
+export default pattern

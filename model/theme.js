@@ -14,10 +14,10 @@ class Theme {
   /**
    * 获取主题详情
    */
-  async getThemes() {
+  async getThemes () {
     const names = `${Theme.locationA},${Theme.locationE},${Theme.locationF},${Theme.locationH}`
     const data = await Http.request({
-      url: `/theme/by/names`,
+      url: '/theme/by/names',
       data: {
         names
       }
@@ -25,30 +25,33 @@ class Theme {
     this.themes = data.data
   }
 
-  getHomeLocationA() {
+  getHomeLocationA () {
     return this.themes.find(t => t.name === Theme.locationA)
   }
-  getHomeLocationE() {
+
+  getHomeLocationE () {
     return this.themes.find(t => t.name === Theme.locationE)
   }
-  getHomeLocationF() {
+
+  getHomeLocationF () {
     return this.themes.find(t => t.name === Theme.locationF)
   }
-  getHomeLocationH() {
+
+  getHomeLocationH () {
     return this.themes.find(t => t.name === Theme.locationH)
   }
 
   /**
    * 获取主题详情(带SPU)
    */
-  static async getThemeSpuByName(name) {
+  static async getThemeSpuByName (name) {
     const data = await Http.request({
       url: `/theme/name/${name}/with_spu`
     })
     return data.data
   }
 
-  static async getHomeLocationESpu() {
+  static async getHomeLocationESpu () {
     return Theme.getThemeSpuByName(Theme.locationE)
   }
 }

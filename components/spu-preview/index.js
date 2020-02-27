@@ -31,9 +31,9 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onItemTap() {
+    onItemTap () {
       const { id } = this.data.data
-      wx.navigateTo({ url: `/pages/detail/index?pid=${id}` });
+      wx.navigateTo({ url: `/pages/detail/index?pid=${id}` })
     }
   }
 })

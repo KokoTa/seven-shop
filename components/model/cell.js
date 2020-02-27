@@ -1,4 +1,4 @@
-import { CellStatus } from '../../core/enum';
+import { CellStatus } from '../../core/enum'
 /**
  * 规格单元
  */
@@ -10,13 +10,13 @@ class Cell {
   status = CellStatus.WAITING
   skuImg
 
-  constructor(spec) {
+  constructor (spec) {
     this.spec = spec
     this.title = spec.value
     this.id = spec.value_id
   }
 
-  static getCellCode(spec) {
+  static getCellCode (spec) {
     return `${spec.key_id}-${spec.value_id}`
   }
 }

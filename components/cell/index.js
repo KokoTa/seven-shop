@@ -20,7 +20,7 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onTap(e) {
+    onTap (e) {
       this.triggerEvent('cellTap', {
         cell: this.properties.cell,
         x: this.properties.x,

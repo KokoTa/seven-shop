@@ -15,23 +15,22 @@ const formatNumber = n => {
 }
 
 // 组合算法
-const combination = function(arr1, num) {
-  var result = [];
-  var range = function(r, arr2) {
+const combination = function (arr1, num) {
+  var result = []
+  var range = function (r, arr2) {
     if (r.length == num) {
       result.push(r)
     } else {
-      let l = r.length;
-      let len = arr2.length - num + l
+      const l = r.length
+      const len = arr2.length - num + l
       for (let i = 0; i <= len; i++) {
         range(r.concat(arr2[i]), arr2.slice(i + 1))
       }
     }
   }
-  range([], arr1);
+  range([], arr1)
   return result
 }
-
 
 module.exports = {
   formatTime: formatTime,

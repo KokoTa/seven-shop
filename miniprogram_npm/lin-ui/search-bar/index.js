@@ -74,7 +74,7 @@ Component({
       type: Boolean,
       value: false
     },
-    // 占位文字的样式  
+    // 占位文字的样式
     placeholderStyle: {
       type: String,
       value: ''
@@ -92,59 +92,59 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onCancel() {
+    onCancel () {
       this.triggerEvent('lincancel', {}, {
         bubbles: true,
         composed: true
-      });
+      })
     },
     // input属性列表
-    handleInputChange(event) {
+    handleInputChange (event) {
       const {
         detail = {}
-      } = event;
+      } = event
       const {
         value = ''
-      } = detail;
+      } = detail
 
       this.setData({
         value
-      });
+      })
 
-      this.triggerEvent('linchange', detail);
+      this.triggerEvent('linchange', detail)
     },
 
-    handleInputFocus(event) {
-      this.triggerEvent('linfocus', event.detail);
+    handleInputFocus (event) {
+      this.triggerEvent('linfocus', event.detail)
     },
 
-    handleInputBlur(event) {
-      this.triggerEvent('linblur', event.detail);
+    handleInputBlur (event) {
+      this.triggerEvent('linblur', event.detail)
     },
 
-    handleInputConfirm(event) {
+    handleInputConfirm (event) {
       const {
         detail = {}
-      } = event;
+      } = event
       const {
         value = ''
-      } = detail;
+      } = detail
 
       this.setData({
         value
-      });
+      })
 
-      this.triggerEvent('linconfirm', detail);
+      this.triggerEvent('linconfirm', detail)
     },
 
-    onClearTap(event) {
+    onClearTap (event) {
       this.setData({
         value: ''
-      });
+      })
       this.triggerEvent('linclear', event.detail, {
         bubbles: true,
         composed: true
-      });
+      })
     }
   }
-});
+})

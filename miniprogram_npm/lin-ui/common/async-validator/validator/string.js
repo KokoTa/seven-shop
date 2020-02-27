@@ -1,5 +1,5 @@
-import rules from '../rule/index.js';
-import { isEmptyValue } from '../util';
+import rules from '../rule/index.js'
+import { isEmptyValue } from '../util'
 
 /**
  *  Performs validation for string types.
@@ -11,24 +11,24 @@ import { isEmptyValue } from '../util';
  *  @param options The validation options.
  *  @param options.messages The validation messages.
  */
-function string(rule, value, callback, source, options) {
-  const errors = [];
-  const validate = rule.required || (!rule.required && source.hasOwnProperty(rule.field));
+function string (rule, value, callback, source, options) {
+  const errors = []
+  const validate = rule.required || (!rule.required && source.hasOwnProperty(rule.field))
   if (validate) {
     if (isEmptyValue(value, 'string') && !rule.required) {
-      return callback();
+      return callback()
     }
-    rules.required(rule, value, source, errors, options, 'string');
+    rules.required(rule, value, source, errors, options, 'string')
     if (!isEmptyValue(value, 'string')) {
-      rules.type(rule, value, source, errors, options);
-      rules.range(rule, value, source, errors, options);
-      rules.pattern(rule, value, source, errors, options);
+      rules.type(rule, value, source, errors, options)
+      rules.range(rule, value, source, errors, options)
+      rules.pattern(rule, value, source, errors, options)
       if (rule.whitespace === true) {
-        rules.whitespace(rule, value, source, errors, options);
+        rules.whitespace(rule, value, source, errors, options)
       }
     }
   }
-  callback(errors);
+  callback(errors)
 }
 
-export default string;
+export default string

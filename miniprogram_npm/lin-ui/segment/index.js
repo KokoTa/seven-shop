@@ -1,4 +1,4 @@
-import scrollCenter from '../behaviors/scrollCenter';
+import scrollCenter from '../behaviors/scrollCenter'
 
 Component({
   /**
@@ -30,14 +30,14 @@ Component({
   relations: {
     '../segment-item/index': {
       type: 'child',
-      linked() {
+      linked () {
         // 每次有子节点被插入时执行，target是该节点实例对象，触发在该节点attached生命周期之后
-        this.initTabs();
+        this.initTabs()
       },
-      unlinked() {
-        this.initTabs();
+      unlinked () {
+        this.initTabs()
       }
-    },
+    }
   },
   properties: {
     activeKey: {
@@ -47,7 +47,7 @@ Component({
     },
     placement: {
       type: String,
-      value: 'top',
+      value: 'top'
     },
     scrollable: Boolean,
     hasLine: {
@@ -56,10 +56,10 @@ Component({
     },
     animatedForLine: Boolean,
     activeColor: {
-      type: String,
+      type: String
     },
     inactiveColor: {
-      type: String,
+      type: String
     },
     equalWidth: {
       type: Boolean,
@@ -87,41 +87,41 @@ Component({
      * 组件的方法列表
      */
   methods: {
-    initTabs(val = this.data.activeKey) {
-      let items = this.getRelationNodes('../segment-item/index');
+    initTabs (val = this.data.activeKey) {
+      const items = this.getRelationNodes('../segment-item/index')
       if (items.length > 0) {
-        if (items.length === this.data.tabList.length) return;
-        let activeKey = val,
-          currentIndex = this.data.currentIndex;
+        if (items.length === this.data.tabList.length) return
+        let activeKey = val
+        let currentIndex = this.data.currentIndex
         const tab = items.map((item, index) => {
-          activeKey = !val && index == 0 ? item.data.key : activeKey;
-          currentIndex = item.data.key === activeKey ? index : currentIndex;
+          activeKey = !val && index == 0 ? item.data.key : activeKey
+          currentIndex = item.data.key === activeKey ? index : currentIndex
           return {
             ...item.data
-          };
-        });
+          }
+        })
         this.setData({
           tabList: tab,
           activeKey,
-          currentIndex,
+          currentIndex
         }, () => {
           if (this.data.scrollable) {
-            this.queryMultipleNodes();
+            this.queryMultipleNodes()
           }
-        });
+        })
       }
     },
 
-    handleChange(e) {
-      const activeKey = e.currentTarget.dataset.key;
-      const currentIndex = e.currentTarget.dataset.index;
+    handleChange (e) {
+      const activeKey = e.currentTarget.dataset.key
+      const currentIndex = e.currentTarget.dataset.index
       this._setChangeData({
         activeKey,
         currentIndex
-      });
+      })
     },
 
-    _setChangeData({
+    _setChangeData ({
       activeKey,
       currentIndex
     }) {
@@ -130,13 +130,13 @@ Component({
         currentIndex
       }, () => {
         if (this.data.scrollable) {
-          this.queryMultipleNodes();
+          this.queryMultipleNodes()
         }
-      });
+      })
       this.triggerEvent('linchange', {
         activeKey,
         currentIndex
-      });
+      })
     }
   }
-});
+})

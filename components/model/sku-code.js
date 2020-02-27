@@ -1,6 +1,6 @@
-import { combination } from '../../utils/util';
-import { Cell } from './cell';
-import { Joiner } from '../../utils/joiner';
+import { combination } from '../../utils/util'
+import { Cell } from './cell'
+import { Joiner } from '../../utils/joiner'
 
 /**
  * 处理 SKU code
@@ -11,18 +11,18 @@ class SkuCode {
   spuId
   totalSegments = [] // 当前 SKU 的所有规格路径
 
-  constructor(code) {
+  constructor (code) {
     this.code = code
     this._splitToSegments()
   }
 
-  _splitToSegments() {
+  _splitToSegments () {
     // 2$1-44#3-9#4-14
     // 2 表示 spu id
     // $ # 是分隔符
     // 1-44 是 spec 数组中的一项，是 key id - value id
 
-    const spuAndSpec = this.code.split("$")
+    const spuAndSpec = this.code.split('$')
 
     const spuId = spuAndSpec[0]
     this.spuId = spuId
@@ -40,7 +40,7 @@ class SkuCode {
   }
 
   // PS：该方法缺少了 spu id
-  static getSkuCode(specs) {
+  static getSkuCode (specs) {
     const joiner = new Joiner('#')
     specs.forEach(spec => {
       if (spec) {

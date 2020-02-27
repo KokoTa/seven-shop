@@ -7,16 +7,16 @@ class Joiner {
   symbol = '-'
   cutCharNum = 1
 
-  constructor(symbol, cutCharNum) {
+  constructor (symbol, cutCharNum) {
     if (symbol) this.symbol = symbol
     if (cutCharNum) this.cutCharNum = cutCharNum
   }
 
-  join(part) {
+  join (part) {
     if (part) this.str += `${part}${this.symbol}`
   }
 
-  getStr() {
+  getStr () {
     return this.str.slice(0, this.str.length - this.cutCharNum)
   }
 }

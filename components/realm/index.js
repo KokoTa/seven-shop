@@ -1,7 +1,7 @@
-import { FenceGroup } from '../model/fence-group';
-import { Judger } from '../model/judger';
-import { Spu } from '../../model/spu';
-import { Cart } from '../model/cart';
+import { FenceGroup } from '../model/fence-group'
+import { Judger } from '../model/judger'
+import { Spu } from '../../model/spu'
+import { Cart } from '../model/cart'
 
 /**
  * 组件关系：realm > fence > cell
@@ -20,7 +20,7 @@ Component({
    * 因此这里要使用监听器
    */
   observers: {
-    'spu': function (spu) {
+    spu: function (spu) {
       if (!spu) return
       if (!spu.title) return
 
@@ -54,12 +54,12 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    processNoSpec(spu) {
+    processNoSpec (spu) {
       this.setData({ noSpec: true })
       this.triggerEvent('skuChoice', { noSpec: true })
       this.bindSkuData(spu.sku_list[0])
     },
-    processHasSpec(spu) {
+    processHasSpec (spu) {
       // 规格集合类
       const fenceGroup = new FenceGroup(spu)
       fenceGroup.initFences()
@@ -79,7 +79,7 @@ Component({
     },
 
     // 接收 cell 组件冒泡上来的事件
-    onCellTap(e) {
+    onCellTap (e) {
       const detail = e.detail
       const judger = this.data.judger
       judger.judge(detail) // 改变 cell 状态
@@ -96,7 +96,7 @@ Component({
       this.outStockStatus()
     },
 
-    bindTipData() {
+    bindTipData () {
       const judger = this.data.judger
       const isSkuIntact = judger.isSkuIntact() // 是否选择了完整路径
       const missingSpecKeys = judger.getMissingSpecKeys() // 未选择的规格名
@@ -116,7 +116,7 @@ Component({
         intactSpecValues
       })
     },
-    bindSkuData(sku) {
+    bindSkuData (sku) {
       this.setData({
         previewImg: sku.img,
         title: sku.title,
@@ -125,7 +125,7 @@ Component({
         stock: sku.stock
       })
     },
-    bindSpuData() {
+    bindSpuData () {
       const spu = this.properties.spu
       this.setData({
         previewImg: spu.img,
@@ -136,12 +136,12 @@ Component({
       })
     },
 
-    onSelectCount(e) {
+    onSelectCount (e) {
       this.setData({ currentSkuCount: e.detail.count })
       this.outStockStatus()
     },
     // 判断缺货状态
-    outStockStatus() {
+    outStockStatus () {
       const { stock, currentSkuCount } = this.data
       const outStock = stock < currentSkuCount
       console.log(stock, currentSkuCount)

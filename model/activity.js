@@ -4,7 +4,7 @@ class Activity {
   static locationD = 'a-2'
 
   // 首页优惠券
-  static async getHomeLocationD() {
+  static async getHomeLocationD () {
     const data = await Http.request({
       url: `/activity/name/${this.locationD}`
     })

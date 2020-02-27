@@ -15,7 +15,7 @@ Component({
   },
 
   observers: {
-    spu: function(spu) {
+    spu: function (spu) {
       if (!spu) return
       if (!spu.tags) return
 

@@ -1,4 +1,4 @@
-import { Cart } from '../model/cart';
+import { Cart } from '../model/cart'
 // components/counter/index.js
 Component({
   /**
@@ -30,7 +30,7 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onOverStep(e) {
+    onOverStep (e) {
       const minOrMaxOut = e.detail.type
       if (minOrMaxOut === 'overflow_max') {
         wx.showToast({

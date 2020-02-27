@@ -1,11 +1,11 @@
 // slide-view/slide-view.js
-const _windowWidth = wx.getSystemInfoSync().windowWidth;
+const _windowWidth = wx.getSystemInfoSync().windowWidth
 Component({
   /**
    * 组件的属性列表
    */
   options: {
-    multipleSlots: true,
+    multipleSlots: true
   },
   properties: {
     // 组件显示区域的宽度
@@ -16,7 +16,7 @@ Component({
     // 组件显示区域的高度
     height: {
       type: Number,
-      value: 100,
+      value: 100
     },
     // 组件滑动显示区域的宽度
     slideWidth: {
@@ -47,9 +47,9 @@ Component({
           this.setData({
             popup: false,
             x: 0
-          });
-          this.onCloseTap();
-        } 
+          })
+          this.onCloseTap()
+        }
       }
     }
   },
@@ -62,126 +62,121 @@ Component({
     //  movable-view偏移量
     x: 0,
     //  movable-view是否可以出界
-    out: false,
+    out: false
   },
 
   /**
    * 组件的方法列表
    */
-  ready() {
-    this.updateRight();
+  ready () {
+    this.updateRight()
   },
   methods: {
-    updateRight() {
-
+    updateRight () {
       // 获取右侧滑动显示区域的宽度
-      const that = this; 
-      const query = wx.createSelectorQuery().in(this);
+      const that = this
+      const query = wx.createSelectorQuery().in(this)
       query.select('.right').boundingClientRect(function (res) {
-        that._slideWidth = res.width;
-        let width = res.width <=50 ? res.width : 50;
-        that._threshold = that.properties.threshold ? that.properties.threshold : width;
-        that._viewWidth = that.data.width + res.width * (750 / _windowWidth);
+        that._slideWidth = res.width
+        const width = res.width <= 50 ? res.width : 50
+        that._threshold = that.properties.threshold ? that.properties.threshold : width
+        that._viewWidth = that.data.width + res.width * (750 / _windowWidth)
         that.setData({
           viewWidth: that._viewWidth
-        });
-      }).exec();
+        })
+      }).exec()
     },
-    onTouchStart(e) {
-      this._startX = e.changedTouches[0].pageX;
+    onTouchStart (e) {
+      this._startX = e.changedTouches[0].pageX
     },
     //  当滑动范围超过阈值自动完成剩余滑动
-    onTouchEnd(e) {
-      if (this.properties.disabled) return;
+    onTouchEnd (e) {
+      if (this.properties.disabled) return
 
-      this._endX = e.changedTouches[0].pageX;
-      this._length = this._endX - this._startX;
+      this._endX = e.changedTouches[0].pageX
+      this._length = this._endX - this._startX
 
       const {
         _endX,
         _startX,
         _threshold
-      } = this;
+      } = this
 
       if (this._length > _threshold) {
         this.setData({
           popup: false,
-          x: 0,
-        });
-        this.onCloseTap();
-
+          x: 0
+        })
+        this.onCloseTap()
       }
-      if (_endX > _startX && this.data.out === false) return;
+      if (_endX > _startX && this.data.out === false) return
       if (_startX - _endX >= _threshold) {
         this.setData({
           x: -this._slideWidth,
           popup: true,
           close: false
-        });
-        this.onOpenTap();
+        })
+        this.onOpenTap()
       } else if (_startX - _endX < _threshold && _startX - _endX > 0 && this.data.popup != true) {
         this.setData({
           x: 0
-        });
-        this.onCloseTap();
-
+        })
+        this.onCloseTap()
       } else if (_endX - _startX >= _threshold) {
         this.setData({
           x: 0
-        });
-        this.onCloseTap();
-
+        })
+        this.onCloseTap()
       } else if (_endX - _startX < _threshold && _endX - _startX > 0) {
         this.setData({
           x: -this._slideWidth,
           close: false
-        });
-        this.onOpenTap();
-
+        })
+        this.onOpenTap()
       }
     },
     //  根据滑动的范围设定是否允许movable-view出界
-    onChange(e) {
+    onChange (e) {
       if (!this.data.out && e.detail.x < -this._threshold) {
         this.setData({
           out: true
-        });
+        })
       } else if (this.data.out && e.detail.x >= -this._threshold) {
         this.setData({
           out: false
-        });
+        })
       }
     },
 
     // 点击 右边区域
-    onRightTap() {
-      let detail = 'click right';
-      let option = { bubbles: true, composed: true };
+    onRightTap () {
+      const detail = 'click right'
+      const option = { bubbles: true, composed: true }
       if (this.properties.autoClose) {
         this.setData({
           popup: false,
           x: 0
-        });
-        this.onCloseTap();
+        })
+        this.onCloseTap()
       }
 
-      this.triggerEvent('lintap', detail, option);
+      this.triggerEvent('lintap', detail, option)
     },
 
     // 打开后触发
-    onOpenTap() {
-      let detail = true;
-      let option = { bubbles: true, composed: true };
+    onOpenTap () {
+      const detail = true
+      const option = { bubbles: true, composed: true }
 
-      this.triggerEvent('slideopen', detail, option);
+      this.triggerEvent('slideopen', detail, option)
     },
 
     // 关闭后触发
-    onCloseTap() {
-      let detail = false;
-      let option = { bubbles: true, composed: true };
+    onCloseTap () {
+      const detail = false
+      const option = { bubbles: true, composed: true }
 
-      this.triggerEvent('slideclose', detail, option);
+      this.triggerEvent('slideclose', detail, option)
     }
   }
-});
+})

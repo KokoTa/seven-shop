@@ -59,33 +59,33 @@ Component({
   data: {
     parentPlacement: ''
   },
-  ready() {
-    const parent = this.getRelationNodes('../checkbox-group/index')[0];
-    let {placement:parentPlacement} = parent.properties;
-    this.setData({parentPlacement});
+  ready () {
+    const parent = this.getRelationNodes('../checkbox-group/index')[0]
+    const { placement: parentPlacement } = parent.properties
+    this.setData({ parentPlacement })
   },
   methods: {
     // 点击checkbox
-    onCheckboxChangeTap() {
+    onCheckboxChangeTap () {
       if (this.properties.disabled || this.data.parentDisabled) {
-        return;
+        return
       }
 
-      const parent = this.getRelationNodes('../checkbox-group/index')[0];
+      const parent = this.getRelationNodes('../checkbox-group/index')[0]
 
-      if(this.properties.checked) {
-        if(this.isOverflow('minSelected')) return;
+      if (this.properties.checked) {
+        if (this.isOverflow('minSelected')) return
       } else {
-        if(this.isOverflow('maxSelected')) return;
+        if (this.isOverflow('maxSelected')) return
       }
 
       const item = {
         checked: !this.properties.checked,
         key: this.properties.key,
         cell: this.properties.cell
-      };
+      }
       if (parent) {
-        parent.onEmitEventHandle(item);
+        parent.onEmitEventHandle(item)
       }
     },
 
@@ -93,18 +93,18 @@ Component({
      *
      * @param {*} type (max/min)
      */
-    isOverflow(type) {
-      const parent = this.getRelationNodes('../checkbox-group/index')[0];
+    isOverflow (type) {
+      const parent = this.getRelationNodes('../checkbox-group/index')[0]
 
-      const limit = parent.properties[type];
-      if (!limit) return false;
-      const selectedLength = parent._selected();
-      let isOverflow = type === 'minSelected' ? selectedLength <= limit : selectedLength >= limit;
+      const limit = parent.properties[type]
+      if (!limit) return false
+      const selectedLength = parent._selected()
+      const isOverflow = type === 'minSelected' ? selectedLength <= limit : selectedLength >= limit
       if (isOverflow) {
-        let backType = type === 'minSelected' ? 'min_selected' : 'max_selected';
-        parent.onEmitOverflowHandle && parent.onEmitOverflowHandle({key: this.properties.key, limitNumber: limit, type: `overflow_${backType}`});
+        const backType = type === 'minSelected' ? 'min_selected' : 'max_selected'
+        parent.onEmitOverflowHandle && parent.onEmitOverflowHandle({ key: this.properties.key, limitNumber: limit, type: `overflow_${backType}` })
       }
-      return isOverflow;
+      return isOverflow
     }
   }
-});
+})

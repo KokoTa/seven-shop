@@ -2,25 +2,25 @@
  * 数据判断与操作类
  * 拆解 SKU，检查路径
  */
-import { SkuCode } from './sku-code';
-import { CellStatus } from '../../core/enum';
-import { SkuPending } from './sku-pending';
-import { Joiner } from '../../utils/joiner';
-import { Cell } from './cell';
+import { SkuCode } from './sku-code'
+import { CellStatus } from '../../core/enum'
+import { SkuPending } from './sku-pending'
+import { Joiner } from '../../utils/joiner'
+import { Cell } from './cell'
 
 class Judger {
   fenceGroup
   pathDict = []
   skuPending
 
-  constructor(fenceGroup) {
+  constructor (fenceGroup) {
     this.fenceGroup = fenceGroup
     this._initPathDict()
     this._initSkuPending()
   }
 
   // 初始化字典路径
-  _initPathDict() {
+  _initPathDict () {
     this.fenceGroup.spu.sku_list.forEach(item => {
       const skuCode = new SkuCode(item.code)
       this.pathDict.push(...skuCode.totalSegments)
@@ -28,7 +28,7 @@ class Judger {
   }
 
   // 初始化默认记录
-  _initSkuPending() {
+  _initSkuPending () {
     const fencesLength = this.fenceGroup.fences.length
     const skuPending = new SkuPending(fencesLength)
     this.skuPending = skuPending
@@ -40,7 +40,7 @@ class Judger {
     this.judge({}, true)
   }
 
-  judge({ cell, x, y }, isInit = false) {
+  judge ({ cell, x, y }, isInit = false) {
     // 如果不是初始化默认记录，则说明是用户点击 cell 触发了该函数
     if (!isInit) {
       // 改变点击的 cell 的状态
@@ -52,7 +52,7 @@ class Judger {
     })
   }
 
-  _eachCell(cb) {
+  _eachCell (cb) {
     const fences = this.fenceGroup.fences
     for (let i = 0; i < fences.length; i++) {
       for (let j = 0; j < fences[i].cells.length; j++) {
@@ -62,7 +62,7 @@ class Judger {
     }
   }
 
-  _changeCellStatus(cell, x, y) {
+  _changeCellStatus (cell, x, y) {
     if (cell.status === CellStatus.WAITING) {
       this.fenceGroup.setCellStatusByXY(x, y, CellStatus.SELECTED) // 改变状态
       this.skuPending.insertCell(cell, x) // 记录选择
@@ -72,7 +72,7 @@ class Judger {
     }
   }
 
-  _changeOtherCellStatus(cell, x, y) {
+  _changeOtherCellStatus (cell, x, y) {
     // 查找潜在路径
     const path = this._findPotentialPath(cell, x)
     // console.log(path)
@@ -98,7 +98,7 @@ class Judger {
   * G H I
   * 选中 E，则 A 的潜在路径有 AE，B 的潜在路径有 BE，C 的潜在路径有 CE，D 的潜在路径有 D，E 的潜在路径有 E，F 的潜在路径有 F，同理 G、H、I 的潜在路径有 EG EH EI
   */
-  _findPotentialPath(cell, rowNum) { // 参数为 cell 以及该 cell 对应的行
+  _findPotentialPath (cell, rowNum) { // 参数为 cell 以及该 cell 对应的行
     const fences = this.fenceGroup.fences
     const joiner = new Joiner('#')
 
@@ -126,25 +126,25 @@ class Judger {
     return joiner.getStr()
   }
 
-  _isInPathDict(path) {
+  _isInPathDict (path) {
     return this.pathDict.includes(path)
   }
 
   // 是否选择了一条完整路径
-  isSkuIntact() {
+  isSkuIntact () {
     return this.skuPending.isIntact()
   }
 
   // 获取 sku
-  getDeterminateSku() {
+  getDeterminateSku () {
     const code = this.skuPending.getSkuPendingCode()
     const fullCode = `${this.fenceGroup.spu.id}$${code}`
     const sku = this.fenceGroup.spu.sku_list.find(sku => sku.code === fullCode)
-    return sku ? sku : null
+    return sku || null
   }
 
   // 获取未选的规格名
-  getMissingSpecKeys() {
+  getMissingSpecKeys () {
     const missingIndex = this.skuPending.getMissingSpecKeysIndex()
     return missingIndex.map((index) => {
       return this.fenceGroup.fences[index].title
@@ -152,7 +152,7 @@ class Judger {
   }
 
   // 获取已选择的规格值
-  getIntactSpecValues() {
+  getIntactSpecValues () {
     return this.skuPending.getIntactSpecValues()
   }
 }

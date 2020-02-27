@@ -19,7 +19,7 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    onItemTap(e) {
+    onItemTap (e) {
       const id = e.detail.key
       this.triggerEvent('itemTap', { id })
     }

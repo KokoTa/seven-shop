@@ -1,6 +1,6 @@
-import rules from '../rule/index.js';
-import { isEmptyValue } from '../util';
-const ENUM = 'enum';
+import rules from '../rule/index.js'
+import { isEmptyValue } from '../util'
+const ENUM = 'enum'
 
 /**
  *  Validates an enumerable list.
@@ -12,19 +12,19 @@ const ENUM = 'enum';
  *  @param options The validation options.
  *  @param options.messages The validation messages.
  */
-function enumerable(rule, value, callback, source, options) {
-  const errors = [];
-  const validate = rule.required || (!rule.required && source.hasOwnProperty(rule.field));
+function enumerable (rule, value, callback, source, options) {
+  const errors = []
+  const validate = rule.required || (!rule.required && source.hasOwnProperty(rule.field))
   if (validate) {
     if (isEmptyValue(value) && !rule.required) {
-      return callback();
+      return callback()
     }
-    rules.required(rule, value, source, errors, options);
+    rules.required(rule, value, source, errors, options)
     if (value) {
-      rules[ENUM](rule, value, source, errors, options);
+      rules[ENUM](rule, value, source, errors, options)
     }
   }
-  callback(errors);
+  callback(errors)
 }
 
-export default enumerable;
+export default enumerable

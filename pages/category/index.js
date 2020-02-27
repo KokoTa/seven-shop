@@ -1,8 +1,8 @@
-import { getSystemInfo } from '../../utils/system';
+import { getSystemInfo } from '../../utils/system'
 // pages/category/index.js
-import { px2rpx } from '../../miniprogram_npm/lin-ui/utils/util';
-import { Category } from '../../model/category';
-import { SpuListType } from '../../core/enum';
+import { px2rpx } from '../../miniprogram_npm/lin-ui/utils/util'
+import { Category } from '../../model/category'
+import { SpuListType } from '../../core/enum'
 Page({
 
   /**
@@ -22,14 +22,14 @@ Page({
     this.initCategoryData()
   },
 
-  async setSegmentHeight() {
+  async setSegmentHeight () {
     const info = await getSystemInfo()
     const windowHeightRpx = px2rpx(info.windowHeight)
-    const height = windowHeightRpx - 60 - 20 -2
+    const height = windowHeightRpx - 60 - 20 - 2
     this.setData({ height })
   },
 
-  async initCategoryData() {
+  async initCategoryData () {
     this.category = new Category()
     await this.category.getAllCategories()
     const roots = this.category.getRoots()
@@ -43,21 +43,21 @@ Page({
     })
   },
 
-  getDefaultRoot(roots) {
-    const defaultRoot = roots.find(r => r.id === this.data.defaultRootId)
+  getDefaultRoot (roots) {
+    let defaultRoot = roots.find(r => r.id === this.data.defaultRootId)
     if (!defaultRoot) {
       defaultRoot = roots[0]
     }
     return defaultRoot
   },
 
-  onGoToSearch() {
+  onGoToSearch () {
     wx.navigateTo({
       url: '/pages/search/index'
     })
   },
 
-  onSegmentChange(e) {
+  onSegmentChange (e) {
     const rootId = e.detail.activeKey
     const roots = this.category.getRoots()
     const root = roots.find(r => r.id === +rootId)
@@ -70,7 +70,7 @@ Page({
     }
   },
 
-  onGridItemTap(e) {
+  onGridItemTap (e) {
     const id = e.detail.id
     wx.navigateTo({
       url: `/pages/spu-list/index?id=${id}&type=${SpuListType.SUB_CATEGORY}`

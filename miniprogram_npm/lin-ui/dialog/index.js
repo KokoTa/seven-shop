@@ -1,12 +1,12 @@
-import computeOffset from '../behaviors/computeOffset';
-import zIndex from '../behaviors/zIndex';
-import hover from '../behaviors/hover';
+import computeOffset from '../behaviors/computeOffset'
+import zIndex from '../behaviors/zIndex'
+import hover from '../behaviors/hover'
 
 Component({
   /**
    * 组件的属性列表
    */
-  behaviors: [computeOffset,zIndex,hover],
+  behaviors: [computeOffset, zIndex, hover],
   externalClasses: ['l-class', 'l-title-class', 'l-content-class', 'l-confirm-class', 'l-cancel-class', 'l-bg-class'],
   properties: {
     // 显示与隐藏
@@ -70,31 +70,31 @@ Component({
   },
   data: {
     success: null,
-    fail: null,
+    fail: null
   },
   /**
    * 组件的初始数据
    */
-  attached() {
+  attached () {
     if (this.data.openApi) {
-      this.initDialog();
+      this.initDialog()
     }
   },
 
   pageLifetimes: {
-    show() {
+    show () {
       if (this.data.openApi) {
-        this.initDialog();
+        this.initDialog()
       }
-    },
+    }
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    initDialog() {
-      wx.lin = wx.lin || {};
+    initDialog () {
+      wx.lin = wx.lin || {}
       wx.lin.showDialog = (options) => {
         const {
           type = 'alert',
@@ -108,8 +108,8 @@ Component({
           cancelText = '取消',
           confirmColor = '#3683d6',
           success = null,
-          fail = null,
-        } = options;
+          fail = null
+        } = options
         this.setData({
           type,
           title,
@@ -124,64 +124,62 @@ Component({
           show: true,
           fail,
           success
-        });
-        return this;
-      };
+        })
+        return this
+      }
     },
 
     // 确定按钮
-    onConfirmTap() {
-      let detail = 'confirm';
-      let option = { bubbles: true, composed: true };
+    onConfirmTap () {
+      const detail = 'confirm'
+      const option = { bubbles: true, composed: true }
 
       const {
         success
-      } = this.data;
+      } = this.data
       success && success({
         confirm: true,
         cancel: false,
         errMsg: 'showDialog: success'
-      });
+      })
       this.setData({
         show: !this.data.show
-      });
-      this.triggerEvent('linconfirm', detail, option);
-
+      })
+      this.triggerEvent('linconfirm', detail, option)
     },
 
     // 取消按钮
-    onCancelTap() {
-
-      let detail = 'cancel';
-      let option = { bubbles: true, composed: true };
+    onCancelTap () {
+      const detail = 'cancel'
+      const option = { bubbles: true, composed: true }
 
       const {
         success
-      } = this.data;
+      } = this.data
       success && success({
         confirm: false,
         cancel: true,
         errMsg: 'showDialog: success'
-      });
+      })
       this.setData({
         show: !this.data.show
-      });
+      })
 
-      this.triggerEvent('lincancel', detail, option);
+      this.triggerEvent('lincancel', detail, option)
     },
 
     // 背景点击事件
-    onDialogTap() {
-      let detail = true;
-      let option = { bubbles: true, composed: true };
+    onDialogTap () {
+      const detail = true
+      const option = { bubbles: true, composed: true }
 
       if (this.data.locked !== true) {
         this.setData({
           show: !this.data.show
-        });
+        })
       }
 
-      this.triggerEvent('lintap', detail, option);
+      this.triggerEvent('lintap', detail, option)
     }
   }
-});
+})

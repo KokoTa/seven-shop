@@ -7,7 +7,7 @@ export default Behavior({
       value: new Date().getTime() + 86400000,
       observer: function (newVal, oldVal) {
         if (newVal && !oldVal) {
-          this.getLatestTime();
+          this.getLatestTime()
         }
       }
     },
@@ -16,9 +16,9 @@ export default Behavior({
       value: true,
       observer: function (newVal) {
         if (newVal) {
-          this.init();
+          this.init()
         } else if (!newVal) {
-          clearInterval(this.data.timer);
+          clearInterval(this.data.timer)
         }
       }
     },
@@ -32,7 +32,7 @@ export default Behavior({
     },
     isZeroPadd: {
       type: Boolean,
-      value: true,
+      value: true
     },
     countdownType: {
       type: String,
@@ -46,130 +46,128 @@ export default Behavior({
   data: {
     initAddTime: 0,
     timer: null,
-    date: [],
+    date: []
   },
   ready: function () {
-    this.getLatestTime();
+    this.getLatestTime()
   },
 
   detached: function () {
     if (this.data.isClearInterval) {
-      clearInterval(this.data.timer);
+      clearInterval(this.data.timer)
     }
   },
 
   pageLifetimes: {
-    hide() {
+    hide () {
       if (this.data.isClearInterval) {
-        clearInterval(this.data.timer);
+        clearInterval(this.data.timer)
       }
-
     },
-    show() {
+    show () {
       if (this.data.isClearInterval) {
-        this.getLatestTime();
+        this.getLatestTime()
       }
     }
   },
 
   methods: {
     // 自动补零
-    zeroPadding(num) {
-      num = num.toString();
-      return num[1] ? num : '0' + num;
+    zeroPadding (num) {
+      num = num.toString()
+      return num[1] ? num : '0' + num
     },
 
-    init() {
-      clearInterval(this.data.timer);
+    init () {
+      clearInterval(this.data.timer)
       const timer = setTimeout(() => {
-        this.getLatestTime.call(this);
-      }, 1000);
+        this.getLatestTime.call(this)
+      }, 1000)
       this.setData({
         timer
-      });
+      })
     },
 
-    getLatestTime() {
-      let {
+    getLatestTime () {
+      const {
         time,
         status,
         timeType,
         initAddTime,
-        countdownType,
-      } = this.data;
+        countdownType
+      } = this.data
       // IOS不支持2019-04-23 的日期格式
-      let countDownTime = time;
-      if (countdownType === 'normal') {  //当countdownType === normal时，不影响之前的代码
+      let countDownTime = time
+      if (countdownType === 'normal') { // 当countdownType === normal时，不影响之前的代码
         if (timeType !== 'second') {
-          countDownTime = typeof time === 'string' ? countDownTime.replace(/-/g, '/') : countDownTime;
-          countDownTime = Math.ceil((new Date(countDownTime).getTime() - new Date().getTime()) / 1000);
+          countDownTime = typeof time === 'string' ? countDownTime.replace(/-/g, '/') : countDownTime
+          countDownTime = Math.ceil((new Date(countDownTime).getTime() - new Date().getTime()) / 1000)
         }
 
         if (countDownTime < 0 && timeType !== 'second') {
-          this._getTimeValue(0);
-          this.CountdownEnd();
-          return;
+          this._getTimeValue(0)
+          this.CountdownEnd()
+          return
         }
 
         if (countDownTime - initAddTime > 0) {
-          this.getLatestForCountDown(countDownTime);
+          this.getLatestForCountDown(countDownTime)
         } else if (countDownTime - initAddTime < 0) {
-          this.getLatestForAddTime(countDownTime);
+          this.getLatestForAddTime(countDownTime)
         } else if (countDownTime - initAddTime === 0) {
           if (initAddTime <= 0) {
-            this._getTimeValue(countDownTime);
+            this._getTimeValue(countDownTime)
           }
-          this.CountdownEnd();
+          this.CountdownEnd()
         }
 
         if (status && countDownTime - initAddTime !== 0) {
-          this.init.call(this);
+          this.init.call(this)
         }
-
       } else if (countdownType === 'anniversary') { //  当countdownType === anniversary时，为纪念日模式
-        if (timeType === 'second') {    //  纪念日模式不能设置timeType === second
-          console.error(`countdownType为${countdownType}类型时，不可设置timeType值为second`);
+        if (timeType === 'second') { //  纪念日模式不能设置timeType === second
+          console.error(`countdownType为${countdownType}类型时，不可设置timeType值为second`)
         } else {
-          countDownTime = typeof time === 'string' ? countDownTime.replace(/-/g, '/') : countDownTime;
-          countDownTime = Math.ceil((new Date().getTime() - new Date(countDownTime).getTime()) / 1000);
-          if (countDownTime >= 0) {   //  countDownTime计算结果不能为负数
-            this.getLatestForCountDown(countDownTime);
-            this.init.call(this);
+          countDownTime = typeof time === 'string' ? countDownTime.replace(/-/g, '/') : countDownTime
+          countDownTime = Math.ceil((new Date().getTime() - new Date(countDownTime).getTime()) / 1000)
+          if (countDownTime >= 0) { //  countDownTime计算结果不能为负数
+            this.getLatestForCountDown(countDownTime)
+            this.init.call(this)
           } else {
-            console.error('time传值错误');
+            console.error('time传值错误')
           }
         }
       } else { //  countdownType 不能设置为 normal，anniversary 以外的值
-        console.error('错误的countdownType类型');
+        console.error('错误的countdownType类型')
       }
     },
 
-    getLatestForAddTime(countDownTime) {
+    getLatestForAddTime (countDownTime) {
       let {
         initAddTime
-      } = this.data;
+      } = this.data
       if (initAddTime !== Math.abs(countDownTime)) {
-        initAddTime++;
-        this._getTimeValue(initAddTime);
+        initAddTime++
+        this._getTimeValue(initAddTime)
         this.setData({
           initAddTime
-        });
+        })
       }
     },
 
-    getLatestForCountDown(countDownTime) {
-      this._getTimeValue(countDownTime);
+    getLatestForCountDown (countDownTime) {
+      this._getTimeValue(countDownTime)
       this.setData({
-        time: this.data.timeType === 'second' ? --countDownTime : this.data.time,
-      });
+        time: this.data.timeType === 'second' ? --countDownTime : this.data.time
+      })
     },
 
-    _getTimeValue(countDownTime) {
+    _getTimeValue (countDownTime) {
       const {
         format
-      } = this.data;
-      const date = [];
-      const fomatArray = format.split(/(\{.*?\})/);
+      } = this.data
+      const date = []
+      const fomatArray = format.split(/(\{.*?\})/)
       const formatType = [{
         key: '{%d}',
         type: 'day',
@@ -185,38 +183,38 @@ export default Behavior({
       }, {
         key: '{%s}',
         type: 'second',
-        count: 1,
-      }];
-      let diffSecond = countDownTime;
+        count: 1
+      }]
+      let diffSecond = countDownTime
       formatType.forEach(format => {
-        const index = this._findTimeName(fomatArray, format.key);
-        if (index === -1) return;
-        const name = fomatArray[index];
+        const index = this._findTimeName(fomatArray, format.key)
+        if (index === -1) return
+        const name = fomatArray[index]
         const formatItem = {
           type: format.type,
           name,
           value: parseInt(diffSecond / format.count)
-        };
-        if (this.data.isZeroPadd) {
-          formatItem.value = this.zeroPadding(formatItem.value);
         }
-        diffSecond %= format.count;
-        date.push(formatItem);
-      });
+        if (this.data.isZeroPadd) {
+          formatItem.value = this.zeroPadding(formatItem.value)
+        }
+        diffSecond %= format.count
+        date.push(formatItem)
+      })
       this.setData({
         date
-      });
-      return date;
+      })
+      return date
     },
 
-    _findTimeName(fomatArray, str) {
-      const index = fomatArray.indexOf(str);
-      if (index === -1) return -1;
-      return index + 1;
+    _findTimeName (fomatArray, str) {
+      const index = fomatArray.indexOf(str)
+      if (index === -1) return -1
+      return index + 1
     },
 
-    CountdownEnd() {
-      this.triggerEvent('linend', {});
-    },
+    CountdownEnd () {
+      this.triggerEvent('linend', {})
+    }
   }
-});
+})

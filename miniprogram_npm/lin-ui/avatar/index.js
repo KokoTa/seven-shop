@@ -30,12 +30,12 @@ Component({
     },
     size: {
       type: Number,
-      value: 120,
+      value: 120
     },
     placement: {
       type: String,
       value: 'right'
-    },
+    }
   },
   data: {
     _isHaveUserNickName: false,
@@ -45,26 +45,26 @@ Component({
   },
   methods: {
     _initOpenData: function (openData) {
-      this._isHaveUserAvatarUrl(openData);
-      this._isHaveUserNickName(openData);
+      this._isHaveUserAvatarUrl(openData)
+      this._isHaveUserNickName(openData)
     },
 
     _isHaveUserAvatarUrl: function (openData) {
       this.setData({
         _isHaveUserAvatarUrl: openData.indexOf('userAvatarUrl') !== -1
-      });
+      })
     },
 
     _isHaveUserNickName: function (openData) {
       this.setData({
         _isHaveUserNickName: openData.indexOf('userNickName') !== -1
-      });
+      })
     },
     tapAvatar: function (e) {
       this.triggerEvent('lintap', e, {
         bubbles: true,
         composed: true
-      });
-    },
+      })
+    }
   }
-});
+})
