@@ -59,7 +59,9 @@ Page({
   },
 
   async _getMoreData () {
+    wx.lin.showLoading({ fullScreen: true, color: '#157658' })
     const data = await this.data.paging.getMoreData()
+    wx.lin.hideLoading()
     if (data) wx.lin.renderWaterFlow(data.items)
     if (!this.data.paging.moreData) {
       this.setData({ loadingType: 'end' })
