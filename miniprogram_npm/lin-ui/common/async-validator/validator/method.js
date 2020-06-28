@@ -1,5 +1,5 @@
-import rules from '../rule/index.js'
-import { isEmptyValue } from '../util'
+import rules from '../rule/index.js';
+import { isEmptyValue } from '../util';
 
 /**
  *  Validates a function.
@@ -11,19 +11,19 @@ import { isEmptyValue } from '../util'
  *  @param options The validation options.
  *  @param options.messages The validation messages.
  */
-function method (rule, value, callback, source, options) {
-  const errors = []
-  const validate = rule.required || (!rule.required && source.hasOwnProperty(rule.field))
+function method(rule, value, callback, source, options) {
+  const errors = [];
+  const validate = rule.required || (!rule.required && source.hasOwnProperty(rule.field));
   if (validate) {
     if (isEmptyValue(value) && !rule.required) {
-      return callback()
+      return callback();
     }
-    rules.required(rule, value, source, errors, options)
+    rules.required(rule, value, source, errors, options);
     if (value !== undefined) {
-      rules.type(rule, value, source, errors, options)
+      rules.type(rule, value, source, errors, options);
     }
   }
-  callback(errors)
+  callback(errors);
 }
 
-export default method
+export default method;

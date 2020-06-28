@@ -37,7 +37,7 @@ Component({
 
   observers: {
     'count,min,max': function () {
-      this.valueRange(this.data.count, 'parameter')
+      this.valueRange(this.data.count, 'parameter');
     }
   },
 
@@ -45,53 +45,53 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    doNothing (e) {
-      const { type } = e.currentTarget.dataset
+    doNothing(e) {
+      const { type } = e.currentTarget.dataset;
       this.triggerEvent('linout', { type, way: 'icon' }, {
         bubbles: true,
         composed: true
-      })
+      });
     },
 
-    onCount () {
+    onCount() {
       this.setData({
         focus: true
-      })
+      });
     },
 
-    onBlur (e) {
+    onBlur(e) {
       this.setData({
         focus: false
-      })
-      const {
+      });
+      let {
         value
-      } = e.detail
+      } = e.detail;
       setTimeout(() => {
         this.blurCount(Number(value), () => {
-          this.data.count = this.data.result
+          this.data.count = this.data.result;
           this.triggerEvent('lintap', {
             count: this.data.result,
             type: 'blur'
           }, {
             bubbles: true,
             composed: true
-          })
-        })
-      }, 50)
+          });
+        });
+      }, 50);
     },
 
-    blurCount (value, callback) {
+    blurCount(value, callback) {
       if (value) {
-        this.valueRange(value)
+        this.valueRange(value);
       } else {
         this.setData({
           result: this.properties.count
-        })
+        });
       }
-      callback && callback()
+      callback && callback();
     },
 
-    valueRange (value, way = 'input') {
+    valueRange(value, way = 'input') {
       if (value > this.properties.max) {
         this.setData({
           result: this.properties.max
@@ -99,8 +99,8 @@ Component({
           this.triggerEvent('linout', { type: 'overflow_max', way }, {
             bubbles: true,
             composed: true
-          })
-        })
+          });
+        });
       } else if (value < this.properties.min) {
         this.setData({
           result: this.properties.min
@@ -108,51 +108,51 @@ Component({
           this.triggerEvent('linout', { type: 'overflow_min', way }, {
             bubbles: true,
             composed: true
-          })
-        })
+          });
+        });
       } else {
         this.setData({
           result: value
-        })
+        });
       }
     },
 
-    reduceTap () {
-      const distance = this.data.count - this.properties.step
+    reduceTap() {
+      let distance = this.data.count - this.properties.step;
       if (distance <= this.properties.min) {
-        this.data.count = this.properties.min
+        this.data.count = this.properties.min;
       } else {
-        this.data.count -= this.properties.step
+        this.data.count -= this.properties.step;
       }
       this.setData({
         result: this.data.count
-      })
+      });
       this.triggerEvent('lintap', {
         count: this.data.result,
         type: 'reduce'
       }, {
         bubbles: true,
         composed: true
-      })
+      });
     },
 
-    addTap () {
-      const distance = this.data.count + this.properties.step
+    addTap() {
+      let distance = this.data.count + this.properties.step;
       if (distance >= this.properties.max) {
-        this.data.count = this.properties.max
+        this.data.count = this.properties.max;
       } else {
-        this.data.count += this.properties.step
+        this.data.count += this.properties.step;
       }
       this.setData({
         result: this.data.count
-      })
+      });
       this.triggerEvent('lintap', {
         count: this.data.result,
         type: 'add'
       }, {
         bubbles: true,
         composed: true
-      })
-    }
+      });
+    },
   }
-})
+});

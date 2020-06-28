@@ -1,5 +1,5 @@
-import rules from '../rule/index.js'
-import { isEmptyValue } from '../util'
+import rules from '../rule/index.js';
+import { isEmptyValue } from '../util';
 
 /**
  *  Validates the regular expression type.
@@ -11,19 +11,19 @@ import { isEmptyValue } from '../util'
  *  @param options The validation options.
  *  @param options.messages The validation messages.
  */
-function regexp (rule, value, callback, source, options) {
-  const errors = []
-  const validate = rule.required || (!rule.required && source.hasOwnProperty(rule.field))
+function regexp(rule, value, callback, source, options) {
+  const errors = [];
+  const validate = rule.required || (!rule.required && source.hasOwnProperty(rule.field));
   if (validate) {
     if (isEmptyValue(value) && !rule.required) {
-      return callback()
+      return callback();
     }
-    rules.required(rule, value, source, errors, options)
+    rules.required(rule, value, source, errors, options);
     if (!isEmptyValue(value)) {
-      rules.type(rule, value, source, errors, options)
+      rules.type(rule, value, source, errors, options);
     }
   }
-  callback(errors)
+  callback(errors);
 }
 
-export default regexp
+export default regexp;

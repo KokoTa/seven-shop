@@ -1,5 +1,5 @@
-import zIndex from '../behaviors/zIndex'
-import watchShow from '../behaviors/watchShow'
+import zIndex from '../behaviors/zIndex';
+import watchShow from '../behaviors/watchShow';
 Component({
   behaviors: [zIndex, watchShow],
   externalClasses: ['l-class', 'l-image-class'],
@@ -36,22 +36,22 @@ Component({
 
   // 解决 addListener undefined 的错误
   observers: {
-    icon: function () {}
+    'icon': function () {}
   },
 
-  attached () {
-    this.initMessage()
+  attached() {
+    this.initMessage();
   },
 
   pageLifetimes: {
-    show () {
-      this.initMessage()
-    }
+    show() {
+      this.initMessage();
+    },
   },
 
   methods: {
-    initMessage () {
-      wx.lin = wx.lin || {}
+    initMessage() {
+      wx.lin = wx.lin || {};
       wx.lin.showMessage = (options = {}) => {
         const {
           content = '',
@@ -60,23 +60,23 @@ Component({
           type = 'primary',
           duration = 1500,
           success = null
-        } = options
-        this.data.success = success
+        } = options;
+        this.data.success = success;
         this.setData({
           content,
           icon,
           image,
           duration,
           type
-        })
-        this.changeStatus()
-        return this
-      }
-      wx.lin.hideMessage = () => {
+        });
+        this.changeStatus();
+        return this;
+      };
+      wx.lin.hideMessage = ()=>{
         this.setData({
           status: false
-        })
-      }
+        });
+      };
     }
   }
-})
+});

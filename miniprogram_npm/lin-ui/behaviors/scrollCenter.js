@@ -1,54 +1,54 @@
 // eslint-disable-next-line no-undef
 export default Behavior({
   methods: {
-    getRect (selector, all = false) {
+    getRect(selector, all = false) {
       return new Promise((resolve, reject) => {
-        const query = wx.createSelectorQuery().in(this)
-        const type = all ? query.selectAll(selector) : query.select(selector)
+        const query = wx.createSelectorQuery().in(this);
+        const type = all ? query.selectAll(selector) : query.select(selector);
         type.boundingClientRect((res) => {
-          if (!res) return reject('找不到元素')
-          resolve(res)
-        }).exec()
-      })
+          if (!res) return reject('找不到元素');
+          resolve(res);
+        }).exec();
+      });
     },
-    queryScrollNode (res, currentIndex, type = 'width') {
-      const currentRect = res[currentIndex]
+    queryScrollNode(res, currentIndex, type = 'width') {
+      const currentRect = res[currentIndex];
 
       this.getRect('.l-tabsscroll').then(_ => {
-        const scrollWidth = _[type]
+        const scrollWidth = _[type];
 
         let transformDistance = res
           .slice(0, currentIndex)
-          .reduce((prev, curr) => prev + curr[type], 0)
+          .reduce((prev, curr) => prev + curr[type], 0);
 
-        transformDistance += (currentRect[type] - scrollWidth) / 2
+        transformDistance += (currentRect[type] - scrollWidth) / 2;
 
         if (type === 'width') {
           this.setData({
             transformX: transformDistance,
             transformY: 0
-          })
+          });
         } else {
           this.setData({
             transformX: 0,
             transformY: transformDistance
-          })
+          });
         }
-      })
+      });
     },
-    queryMultipleNodes () {
+    queryMultipleNodes() {
       const {
         placement,
         currentIndex
-      } = this.data
+      } = this.data;
       this.getRect('.l-tabs-item', true)
         .then((res) => {
           if (['top', 'bottom'].indexOf(placement) !== -1) {
-            this.queryScrollNode(res, currentIndex)
+            this.queryScrollNode(res, currentIndex);
           } else {
-            this.queryScrollNode(res, currentIndex, 'height')
+            this.queryScrollNode(res, currentIndex, 'height');
           }
-        })
+        });
     }
   }
-})
+});

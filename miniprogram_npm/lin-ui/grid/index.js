@@ -1,4 +1,4 @@
-import hover from '../behaviors/hover'
+import hover from '../behaviors/hover';
 
 Component({
   options: {
@@ -8,77 +8,78 @@ Component({
   relations: {
     '../grid-item/index': {
       type: 'child',
-      linked () {
-        this.initGrids()
+      linked() {
+        this.initGrids();
+
       },
-      unlinked () {
-        this.initGrids()
+      unlinked() {
+        this.initGrids();
       }
-    }
+    },
 
   },
   externalClasses: ['l-class', 'l-class-grid', 'l-grid-class'],
   properties: {
     rowNum: {
       type: String,
-      value: 3
+      value: 3,
     },
     showBorder: Boolean,
     showColBorder: Boolean,
-    showRowBorder: Boolean
+    showRowBorder: Boolean,
   },
   data: {
     gridItems: [],
     childNum: 0,
     currentIndex: -1,
-    currentCell: -1
+    currentCell: -1,
   },
-  ready () {
-    this.initGrids()
+  ready() {
+    this.initGrids();
   },
 
   lifetimes: {
-    show () {
+    show() {
 
-    }
+    },
   },
   methods: {
-    initGrids () {
-      const items = this.getRelationNodes('../grid-item/index')
-      if (this.data.childNum === items.length) return
+    initGrids() {
+      let items = this.getRelationNodes('../grid-item/index');
+      if (this.data.childNum === items.length) return;
       const gridItems = items.map((item, index) => {
         item.setData({
-          index
-        })
+          index,
+        });
         return {
-          index: index,
+          index:index,
           key: item.data.key,
           cell: item.data.cell
-        }
-      })
+        };
+      });
       this.setData({
         gridItems: gridItems,
         childNum: items.length
-      })
+      });
     },
-    tapGridItem (e) {
-      const { gridIndex } = e.target.dataset
+    tapGridItem(e) {
+      const { gridIndex } = e.target.dataset;
       this.setData({
         currentIndex: gridIndex,
         currentCell: this.data.gridItems[gridIndex].cell
-      })
+      });
     },
 
-    tapGrid () {
+    tapGrid() {
       this.triggerEvent('lintap', {
         index: this.data.currentIndex,
         cell: this.data.currentCell
-      }, { bubbles: true, composed: true })
+      }, { bubbles: true, composed: true });
 
       this.setData({
         currentIndex: -1,
         currentCell: -1
-      })
+      });
     }
   }
-})
+});

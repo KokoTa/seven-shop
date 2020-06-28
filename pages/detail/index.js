@@ -51,5 +51,8 @@ Page({
     this.setData({
       ...data.detail
     })
+  },
+  onShopping(data) {
+    console.log(data.detail)
   }
 })

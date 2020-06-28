@@ -1,5 +1,5 @@
 Component({
-  externalClasses: ['l-class', 'l-loading-class', 'l-end-class', 'l-line-class'],
+  externalClasses: ['l-class','l-loading-class','l-end-class','l-line-class'],
   options: {
     multipleSlots: true // 在组件定义时的选项中启用多slot支持
   },
@@ -30,19 +30,19 @@ Component({
 
   },
 
-  attached () {
-    this._init()
+  attached() {
+    this._init();
   },
 
   pageLifetimes: {
-    show () {
-      this._init()
-    }
+    show() {
+      this._init();
+    },
   },
 
   methods: {
-    _init () {
-      wx.lin = wx.lin || {}
+    _init() {
+      wx.lin = wx.lin || {};
       wx.lin.showLoadmore = (options) => {
         const {
           custom = false,
@@ -52,7 +52,7 @@ Component({
           type = 'loading',
           endText = '我是有底线的',
           loadingText = '加载中...'
-        } = { ...options }
+        } = { ...options };
         this.setData({
           custom,
           line,
@@ -62,19 +62,19 @@ Component({
           endText,
           loadingText,
           show: true
-        })
-      }
+        });
+      };
       wx.lin.hideLoadmore = () => {
         this.setData({
           show: false
-        })
-      }
+        });
+      };
     },
-    onLoadmore () {
+    onLoadmore() {
       this.triggerEvent('lintap', {}, {
         bubbles: true,
         composed: true
-      })
+      });
     }
   }
-})
+});

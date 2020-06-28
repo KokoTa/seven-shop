@@ -136,6 +136,7 @@ Component({
       })
     },
 
+    // 购买数量
     onSelectCount (e) {
       this.setData({ currentSkuCount: e.detail.count })
       this.outStockStatus()
@@ -146,6 +147,32 @@ Component({
       const outStock = stock < currentSkuCount
       console.log(stock, currentSkuCount)
       this.setData({ outStock })
+    },
+
+    // 生成订单 or 加入购物车
+    onBuyOrCart() {
+      // 是否有规格
+      if (Spu.isNoSpec(this.properties.spu)) {
+        this._triggerShoppingEvent(this._getNoSpecSku())
+      } else {
+        this._triggerShoppingEvent(this._getSpecSku())
+      }
+    },
+    _getNoSpecSku() {
+      return this.properties.spu.sku_list[0]
+    },
+    _getSpecSku() {
+      const sku = this.data.judger.getDeterminateSku()
+      if (!sku) return wx.showToast({ title: '请完善规格' })
+      return sku
+    },
+    _triggerShoppingEvent(sku) {
+      this.triggerEvent('shopping', {
+        orderWay: this.properties.shoppingWay,
+        spuId: this.properties.spu.id,
+        sku: sku,
+        skuCount: this.data.currentSkuCount 
+      })
     }
   }
 })

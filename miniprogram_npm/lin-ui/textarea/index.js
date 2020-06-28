@@ -1,5 +1,5 @@
 // input/input.js
-import rules from '../behaviors/rules'
+import rules from '../behaviors/rules';
 
 Component({
   /**
@@ -50,9 +50,9 @@ Component({
     },
     // 校验
     rules: {
-      type: Object
+      type: Object,
     },
-    // 占位文字的样式
+    // 占位文字的样式  
     placeholderStyle: {
       type: String,
       value: ''
@@ -66,44 +66,44 @@ Component({
 
   },
 
-  attached () {
-    this.initRules()
+  attached() {
+    this.initRules();
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    handleInputChange (event) {
+    handleInputChange(event) {
       const {
         detail = {}
-      } = event
+      } = event;
       const {
         value = ''
-      } = detail
+      } = detail;
 
       this.setData({
         value
-      })
+      });
 
-      this.triggerEvent('lininput', event.detail)
+      this.triggerEvent('lininput', event.detail);
     },
 
-    handleInputFocus (event) {
-      this.triggerEvent('linfocus', event.detail)
+    handleInputFocus(event) {
+      this.triggerEvent('linfocus', event.detail);
     },
 
-    handleInputBlur (event) {
+    handleInputBlur(event) {
       this.validatorData({
         value: event.detail.value
-      })
-      this.triggerEvent('linblur', event.detail)
+      });
+      this.triggerEvent('linblur', event.detail);
     },
-    handleInputConfirm (event) {
-      this.triggerEvent('linconfirm', event.detail)
-    }
+    handleInputConfirm(event) {
+      this.triggerEvent('linconfirm', event.detail);
+    },
     // onClearTap(e) {
     //   this.setData({ value: '' })
     // },
   }
-})
+});

@@ -2,7 +2,7 @@ Component({
   /**
      * 组件的属性列表
      */
-  externalClasses: ['l-class', 'l-class-icon', 'l-class-image', 'l-icon-class', 'l-image-class'],
+  externalClasses: ['l-class', 'l-class-icon','l-class-image', 'l-icon-class','l-image-class'],
   options: {
     multipleSlots: true // 在组件定义时的选项中启用多slot支持
   },
@@ -11,7 +11,7 @@ Component({
       type: Number,
       value: 5
     },
-    score: {
+    score:{
       type: Number,
       value: 0
     },
@@ -28,12 +28,12 @@ Component({
       type: String,
       value: '#FFE5E5'
     },
-    name: {
-      type: String,
-      value: 'favor-fill'
+    name:{
+      type:String,
+      value:'favor-fill'
     },
-    activeImage: String,
-    inActiveImage: String
+    activeImage:String,
+    inActiveImage:String
   },
 
   /**
@@ -47,13 +47,13 @@ Component({
      * 组件的方法列表
      */
   methods: {
-    handleClick (e) {
-      if (this.data.disabled) return
-      const { index } = e.currentTarget.dataset
+    handleClick(e){
+      if(this.data.disabled) return;
+      const {index} = e.currentTarget.dataset;
       this.setData({
-        score: index + 1
-      })
-      this.triggerEvent('linchange', { score: index + 1 })
+        score:index + 1 
+      });
+      this.triggerEvent('linchange',{score:index+1});
     }
   }
-})
+});

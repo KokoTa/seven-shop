@@ -15,7 +15,7 @@ Component({
   relations: {
     '../steps/index': {
       type: 'parent'
-    }
+    },
   },
   properties: {
     icon: String,
@@ -41,10 +41,10 @@ Component({
    */
   methods: {
     // 与父组件通信并绑定相关配置数据
-    updateDataChange (options) {
+    updateDataChange(options) {
       this.setData({
         ...options
-      })
+      });
     }
   }
-})
+});

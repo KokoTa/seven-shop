@@ -28,6 +28,7 @@ class SkuCode {
     this.spuId = spuId
 
     const specCodeArray = spuAndSpec[1].split('#')
+
     // 找出所有规格组合(路径)
     for (let i = 1; i <= specCodeArray.length; i++) {
       const segments = combination(specCodeArray, i)

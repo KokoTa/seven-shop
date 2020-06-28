@@ -3,19 +3,19 @@ Component({
   relations: {
     '../tabs/index': {
       type: 'parent',
-      linked: function (target) {
+      linked: function(target) {
         !this.data.parent && this.setData({
           parent: target
-        })
+        });
         // 每次被插入到custom-ul时执行，target是custom-ul节点实例对象，触发在attached生命周期之后
       }
     },
     '../combined-tabs/index': {
       type: 'parent',
-      linked: function (target) {
+      linked: function(target) {
         !this.data.parent && this.setData({
           parent: target
-        })
+        });
         // 每次被插入到custom-ul时执行，target是custom-ul节点实例对象，触发在attached生命周期之后
       }
     }
@@ -41,8 +41,8 @@ Component({
   },
 
   observers: {
-    '**': function (filed) {
-      this.updateData(filed)
+    '**': function(filed) {
+      this.updateData(filed);
     }
   },
 
@@ -56,10 +56,10 @@ Component({
   },
 
   methods: {
-    updateData () {
-      const parent = this.data.parent
-      if (!parent) return
-      parent.initTabs()
+    updateData() {
+      let parent = this.data.parent;
+      if (!parent) return;
+      parent.initTabs();
     }
   }
-})
+});

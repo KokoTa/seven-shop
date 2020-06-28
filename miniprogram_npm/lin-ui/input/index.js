@@ -1,15 +1,15 @@
 // input/input.js
-import rules from '../behaviors/rules'
+import rules from '../behaviors/rules';
 
 Component({
   /**
    * 组件的属性列表
    */
   options: {
-    multipleSlots: true
+    multipleSlots: true,
   },
   behaviors: ['wx://form-field', rules],
-  externalClasses: ['l-class', 'l-label-class', 'l-error-text', 'l-error-text-class'],
+  externalClasses: ['l-class', 'l-label-class','l-error-text','l-error-text-class'],
   properties: {
     // 表单标题（label）的文本
     label: {
@@ -17,7 +17,7 @@ Component({
       value: ''
     },
     // 是否隐藏label
-    hideLabel: {
+    hideLabel:{
       type: Boolean,
       value: false
     },
@@ -91,11 +91,11 @@ Component({
       type: Boolean,
       value: false
     },
-    // 占位文字的样式
+    // 占位文字的样式  
     placeholderStyle: {
       type: String,
       value: ''
-    }
+    },
   },
 
   /**
@@ -104,58 +104,58 @@ Component({
   data: {
 
   },
-  attached () {
-    this.initRules()
+  attached() {
+    this.initRules();
   },
   /**
    * 组件的方法列表
    */
   methods: {
 
-    handleInputChange (event) {
+    handleInputChange(event) {
       const {
         detail = {}
-      } = event
+      } = event;
       const {
         value = ''
-      } = detail
+      } = detail;
 
       this.setData({
         value
-      })
+      });
 
-      this.triggerEvent('lininput', event.detail)
+      this.triggerEvent('lininput', event.detail);
     },
 
-    handleInputFocus (event) {
-      this.triggerEvent('linfocus', event.detail)
+    handleInputFocus(event) {
+      this.triggerEvent('linfocus', event.detail);
     },
 
-    handleInputBlur (event) {
+    handleInputBlur(event) {
       this.validatorData({
         value: event.detail.value
-      })
-      this.triggerEvent('linblur', event.detail)
+      });
+      this.triggerEvent('linblur', event.detail);
     },
-    handleInputConfirm (event) {
+    handleInputConfirm(event) {
       const {
         detail = {}
-      } = event
+      } = event;
       const {
         value = ''
-      } = detail
+      } = detail;
 
       this.setData({
         value
-      })
+      });
 
-      this.triggerEvent('linconfirm', event.detail)
+      this.triggerEvent('linconfirm', event.detail);
     },
-    onClearTap (event) {
+    onClearTap(event) {
       this.setData({
         value: ''
-      })
-      this.triggerEvent('linclear', event.detail)
-    }
+      });
+      this.triggerEvent('linclear', event.detail);
+    },
   }
-})
+});

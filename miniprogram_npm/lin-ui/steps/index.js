@@ -8,13 +8,13 @@ Component({
   relations: {
     '../step/index': {
       type: 'child',
-      linked () {
-        this._initSteps()
+      linked() {
+        this._initSteps();
       },
-      unlinked () {
-        this._initSteps()
+      unlinked() {
+        this._initSteps();
       }
-    }
+    },
   },
 
   properties: {
@@ -40,8 +40,8 @@ Component({
   },
 
   observers: {
-    activeIndex: function () {
-      this._initSteps()
+    'activeIndex': function () {
+      this._initSteps();
     }
   },
 
@@ -56,21 +56,21 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    _initSteps () {
-      const query = wx.createSelectorQuery().in(this)
+    _initSteps() {
+      const query = wx.createSelectorQuery().in(this);
       query.select('.steps-container').boundingClientRect().exec(res => {
-        const steps = this.getRelationNodes('../step/index')
-        this.data.length = steps.length
+        let steps = this.getRelationNodes('../step/index');
+        this.data.length = steps.length;
         if (this.data.length > 0) {
           steps.forEach((step, index) => {
             step.updateDataChange({
               index,
               ...this.data,
               stepsWidth: res[0].width
-            })
-          })
+            });
+          });
         }
-      })
+      });
     }
   }
-})
+});

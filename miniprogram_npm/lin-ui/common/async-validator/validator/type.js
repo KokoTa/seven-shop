@@ -1,20 +1,20 @@
-import rules from '../rule/index.js'
-import { isEmptyValue } from '../util'
+import rules from '../rule/index.js';
+import { isEmptyValue } from '../util';
 
-function type (rule, value, callback, source, options) {
-  const ruleType = rule.type
-  const errors = []
-  const validate = rule.required || (!rule.required && source.hasOwnProperty(rule.field))
+function type(rule, value, callback, source, options) {
+  const ruleType = rule.type;
+  const errors = [];
+  const validate = rule.required || (!rule.required && source.hasOwnProperty(rule.field));
   if (validate) {
     if (isEmptyValue(value, ruleType) && !rule.required) {
-      return callback()
+      return callback();
     }
-    rules.required(rule, value, source, errors, options, ruleType)
+    rules.required(rule, value, source, errors, options, ruleType);
     if (!isEmptyValue(value, ruleType)) {
-      rules.type(rule, value, source, errors, options)
+      rules.type(rule, value, source, errors, options);
     }
   }
-  callback(errors)
+  callback(errors);
 }
 
-export default type
+export default type;

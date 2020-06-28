@@ -63,89 +63,90 @@ Component({
     width: 0,
     duration: 0,
     animation: null,
-    timer: null
+    timer: null,
   },
 
-  detached () {
-    this.destroyTimer()
+  detached() {
+    this.destroyTimer();
   },
 
-  ready () {
+  ready() {
     if (this.properties.type == 'roll' && this.properties.show) {
-      this.initAnimation()
+      this.initAnimation();
     }
   },
 
   methods: {
-    initAnimation () {
+    initAnimation() {
       wx.createSelectorQuery().in(this).select('.l-noticebar-content-wrap').boundingClientRect((wrapRect) => {
         wx.createSelectorQuery().in(this).select('.l-noticebar-content').boundingClientRect((rect) => {
-          const duration = rect.width / 40 * this.data.speed
+          const duration = rect.width / 40 * this.data.speed;
           const animation = wx.createAnimation({
             duration: duration,
-            timingFunction: 'linear'
-          })
+            timingFunction: 'linear',
+          });
           this.setData({
             wrapWidth: wrapRect.width,
             width: rect.width,
             duration: duration,
             animation: animation
           }, () => {
-            this.startAnimation()
-          })
-        }).exec()
-      }).exec()
+            this.startAnimation();
+          });
+        }).exec();
+
+      }).exec();
     },
-    startAnimation () {
-      // reset
+    startAnimation() {
+      //reset
       if (this.data.animation.option.transition.duration !== 0) {
-        this.data.animation.option.transition.duration = 0
-        const resetAnimation = this.data.animation.translateX(this.data.wrapWidth).step()
+        this.data.animation.option.transition.duration = 0;
+        const resetAnimation = this.data.animation.translateX(this.data.wrapWidth).step();
         this.setData({
           animationData: resetAnimation.export()
-        })
+        });
       }
-      this.data.animation.option.transition.duration = this.data.duration
-      const animationData = this.data.animation.translateX(-this.data.width).step()
+      this.data.animation.option.transition.duration = this.data.duration;
+      const animationData = this.data.animation.translateX(-this.data.width).step();
       setTimeout(() => {
         this.setData({
           animationData: animationData.export()
-        })
-      }, 100)
+        });
+      }, 100);
       const timer = setTimeout(() => {
-        this.startAnimation()
-      }, this.data.duration)
+        this.startAnimation();
+      }, this.data.duration);
       this.setData({
-        timer
-      })
+        timer,
+      });
     },
-    destroyTimer () {
+    destroyTimer() {
       if (this.data.timer) {
-        clearTimeout(this.data.timer)
+        clearTimeout(this.data.timer);
       }
     },
-    handleTap () {
-      this.triggerEvent('lintap', {}, { bubbles: true, composed: true })
+    handleTap() {
+      this.triggerEvent('lintap',{},{ bubbles: true, composed: true });
       this.setData({
         timer: null
-      })
+      });
     },
-    onSwip (e) {
+    onSwip(e) {
       this.triggerEvent('lintap', {
         ...e.currentTarget.dataset
-      }, { bubbles: true, composed: true })
+      },{ bubbles: true, composed: true });
     },
-    onIconTap () {
-      this.triggerEvent('linicontap', {}, { bubbles: true, composed: true })
+    onIconTap(){
+      this.triggerEvent('linicontap',{},{ bubbles: true, composed: true });
       this.setData({
         timer: null
-      })
+      });
     },
-    onClose () {
+    onClose() {
       this.setData({
         timer: null,
         show: false
-      })
-    }
+      });
+    },
   }
-})
+});

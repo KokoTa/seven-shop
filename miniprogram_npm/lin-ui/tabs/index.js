@@ -1,4 +1,4 @@
-import scrollCenter from '../behaviors/scrollCenter'
+import scrollCenter from '../behaviors/scrollCenter';
 Component({
   behaviors: [scrollCenter],
   externalClasses: [
@@ -24,14 +24,14 @@ Component({
   relations: {
     '../tabpanel/index': {
       type: 'child',
-      linked () {
+      linked() {
         // 每次有子节点被插入时执行，target是该节点实例对象，触发在该节点attached生命周期之后
-        this.initTabs()
+        this.initTabs();
       },
-      unlinked () {
-        this.initTabs()
+      unlinked() {
+        this.initTabs();
       }
-    }
+    },
 
   },
   options: {
@@ -43,11 +43,11 @@ Component({
   properties: {
     activeKey: {
       type: String,
-      value: ''
+      value: '',
     },
     placement: {
       type: String,
-      value: 'top'
+      value: 'top',
     },
     animated: Boolean,
     swipeable: Boolean,
@@ -76,82 +76,84 @@ Component({
     tabList: [],
     currentIndex: 0,
     transformX: 0,
-    transformY: 0
+    transformY: 0,
   },
   observers: {
-    activeKey: function (newKey) {
-      if (!newKey) return
-      const index = this.data.tabList.findIndex(tab => tab.key === newKey)
+    'activeKey': function (newKey) {
+      if(!newKey) return;
+      const index = this.data.tabList.findIndex(tab=>tab.key===newKey);
       this.setData({
-        currentIndex: index
-      }, () => {
+        currentIndex:index
+      },() => {
         if (this.data.scrollable) {
-          this.queryMultipleNodes()
+          this.queryMultipleNodes();
         }
-      })
+      });
     }
   },
 
-  ready () {
-    this.initTabs()
+  ready() {
+    this.initTabs();
   },
+
 
   /**
    * 组件的方法列表
    */
   methods: {
-    initTabs (val = this.data.activeKey) {
-      const items = this.getRelationNodes('../tabpanel/index')
+    initTabs(val = this.data.activeKey) {
+      let items = this.getRelationNodes('../tabpanel/index');
       if (items.length > 0) {
-        let activeKey = val
-        let currentIndex = this.data.currentIndex
+        let activeKey = val,
+          currentIndex = this.data.currentIndex;
         const tab = items.map((item, index) => {
-          activeKey = !val && index == 0 ? item.data.key : activeKey
-          currentIndex = item.data.key === activeKey ? index : currentIndex
+
+          activeKey = !val && index == 0 ? item.data.key : activeKey;
+          currentIndex = item.data.key === activeKey ? index : currentIndex;
           return {
             tab: item.data.tab,
             key: item.data.key,
             icon: item.data.icon,
             iconSize: item.data.iconSize,
             image: item.data.image,
-            picPlacement: item.data.picPlacement
-          }
-        })
+            picPlacement: item.data.picPlacement,
+          };
+        });
         this.setData({
           tabList: tab,
           activeKey,
-          currentIndex
+          currentIndex,
         }, () => {
           if (this.data.scrollable) {
-            this.queryMultipleNodes()
+            this.queryMultipleNodes();
           }
-        })
+        });
       }
     },
-    swiperChange (e) {
+    swiperChange(e) {
       const {
         source,
         current
-      } = e.detail
+      } = e.detail;
       if (source == 'touch') {
-        const currentIndex = current
-        const activeKey = this.data.tabList[current].key
+        const currentIndex = current;
+        const activeKey = this.data.tabList[current].key;
         this._setChangeData({
           activeKey,
           currentIndex
-        })
+        });
       }
     },
-    handleChange (e) {
-      const activeKey = e.currentTarget.dataset.key
-      const currentIndex = e.currentTarget.dataset.index
+    handleChange(e) {
+      const activeKey = e.currentTarget.dataset.key;
+      const currentIndex = e.currentTarget.dataset.index;
       this._setChangeData({
         activeKey,
         currentIndex
-      })
+      });
     },
 
-    _setChangeData ({
+    _setChangeData({
       activeKey,
       currentIndex
     }) {
@@ -160,13 +162,13 @@ Component({
         currentIndex
       }, () => {
         if (this.data.scrollable) {
-          this.queryMultipleNodes()
+          this.queryMultipleNodes();
         }
-      })
+      });
       this.triggerEvent('linchange', {
         activeKey,
         currentIndex
-      })
+      });
     }
   }
-})
+});

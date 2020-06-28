@@ -1,6 +1,6 @@
-import computeOffset from '../behaviors/computeOffset'
-import zIndex from '../behaviors/zIndex'
-import watchShow from '../behaviors/watchShow'
+import computeOffset from '../behaviors/computeOffset';
+import zIndex from '../behaviors/zIndex';
+import watchShow from '../behaviors/watchShow';
 Component({
   /**
    * 组件的属性列表
@@ -48,7 +48,7 @@ Component({
     },
     openApi: {
       type: Boolean,
-      value: true
+      value: true,
     },
     offsetX: Number,
     offsetY: Number
@@ -66,30 +66,30 @@ Component({
 
   // 解决 addListener undefined 的错误
   observers: {
-    icon: function () {}
+    'icon': function () {}
   },
 
-  attached () {
+  attached() {
     if (this.data.openApi) {
-      this.initToast()
+      this.initToast();
     }
   },
 
   pageLifetimes: {
-    show () {
+    show() {
       if (this.data.openApi) {
-        this.initToast()
+        this.initToast();
       }
-      this.offsetMargin()
-    }
+      this.offsetMargin();
+    },
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-    initToast () {
-      wx.lin = wx.lin || {}
+    initToast() {
+      wx.lin = wx.lin || {};
       wx.lin.showToast = (options = {}) => {
         const {
           title = '',
@@ -105,7 +105,7 @@ Component({
           offsetY = 0,
           iconSize = '60',
           iconColor = ''
-        } = options
+        } = options;
         this.setData({
           title,
           icon,
@@ -120,50 +120,51 @@ Component({
           offsetX,
           iconSize,
           iconColor
-        })
-        this.changeStatus()
-        return this
-      }
+        });
+        this.changeStatus();
+        return this;
+      };
       wx.lin.hideToast = () => {
         this.setData({
           status: false
-        })
-      }
+        });
+      };
     },
 
-    strlen (str) {
-      var len = 0
+    strlen(str) {
+      var len = 0;
       for (var i = 0; i < str.length; i++) {
-        var c = str.charCodeAt(i)
-        if ((c >= '0x0001' && c <= '0x007e') || (c >= '0xff60' && c <= '0xff9f')) {
-          len++
+        var c = str.charCodeAt(i);
+        if ((c >= '0x0001' && c <= '0x007e') || ('0xff60' <= c && c <= '0xff9f')) {
+          len++;
         } else {
-          len += 2
+          len += 2;
         }
       }
-      return len
+      return len;
     },
     // 阻止滑动
-    doNothingMove () {
+    doNothingMove() {
       // do nothing……
     },
 
     // 点击事件
-    onMaskTap () {
-      const detail = true
-      const option = {
+    onMaskTap() {
+
+      let detail = true;
+      let option = {
         bubbles: true,
         composed: true
-      }
+      };
 
       if (this.data.locked !== true) {
         this.setData({
           fullScreen: 'hide',
-          status: 'hide'
-        })
+          status: 'hide',
+        });
       }
 
-      this.triggerEvent('lintap', detail, option)
+      this.triggerEvent('lintap', detail, option);
     }
   }
-})
+});

@@ -11,9 +11,9 @@ Component({
     custom: Boolean,
     size: {
       type: String,
-      value: 'default'
-    }
+      value: 'default',
+    },
   },
   methods: {
   }
-})
+});

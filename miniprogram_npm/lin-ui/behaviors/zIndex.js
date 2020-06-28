@@ -2,9 +2,9 @@
 export default Behavior({
   behaviors: [],
   properties: {
-    zIndex: {
+    zIndex:{
       type: Number,
       value: 777
     }
   }
-})
+});

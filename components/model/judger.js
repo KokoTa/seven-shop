@@ -76,7 +76,7 @@ class Judger {
     // 查找潜在路径
     const path = this._findPotentialPath(cell, x)
     // console.log(path)
-    // 选中的 cell 不需要查找潜在路径
+    // 选中的 cell _findPotentialPath 会返回 undefined，不需要改变状态
     if (!path) return
 
     // 潜在路径是否存在于路径字典中
@@ -90,7 +90,7 @@ class Judger {
 
   /**
   * 当前 cell 的潜在路径为：当前 cell 路径 + 其他行已选中 cell 的路径
-  * 当前选中的 cell 不需要查找潜在路径
+  * 选中的 cell 不需要查找潜在路径，不需要改变状态，因为它本事就是存在于路径字典中
   *
   * 举个例子：
   * A B C
@@ -102,10 +102,8 @@ class Judger {
     const fences = this.fenceGroup.fences
     const joiner = new Joiner('#')
 
-    // cell 为选中状态时，不需要继续判断了，因为它已经被选中了，路径就是它本身
-    // 这里判断条件不能为 cell.status === CellStatus.SELECTED
-    // 假如我选择了 E，E 为 selected，然后选择了 F，此时由于 _changeCellStatus 只会改变选中的那个 cell 而不会重置之前选择的 cell，会产生同一行选中两个的情况
-    // 解决方法是使用 skuPending 类，用它来找到当前选择的 cell
+    // cell 为选中状态时，不用继续判断，因为它已经被选中了，说明它本事存在于路径字典中
+    // PS：这里判断条件不能为 cell.status === CellStatus.SELECTED。假如我选择了 E，E 为 selected，然后选择了 F，此时由于 _changeCellStatus 只会改变选中的那个 cell 而不会重置之前选择的 cell，会产生同一行选中两个的情况。解决方法是使用 skuPending 类，用它来找到当前选择的 cell
     if (this.skuPending.isSelected(cell, rowNum)) return
 
     for (let i = 0; i < fences.length; i++) {

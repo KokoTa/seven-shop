@@ -44,28 +44,28 @@ Component({
     checked: false
   },
   methods: {
-    setChecked (checked) {
+    setChecked(checked) {
       this.setData({
-        checked
-      })
+        checked,
+      });
     },
     // 点击radio
-    onRadioChangeTap () {
+    onRadioChangeTap() {
       if (this.properties.disabled) {
-        return
+        return;
       }
-      const parent = this.getRelationNodes('../radio-group/index')[0]
-      const noneChecked = parent.properties.noneChecked
-      const isCurrent = this.isCurrentSelectedKey(parent)
-      let select = true
+      const parent = this.getRelationNodes('../radio-group/index')[0];
+      const noneChecked = parent.properties.noneChecked;
+      const isCurrent = this.isCurrentSelectedKey(parent);
+      let select = true;
       if (isCurrent) {
-        select = false
+        select = false;
         if (!noneChecked) {
-          return
+          return;
         }
       }
-      const checked = !this.data.checked
-      this.data.checked = checked
+      const checked = !this.data.checked;
+      this.data.checked = checked;
 
       // 子组件不能修改父组件属性
       // parent.properties.current = null
@@ -73,18 +73,18 @@ Component({
         checked,
         key: this.properties.key,
         cell: this.properties.cell
-      }
+      };
       if (parent) {
-        parent.onEmitEventHandle(item, select)
+        parent.onEmitEventHandle(item, select);
       }
     },
 
-    isCurrentSelectedKey (parent) {
-      const currentKey = parent.properties.current
+    isCurrentSelectedKey(parent) {
+      const currentKey = parent.properties.current;
       if (currentKey == this.properties.key) {
-        return true
+        return true;
       }
-      return false
+      return false;
     }
   }
-})
+});

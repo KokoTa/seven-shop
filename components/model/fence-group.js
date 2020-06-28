@@ -21,6 +21,7 @@ class FenceGroup {
     const fences = [] // 规格行数组
     const newMatrix = matrix.transpose() // 矩阵转置
 
+    console.log(newMatrix)
     newMatrix.forEach((arr, index) => {
       const fence = new Fence(arr)
       fence.init()

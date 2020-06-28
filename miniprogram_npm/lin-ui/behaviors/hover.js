@@ -2,9 +2,9 @@
 export default Behavior({
   behaviors: [],
   properties: {
-    isHover: {
+    isHover:{
       type: Boolean,
       value: true
     }
   }
-})
+});
