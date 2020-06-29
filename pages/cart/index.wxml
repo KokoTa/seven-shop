@@ -1,2 +1,9 @@
-<!--pages/cart/index.wxml-->
-<text>pages/cart/index.wxml</text>
+<view wx:if="{{!isEmpty}}" class="container">
+  <block wx:for="{{cartItems}}">
+    <s-cart-item
+      cartItem="{{item}}"
+      bind:check="onCartItemCheck">
+    </s-cart-item>
+  </block>
+</view>
+<l-status-show show="{{isEmpty}}" type="cart" bind:lintap="goHome" l-button-class="status-button"></l-status-show>

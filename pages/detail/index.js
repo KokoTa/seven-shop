@@ -2,6 +2,8 @@ import { Spu } from '../../model/spu'
 // pages/detail.js
 import { ShoppingWay } from '../../core/enum'
 import { SaleExplain } from '../../model/sale-explain'
+import { Cart } from '../../components/model/cart'
+import { CartItem } from '../../components/model/cart-item'
 Page({
 
   /**
@@ -10,7 +12,8 @@ Page({
   data: {
     spu: {},
     saleExplain: [],
-    showRealm: false
+    showRealm: false,
+    cartItemCount: 0
   },
 
   /**
@@ -22,6 +25,11 @@ Page({
     const explain = await SaleExplain.getFixed()
 
     this.setData({ spu, explain })
+  },
+
+  // 进页面的时候获取购物总数
+  onShow() {
+    this.updateCartCount()
   },
 
   onAddToCart () {
@@ -54,5 +62,21 @@ Page({
   },
   onShopping(data) {
     console.log(data.detail)
+    const { orderWay, sku, skuCount, spuId } = data.detail
+
+    if (orderWay === Cart.CART_KEY) { // 加入购物车
+      const cart = new Cart()
+      const cartItem = new CartItem(sku, skuCount)
+      cart.addItem(cartItem)
+    }
+
+    this.updateCartCount()
+  },
+
+  // 获取购物车购买总数
+  updateCartCount() {
+    const cart = new Cart()
+    const totalCount = cart.getTotalCount()
+    this.setData({ cartItemCount: totalCount, showRealm: false })
   }
 })

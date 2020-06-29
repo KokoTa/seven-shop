@@ -27,7 +27,7 @@ class Cart {
       throw new Error('超过购车最大数量')
     }
 
-    const oldItem = this.cartData.find((item) => item.skuId === newItem.skuId)
+    const oldItem = this.cartData.items.find((item) => item.skuId === newItem.skuId)
 
     if (!oldItem) {
       this.cartData.items.unshift(newItem)
@@ -42,7 +42,7 @@ class Cart {
   }
 
   removeItem(skuId) {
-    const oldItemIndex = this.cartData.findIndex((item) => item.skuId === skuId)
+    const oldItemIndex = this.cartData.items.findIndex((item) => item.skuId === skuId)
     if (oldItemIndex !== -1) {
       this.cartData.items.splice(oldItemIndex, 1)
       wx.setStorageSync(Cart.CART_KEY, this.cartData) 
@@ -59,6 +59,25 @@ class Cart {
       cartData = cartData
     }
     this.cartData = cartData
+  }
+
+  isEmpty() {
+    return this.cartData.items.length === 0
+  }
+
+  getTotalCount() {
+    const items = this.cartData.items
+    let count = 0
+    items.forEach((item) => count += item.count)
+    return count
+  }
+
+  static isSoldOut(item) {
+    return item.sku.stock === 0
+  }
+
+  static isOnline(item) {
+    return item.sku.online
   }
 }
 

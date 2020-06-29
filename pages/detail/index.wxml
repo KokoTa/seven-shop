@@ -52,4 +52,5 @@
   bind:goToCart="onGoToCart"
   bind:addToCart="onAddToCart"
   bind:buy="onBuy"
+  cartItemCount="{{cartItemCount}}"
 ></s-tabbar>
