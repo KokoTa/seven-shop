@@ -13,6 +13,13 @@ Page({
     totalSkuCount: 0
   },
 
+  // 页面加载的时候更新购物车内的数据，和服务端数据同步
+  async onLoad() {
+    const skus = await cart.getAllSkuFromServer()
+    const cartItems = cart.refreshSkus(skus)
+    this.setData({ cartItems })
+  },
+
   // 购物车数据要保持最新的，因此每次显示时都要获取数据
   onShow () {
     const cartItems = cart.cartData.items

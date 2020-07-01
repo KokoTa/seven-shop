@@ -1,3 +1,5 @@
+import { Sku } from "../../model/sku"
+
 /**
  * 购物车类
  */
@@ -82,6 +84,42 @@ class Cart {
 
   getCheckedItems() {
     return this.cartData.items.filter((item) => item.checked)
+  }
+
+  async getAllSkuFromServer() {
+    const cartData = this.cartData
+    if (cartData.items.length === 0) return null
+    const skuIds = this.getSkuIds()
+    const serverData = await Sku.getSkuByIds(skuIds)
+    return serverData.data
+  }
+
+  getSkuIds() {
+    const cartData = this.cartData
+    if (cartData.items.length === 0) return []
+    return cartData.items.map((item) => item.skuId)
+  }
+
+  refreshSkus(skus) {
+    const cartItems = this.cartData.items
+
+    // 如果商品下架，则服务端不会返回该商品，前端需要手动下架该商品
+    cartItems.forEach((cartItem) => {
+      let removeFlag = true
+      skus.forEach((sku) => {
+        if (cartItem.skuId === sku.id) {
+          cartItem.sku = sku
+          removeFlag = false
+        }
+      })
+      if (removeFlag) {
+        cartItem.sku.online = false
+      }
+    })
+    
+    wx.setStorageSync(Cart.CART_KEY, this.cartData)
+
+    return cartItems
   }
 
   isEmpty() {

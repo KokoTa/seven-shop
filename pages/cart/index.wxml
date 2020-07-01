@@ -31,5 +31,7 @@
     <text>结算 ( {{totalSkuCount}} )</text>
   </view>
 </view>
+<!-- 全选占位符 -->
+<view style="height: 100rpx;"></view>
 <!-- 购物车控台页 -->
 <l-status-show show="{{isEmpty}}" type="cart" bind:lintap="goHome" l-button-class="status-button"></l-status-show>
