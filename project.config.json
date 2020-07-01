@@ -96,6 +96,13 @@
 					"id": -1,
 					"name": "pages/cart/index",
 					"pathName": "pages/cart/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/order/index",
+					"pathName": "pages/order/index",
 					"scene": null
 				}
 			]

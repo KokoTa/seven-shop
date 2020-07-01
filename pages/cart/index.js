@@ -71,7 +71,10 @@ Page({
     this.updateTotalData()
   },
   onSettle () {
-
+    if (this.data.totalSkuCount <= 0) return
+    wx.navigateTo({
+      url: '/pages/order/index',
+    })
   },
 
   // 更新全选状态
