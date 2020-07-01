@@ -32,7 +32,8 @@
     "l-segment-item": "/miniprogram_npm/lin-ui/segment-item/index",
     "l-search-bar": "/miniprogram_npm/lin-ui/search-bar/index",
     "s-counter": "/components/counter/index",
-    "l-status-show": "/miniprogram_npm/lin-ui/status-show/index"
+    "l-status-show": "/miniprogram_npm/lin-ui/status-show/index",
+    "l-slide-view": "/miniprogram_npm/lin-ui/slide-view/index"
   },
   "tabBar": {
     "borderStyle": "black",

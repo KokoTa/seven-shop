@@ -23,10 +23,7 @@ Component({
   methods: {
     onCheck() {
       const checked = this.properties.checked
-      this.triggerEvent('check', { checked: !checked }, {
-        bubbles: true,
-        composed: true
-      })
+      this.triggerEvent('check', { checked: !checked })
     }
   }
 })

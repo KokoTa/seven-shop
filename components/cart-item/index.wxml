@@ -1,59 +1,67 @@
-<view class="container">
-  <view class="checkbox">
-    <!-- 复选框 -->
-    <s-checkbox checked="{{cartItem.checked}}"></s-checkbox>
-  </view>
-  <view class="sku-container">
-    <!-- 图片 -->
-    <view class="image-container">
-      <view wx:if="{{!online}}" class="image-sole-out">
-        <text>下 架</text>
-      </view>
-      <view wx:elif="{{soldOut}}" class="image-sole-out">
-        <text>售 罄</text>
-      </view>
-      <view wx:elif="{{cartItem.sku.stock < 10}}" class="image-stock-pinch">
-        <text>仅剩{{cartItem.sku.stock}}件</text>
-      </view>
-      <image mode="aspectFit" class="image" src="{{cartItem.sku.img}}"></image>
+<wxs src="../../wxs/price.wxs" module="p"></wxs>
+
+<l-slide-view height="220" width="750" slide-width="200">
+  <view slot="left" class="container">
+    <view class="checkbox">
+      <!-- 复选框 -->
+      <s-checkbox checked="{{cartItem.checked}}" bind:check="onCheck"></s-checkbox>
     </view>
-    <!-- 商品信息 -->
-    <view class="info">
-      <view class="description-container">
-        <view class="title-container">
-          <!-- 打折 -->
-          <l-tag
-            wx:if="{{discount}}"
-            l-class="discount-tag"
-            size="mini"
-            bg-color="#c93756"
-            shap="circle"
-            type="reading"
-            height="24"
-          >
-            打折
-          </l-tag>
-          <!-- 标题 -->
-          <text class="title">{{cartItem.sku.title}}</text>
+    <view class="sku-container">
+      <!-- 图片 -->
+      <view class="image-container">
+        <view wx:if="{{!online}}" class="image-sole-out">
+          <text>下 架</text>
         </view>
-        <!-- 规格 -->
-        <view wx:if="{{specStr}}" class="spec">
-          <text>{{specStr}}</text>
+        <view wx:elif="{{soldOut}}" class="image-sole-out">
+          <text>售 罄</text>
+        </view>
+        <view wx:elif="{{cartItem.sku.stock < 10}}" class="image-stock-pinch">
+          <text>仅剩{{cartItem.sku.stock}}件</text>
+        </view>
+        <image mode="aspectFit" class="image" src="{{cartItem.sku.img}}"></image>
+      </view>
+      <!-- 商品信息 -->
+      <view class="info">
+        <view class="description-container">
+          <view class="title-container">
+            <!-- 打折 -->
+            <l-tag
+              wx:if="{{discount}}"
+              l-class="discount-tag"
+              size="mini"
+              bg-color="#c93756"
+              shap="circle"
+              type="reading"
+              height="24"
+            >
+              打折
+            </l-tag>
+            <!-- 标题 -->
+            <text class="title">{{cartItem.sku.title}}</text>
+          </view>
+          <!-- 规格 -->
+          <view wx:if="{{specStr}}" class="spec">
+            <text>{{specStr}}</text>
+          </view>
+        </view>
+        <view class="price-container">
+          <l-price
+            color="#157658"
+            count-size="28"
+            value="{{p.mainPrice(cartItem.sku.price, cartItem.sku.discount_price)}}"
+          ></l-price>
+          <s-counter
+            count="{{stockCount}}"
+            max="{{stockMax}}"
+            bind:lintap="onSelectCount">
+          </s-counter>
         </view>
       </view>
-      <view class="price-container">
-        <l-price
-          color="#157658"
-          count-size="28"
-          value="{{cartItem.sku.price}}"
-        ></l-price>
-        <s-counter
-          count="{{cartItem.count}}"
-          max="{{cartItem.sku.stock}}">
-        </s-counter>
-      </view>
+      <!-- 蒙层 -->
+      <view wx:if="{{soldOut || !online}}" class="sold-out"></view>
     </view>
-    <!-- 蒙层 -->
-    <view wx:if="{{soldOut || !online}}" class="sold-out"></view>
   </view>
-</view>
+  <view slot="right" bindtap="onDelete" class="slide">
+    <text>删除</text>
+  </view>
+</l-slide-view>

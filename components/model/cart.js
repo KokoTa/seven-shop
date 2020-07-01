@@ -49,6 +49,49 @@ class Cart {
     }
   }
 
+  checkItem(skuId, checked) {
+    this.cartData.items.forEach((item) => {
+      if (item.skuId === skuId) item.checked = checked
+    })
+    wx.setStorageSync(Cart.CART_KEY, this.cartData)
+  }
+
+  checkedAll(checked) {
+    this.cartData.items.forEach((item) => {
+      item.checked = checked
+    })
+    wx.setStorageSync(Cart.CART_KEY, this.cartData)
+  }
+
+  changeItemCount(skuId, count) {
+    const index = this.cartData.items.findIndex((item) => item.skuId === skuId)
+    if (index !== -1) {
+      const cartItem = this.cartData.items[index]
+      // 这里不需要判断边界情况，因为 counter 组件已经帮我们判断了
+      cartItem.count = count
+    }
+    wx.setStorageSync(Cart.CART_KEY, this.cartData)
+  }
+
+  getTotalCount() {
+    const items = this.cartData.items
+    let count = 0
+    items.forEach((item) => count += item.count)
+    return count
+  }
+
+  getCheckedItems() {
+    return this.cartData.items.filter((item) => item.checked)
+  }
+
+  isEmpty() {
+    return this.cartData.items.length === 0
+  }
+
+  isAllChecked() {
+    return this.cartData.items.every((item) => item.checked)
+  }
+
   _getCartData() {
     let cartData = wx.getStorageSync(Cart.CART_KEY)
     if (!cartData) {
@@ -59,17 +102,6 @@ class Cart {
       cartData = cartData
     }
     this.cartData = cartData
-  }
-
-  isEmpty() {
-    return this.cartData.items.length === 0
-  }
-
-  getTotalCount() {
-    const items = this.cartData.items
-    let count = 0
-    items.forEach((item) => count += item.count)
-    return count
   }
 
   static isSoldOut(item) {

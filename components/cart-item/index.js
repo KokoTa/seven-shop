@@ -1,5 +1,6 @@
 import { parseSpecValue } from "../../utils/sku"
 import { Cart } from '../model/cart'
+const cart = new Cart()
 
 // components/cart-item/index.js
 Component({
@@ -26,7 +27,9 @@ Component({
         specStr,
         soldOut,
         online,
-        discount
+        discount,
+        stockMax: cartItem.sku.stock,
+        stockCount: cartItem.count
       })
     }
   },
@@ -38,13 +41,30 @@ Component({
     online: false,
     soldOut: false,
     discount: false,
-    specStr: ''
+    specStr: '',
+    stockMax: Cart.SKU_MAX_COUNT,
+    stockCount: Cart.SKU_MIN_COUNT
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-
+    onCheck(e) {
+      const { skuId } = this.properties.cartItem
+      const checked = e.detail.checked
+      this.triggerEvent('check', { skuId, checked })
+    },
+    onDelete() {
+      const { skuId } = this.properties.cartItem
+      const cart = new Cart()
+      cart.removeItem(skuId)
+      this.triggerEvent('itemDelete', { skuId })
+    },
+    onSelectCount(e) {
+      const { skuId } = this.properties.cartItem
+      const { count } = e.detail
+      this.triggerEvent('count', { skuId, count })
+    }
   }
 })
