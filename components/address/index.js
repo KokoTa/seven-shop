@@ -33,12 +33,12 @@ Component({
    */
   methods: {
     async onChooseAddress() {
-      const authStatus = await this.hasAddressPermission()
-      if (authStatus === AuthAddress.DENY) {
+      const authStatus = await this.hasAddressPermission() // 获取授权情况
+      if (authStatus === AuthAddress.DENY) { // 授权拒绝时跳到授权管理页
         this.setData({ showDialog: true })
         return
       }
-      this.getAddress()
+      this.getAddress() // 授权允许时获取地址
     },
     async getAddress() {
       let res = null

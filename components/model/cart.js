@@ -86,6 +86,10 @@ class Cart {
     return this.cartData.items.filter((item) => item.checked)
   }
 
+  getCheckedSkuIds() {
+    return this.cartData.items.filter((item) => item.checked).map((item) => item.skuId)
+  }
+
   async getAllSkuFromServer() {
     const cartData = this.cartData
     if (cartData.items.length === 0) return null
