@@ -32,7 +32,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.11.3",
-	"appid": "wx1b13619a00914149",
+	"appid": "wx1ac13f6f6780e2f3",
 	"projectname": "seven-shop",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -103,6 +103,14 @@
 					"id": -1,
 					"name": "pages/order/index",
 					"pathName": "pages/order/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 6,
+					"name": "pages/coupon/index",
+					"pathName": "pages/coupon/index",
+					"query": "name=a-2&type=activity",
 					"scene": null
 				}
 			]

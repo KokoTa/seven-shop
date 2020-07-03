@@ -22,7 +22,8 @@ Page({
   onLoad: async function (options) {
     const pid = options.pid
     const spu = await Spu.getDetail(pid)
-    const explain = await SaleExplain.getFixed()
+    // const explain = await SaleExplain.getFixed()
+    const explain = []
 
     this.setData({ spu, explain })
   },

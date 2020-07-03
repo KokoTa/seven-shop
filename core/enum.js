@@ -40,11 +40,17 @@ class OrderException extends Error {
   }
 }
 
+const CouponCenterType = {
+  ACTIVITY: 'activity',
+  SPU_CATEGORY: 'spu_category'
+}
+
 export {
   CellStatus,
   ShoppingWay,
   SpuListType,
   AuthAddress,
   OrderException,
-  OrderExceptionType
+  OrderExceptionType,
+  CouponCenterType
 }

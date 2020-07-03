@@ -12,8 +12,8 @@
     </swiper>
     <!-- 商品分类 -->
     <s-category-grid grid="{{gridC}}"></s-category-grid>
-    <!-- 优惠券 -->
-    <image class="activity" src="{{activityD.entrance_img}}" />
+    <!-- 优惠券，通过 aname 跳到对应的活动 -->
+    <image class="activity" src="{{activityD.entrance_img}}" data-aname="a-2" bindtap="goCoupons" />
     <!-- 每周上新 -->
     <s-spu-scroll wx:if="{{themeE.online}}" theme="{{themeE}}" spu-list="{{themeESpu}}"></s-spu-scroll>
     <!-- 精选甄选 -->
