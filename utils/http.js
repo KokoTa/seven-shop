@@ -1,10 +1,10 @@
 import { config } from '../config/config'
 import { promisic } from '../miniprogram_npm/lin-ui/utils/util'
 import { Token } from '../model/token'
-import { codes } from '../config/exception'
+import { codes } from '../config/errCode'
 
 class Http {
-  static async request ({ url, data, method = 'GET', throwError = false }) {
+  static async request ({ url, data = {}, method = 'GET', throwError = false }) {
     let res = null
     
     try {
@@ -20,7 +20,7 @@ class Http {
       })
     } catch(err) {
       // 这里只有断网的情况下才会触发，即 xhr 失败才会触发，返回 404、500 不会触发 catch
-      if (throwError) new Exception('断网啦！')
+      if (throwError) throw new Error(JSON.stringify(err))
       res = err
       this.showError(-1)
     }
@@ -29,7 +29,7 @@ class Http {
 
     // 2xx 404
     if (code.startsWith('2') || code === '404') {
-      return res
+      return res.data
     }
        
     // 401
@@ -39,7 +39,7 @@ class Http {
     }
 
     // 4xx 5xx 二次重发失败
-    if (throwError) new Exception('方法错啦！服务器炸啦！')
+    if (throwError) throw new Error(JSON.stringify(res.data))
     const errorCode = res.data.code
     this.showError(errorCode, res.data)
   }

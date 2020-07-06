@@ -16,13 +16,12 @@ class Theme {
    */
   async getThemes () {
     const names = `${Theme.locationA},${Theme.locationE},${Theme.locationF},${Theme.locationH}`
-    const data = await Http.request({
+    this.themes = await Http.request({
       url: '/theme/by/names',
       data: {
         names
       }
     })
-    this.themes = data.data
   }
 
   getHomeLocationA () {
@@ -45,10 +44,9 @@ class Theme {
    * 获取主题详情(带SPU)
    */
   static async getThemeSpuByName (name) {
-    const data = await Http.request({
+    return await Http.request({
       url: `/theme/name/${name}/with_spu`
     })
-    return data.data
   }
 
   static async getHomeLocationESpu () {

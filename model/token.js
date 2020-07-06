@@ -38,7 +38,7 @@ class Token {
       }
     })
     wx.setStorageSync('token', res.data.token)
-    return res.data.token
+    return res.token
   }
 
   async verifyFromServer(token) {

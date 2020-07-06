@@ -7,6 +7,18 @@
   </swiper>
   <!-- 描述 -->
   <s-spu-description spu="{{spu}}"></s-spu-description>
+  <!-- 可获取的优惠券 -->
+  <view bind:tap="onGoToCouponCenter" class="coupon-container" wx:if="{{coupons.length !== 0}}">
+    <view class="coupon-left">
+      <block wx:for="{{coupons}}">
+        <s-coupon-mini text="{{item.title}}"></s-coupon-mini>
+      </block>
+    </view>
+    <view class="coupon-right">
+      <text>立即领取</text>
+      <l-icon name="right" color="#157658" size="24"></l-icon>
+    </view>
+  </view>
   <!-- 规格显示 -->
   <view wx:if="{{!noSpec}}" class="sku-pending" bind:tap="onAddToCart">
     <view class="specs">

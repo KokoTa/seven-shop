@@ -6,7 +6,7 @@ import { Http } from '../utils/http'
 class Sku {
   static async getSkuByIds(ids) {
     const res = await Http.request({
-      url: `/sku?ids=${ids}`
+      url: `/sku/skus?ids=${ids}`
     })
     return res
   }

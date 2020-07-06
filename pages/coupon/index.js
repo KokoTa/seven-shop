@@ -1,5 +1,6 @@
 import { CouponCenterType } from "../../core/enum"
 import { Activity } from "../../model/activity"
+import { Coupon } from "../../model/coupon"
 
 // pages/coupon/index.js
 Page({
@@ -25,11 +26,11 @@ Page({
         const activity = await Activity.getActivityWithCoupon(aName)
         coupons = activity.coupons
     }
-    // if (type === CouponCenterType.SPU_CATEGORY) {
-    //     coupons = await Coupon.getCouponsByCategory(cid)
-    //     const wholeStoreCoupons = await Coupon.getWholeStoreCoupons()
-    //     coupons = coupons.concat(wholeStoreCoupons)
-    // }
+    if (type === CouponCenterType.SPU_CATEGORY) {
+        coupons = await Coupon.getCouponsByCategory(cid)
+        const wholeStoreCoupons = await Coupon.getWholeStoreCoupons()
+        coupons = coupons.concat(wholeStoreCoupons)
+    }
 
     console.log(coupons)
     this.setData({

@@ -6,18 +6,16 @@ class Banner {
 
   // 获取首页轮播
   static async getHomeLocationB () {
-    const data = await Http.request({
+    return await Http.request({
       url: `/banner/name/${this.locationB}`
     })
-    return data.data
   }
 
   // 获取热门列表
   static async getHomeLocationG () {
-    const data = await Http.request({
+    return await Http.request({
       url: `/banner/name/${this.locationG}`
     })
-    return data.data
   }
 }
 

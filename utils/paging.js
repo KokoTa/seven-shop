@@ -34,7 +34,7 @@ class Paging {
     const { count, start } = this
     const { url, data, method } = this.req
 
-    const result = await Http.request({
+    const paging = await Http.request({
       url,
       method,
       data: {
@@ -44,7 +44,6 @@ class Paging {
       }
     })
 
-    const paging = result.data
 
     if (!paging) return null
 
@@ -59,7 +58,7 @@ class Paging {
 
     this._accumulate(paging.items)
 
-    this.moreData = this._moreData(paging.total_page, paging.page)
+    this.moreData = this._moreData(paging.total_page, paging.page_no)
 
     if (this.moreData) {
       this.start += this.count

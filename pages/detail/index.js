@@ -1,9 +1,10 @@
 import { Spu } from '../../model/spu'
 // pages/detail.js
-import { ShoppingWay } from '../../core/enum'
+import { ShoppingWay, CouponCenterType } from '../../core/enum'
 import { SaleExplain } from '../../model/sale-explain'
 import { Cart } from '../../components/model/cart'
 import { CartItem } from '../../components/model/cart-item'
+import { Coupon } from '../../model/coupon'
 Page({
 
   /**
@@ -13,7 +14,8 @@ Page({
     spu: {},
     saleExplain: [],
     showRealm: false,
-    cartItemCount: 0
+    cartItemCount: 0,
+    coupons: []
   },
 
   /**
@@ -21,11 +23,12 @@ Page({
    */
   onLoad: async function (options) {
     const pid = options.pid
-    const spu = await Spu.getDetail(-1)
-    // const explain = await SaleExplain.getFixed()
+    const spu = await Spu.getDetail(pid)
+    // const explain = await SaleExplain.getFixed() // 自己的服务器暂时没数据
     const explain = []
+    const coupons = await Coupon.getTop2CouponsByCategory(spu.category_id)
 
-    this.setData({ spu, explain })
+    this.setData({ spu, explain, coupons })
   },
 
   // 进页面的时候获取购物总数
@@ -53,6 +56,13 @@ Page({
   onGoToCart () {
     wx.switchTab({
       url: '/pages/cart/index'
+    })
+  },
+  onGoToCouponCenter() {
+    const type = CouponCenterType.SPU_CATEGORY
+    const cid = this.data.spu.category_id
+    wx.navigateTo({
+      url: `/pages/coupon/index?cid=${cid}&type=${type}`,
     })
   },
   onSkuChoice (data) {

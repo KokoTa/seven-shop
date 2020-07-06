@@ -95,7 +95,7 @@ class Cart {
     if (cartData.items.length === 0) return null
     const skuIds = this.getSkuIds()
     const serverData = await Sku.getSkuByIds(skuIds)
-    return serverData.data
+    return serverData
   }
 
   getSkuIds() {
