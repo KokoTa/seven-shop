@@ -16,14 +16,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
-    const aName = options.name
+    const name = options.name
     const type = options.type
     const cid = options.cid
 
     let coupons
 
     if (type === CouponCenterType.ACTIVITY) {
-        const activity = await Activity.getActivityWithCoupon(aName)
+        const activity = await Activity.getActivityWithCoupon(name)
         coupons = activity.coupons
     }
     if (type === CouponCenterType.SPU_CATEGORY) {

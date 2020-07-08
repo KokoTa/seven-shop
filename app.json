@@ -38,7 +38,9 @@
     "l-slide-view": "/miniprogram_npm/lin-ui/slide-view/index",
     "l-dialog": "/miniprogram_npm/lin-ui/dialog/index",
     "s-address": "/components/address/index",
-    "s-coupon": "/components/coupon/index"
+    "s-coupon": "/components/coupon/index",
+    "l-radio-group": "/miniprogram_npm/lin-ui/radio-group/index",
+    "l-radio": "/miniprogram_npm/lin-ui/radio/index"
   },
   "tabBar": {
     "borderStyle": "black",

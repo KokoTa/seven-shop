@@ -52,6 +52,18 @@ const CouponStatus = {
   EXPIRED: 3
 }
 
+const CouponOperate = {
+  PICK: 'pick',
+  UNPICK: 'unpick'
+}
+
+const CouponType = {
+  FULL_MINUS: 1, // 满减
+  FULL_OFF: 2, // 满折
+  NO_THRESHOLD_MINUS: 3 // 无门槛
+  
+}
+
 export {
   CellStatus,
   ShoppingWay,
@@ -60,5 +72,7 @@ export {
   OrderException,
   OrderExceptionType,
   CouponCenterType,
-  CouponStatus
+  CouponStatus,
+  CouponOperate,
+  CouponType
 }

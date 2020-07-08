@@ -8,7 +8,7 @@ class Activity {
     const data = await Http.request({
       url: `/activity/name/${this.locationD}`
     })
-    return data.data
+    return data
   }
 
   // 活动优惠券
@@ -16,7 +16,7 @@ class Activity {
     const data = await Http.request({
       url:  `/activity/name/${this.locationD}/with_coupon`
     })
-    return data.data
+    return data
   }
 }
 

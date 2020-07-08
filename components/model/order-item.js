@@ -13,8 +13,8 @@ class OrderItem {
   title
   img
   stock
-  categoryId
-  rootCategoryId
+  categoryId // 二级分类
+  rootCategoryId // 一级分类
   specs
   skuId
   cart = new Cart()
@@ -41,6 +41,7 @@ class OrderItem {
     return sku.price
   }
 
+  // 检查库存
   isCountOk() {
     this._checkStock()
     this._beyondMaxSkuCount()

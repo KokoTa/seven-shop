@@ -4,6 +4,7 @@ import { OrderItem } from "../../components/model/order-item"
 import { Order } from "../../components/model/order"
 import { Coupon } from "../../model/coupon"
 import { CouponBO } from "../../components/model/couponBO"
+import { CouponOperate } from "../../core/enum"
 
 const cart = new Cart()
 
@@ -14,22 +15,27 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    orderItems: [],
+    couponBOList: [],
+    finalTotalPrice: 0,
+    discountPrice: 0,
+    currentCouponId: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
-    // 这里不获取缓存中的 sku 项，而是获取 sku id 数组，从服务端那边获取数据，因为缓存的数据可能不是最新的
+    // 这里不获取缓存中的 sku 项，而是获取 sku id 数组，从服务端那边同步数据，因为缓存的数据可能不是最新的
     const skuIds = cart.getCheckedSkuIds()
     const orderItems = await this.getCartOrderItems(skuIds)
     const localItemCount = skuIds.length
     const order = new Order(orderItems, localItemCount)
+    const totalPrice = order.getTotalPrice() // 还未用优惠券时的订单价格
 
     try {
       order.checkOrderIsOk()
-      this.setData({ orderItems })
+      this.setData({ order, orderItems, finalTotalPrice: totalPrice })
     } catch(err) {
       console.error(err)
       return
@@ -61,10 +67,28 @@ Page({
     const coupons = await Coupon.getMySelfWithCategory()
     return coupons.map((coupon) => {
       const couponBO = new CouponBO(coupon)
-      // couponBO.condition(order)
+      couponBO.meetingCondition(order) // 判断该优惠券是否可用，会赋值一个 satisfaction 属性
       return couponBO
     })
-  }
+  },
 
-  
+  onChooseCoupon(e) {
+    const { coupon, operate } = e.detail
+    console.log(coupon, operate)
+
+    if (operate === CouponOperate.PICK) { // 如果有选择优惠券
+      const priceObj = CouponBO.getUseCouponFinalPrice(this.data.order.getTotalPrice(), coupon)
+      this.setData({
+        finalTotalPrice: priceObj.finalPrice,
+        discountPrice: priceObj.discountPrice,
+        currentCouponId: coupon.id
+      })
+    } else {
+      this.setData({
+        finalTotalPrice: this.data.order.getTotalPrice(),
+        discountPrice: 0,
+        currentCouponId: 0
+      })
+    }
+  }
 })
