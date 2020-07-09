@@ -1,0 +1,144 @@
+<!--
+此文件为开发者工具生成，生成时间: 2020/7/9 上午9:51:24 
+使用方法：
+1. 在"pages\order\index.wxml"中使用`include`指令引入此模板，
+2. 在"pages\order\index.wxss"中使用`import`指令引入"pages\order\index.skeleton.wxss"
+3. 书写对应的逻辑，来控制骨架屏的显示与隐藏
+
+更多详细信息可以参考文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/skeleton.html
+-->
+<view class="sk-container">
+  <view class="container">
+    <view is="components/address/index">
+      <view class="address-index--container">
+        <view class="address-index--address-container">
+          <view class="address-index--address-inner">
+            <view class="address-index--base-info">
+              <view is="miniprogram_npm/lin-ui/icon/index">
+                <view class="l-icon icon-index--l-icon l-icon-address icon-index--l-icon-address sk-pseudo sk-pseudo-circle" style="true"></view>
+              </view><text class="address-index--name sk-transparent sk-text-14-2857-979 sk-text" style="background-size: 100% 1.225rem;">张三</text><text class="sk-transparent sk-text-14-2857-623 sk-text" style="background-size: 99.9838% 1.225rem;">020-81167888</text></view>
+            <view
+              class="address-index--address-info"><text class="sk-transparent sk-text-14-2857-92 sk-text" style="background-size: 100% 1.225rem;">广东省</text><text class="sk-transparent sk-text-14-2857-458 sk-text" style="background-size: 91.0261% 1.225rem;"> 广州市</text><text class="sk-transparent sk-text-14-2857-58 sk-text"
+                style="background-size: 91.0261% 1.225rem;"> 海珠区</text><text class="sk-transparent sk-text-14-2857-247 sk-text" style="background-size: 95.8076% 1.225rem;"> 新港中路397号</text></view>
+        </view>
+        <view is="miniprogram_npm/lin-ui/icon/index" style="font-weight: bold">
+          <view class="l-icon icon-index--l-icon l-icon-right icon-index--l-icon-right sk-pseudo sk-pseudo-circle" style="font-size:15px;color:#157658;"></view>
+        </view>
+      </view>
+    </view>
+    <view is="miniprogram_npm/lin-ui/dialog/index">
+      <view is="miniprogram_npm/lin-ui/popup/index">
+        <view class="popup-index--container-popup popup-index--l-popup-center" style="z-index:777; ">
+          <view class="popup-index--container-bg "></view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="order-item-container">
+    <view is="components/order-sku-item/index">
+      <view class="sku-item-index--container order-item">
+        <image class="sku-item-index--left sk-image" mode="aspectFit"></image>
+        <view class="sku-item-index--middle"><text class="sku-item-index--title sku-item-index--hidden-text sk-transparent sk-text-14-2857-842 sk-text" style="background-size: 24.6154% 1.05rem;">碳素墨水</text>
+          <view class="sku-item-index--specs-container"></view>
+        </view>
+        <view class="sku-item-index--right">
+          <view is="miniprogram_npm/lin-ui/price/index">
+            <view class="price-index--price-container " style="color: #333333"><text style="color: #333333; font-size: 14px; font-weight: 500" class="sk-transparent sk-opacity">￥</text><text style="color: rgb(51, 51, 51); font-size: 14px; font-weight: 500; background-size: 100% 1.225rem; background-position-x: 50%;"
+                class="sk-transparent sk-text-14-2857-745 sk-text">68</text></view>
+          </view><text class="sk-transparent sk-text-14-2857-579 sk-text" style="background-size: 99.9063% 1.05rem;">x 1</text></view>
+      </view>
+    </view>
+    <view is="components/order-sku-item/index">
+      <view class="sku-item-index--container order-item">
+        <image class="sku-item-index--left sk-image" mode="aspectFit"></image>
+        <view class="sku-item-index--middle"><text class="sku-item-index--title sku-item-index--hidden-text sk-transparent sk-text-14-2857-916 sk-text" style="background-size: 100% 1.05rem;">多彩别针、回形针 Mini （黑色）一盒30个</text>
+          <view class="sku-item-index--specs-container">
+            <view class="sku-item-index--specs"><text class="sk-transparent sk-text-14-2857-665 sk-text" style="background-size: 99.9767% 0.875rem;">黑色; 一盒30个</text></view>
+          </view>
+        </view>
+        <view class="sku-item-index--right">
+          <view is="miniprogram_npm/lin-ui/price/index">
+            <view class="price-index--price-container " style="color: #333333"><text style="color: #333333; font-size: 14px; font-weight: 500" class="sk-transparent sk-opacity">￥</text><text style="color: rgb(51, 51, 51); font-size: 14px; font-weight: 500; background-size: 100% 1.225rem; background-position-x: 50%;"
+                class="sk-transparent sk-text-14-2857-331 sk-text">398</text></view>
+          </view><text class="sk-transparent sk-text-14-2857-553 sk-text" style="background-size: 99.9341% 1.05rem;">x 20</text></view>
+      </view>
+    </view>
+  </view>
+  <view class="temp-price-container">
+    <view class="origin-price-container"><text class="sk-transparent sk-text-14-2857-722 sk-text" style="background-size: 100% 1.05rem;">商品总金额：</text>
+      <view is="miniprogram_npm/lin-ui/price/index">
+        <view class="price-index--price-container " style="color: #333"><text style="color: #333; font-size: 12px; font-weight: 500" class="sk-transparent sk-opacity">￥</text><text style="color: rgb(51, 51, 51); font-size: 12px; font-weight: 500; background-size: 100% 1.05rem; background-position-x: 50%;" class="sk-transparent sk-text-14-2857-467 sk-text">466</text></view>
+      </view>
+    </view>
+    <view class="discount-price-container"><text class="sk-transparent sk-text-14-2857-994 sk-text" style="background-size: 100% 1.05rem;">优惠金额：</text>
+      <view class="discount-price"><text class="minus-tag sk-transparent sk-opacity">-</text>
+        <view is="miniprogram_npm/lin-ui/price/index">
+          <view class="price-index--price-container " style="color: #333"><text style="color: #333; font-size: 12px; font-weight: 500" class="sk-transparent sk-opacity">￥</text><text style="color: #333; font-size: 12px; font-weight: 500" class="sk-transparent sk-opacity">0</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view is="components/coupon-picker/index">
+    <view class="picker-index--container">
+      <view class="picker-index--header" style="border: none;"><text class="sk-transparent sk-text-14-2857-92 sk-text" style="background-size: 100% 1.225rem;">优惠券</text><text class="sk-transparent sk-text-14-2857-735 sk-text" style="background-size: 99.9694% 1.05rem;">可使用(2)</text></view>
+      <view class="picker-index--main">
+        <view is="miniprogram_npm/lin-ui/radio-group/index">
+          <view class=" group-index--radio-group group-index--radio-group-column">
+            <view is="miniprogram_npm/lin-ui/radio/index" class="picker-index--radio">
+              <view class="radio-index--label radio-index--label-left ">
+                <view class="radio-index--radio" style="color:#157658;font-size:19px">
+                  <view class="radio-index--iconfont radio-index--icon-unselect sk-pseudo sk-pseudo-circle"></view>
+                </view>
+                <view class="picker-index--radio-inner"><text class="sk-transparent sk-text-14-2857-500 sk-text" style="background-size: 99.9819% 1.225rem;">满100打9.9折</text>
+                  <view class="picker-index--date"><text class="sk-transparent sk-text-14-2857-170 sk-text" style="background-size: 99.9737% 1.05rem;">2019/8/28</text><text class="sk-transparent sk-opacity">-</text><text class="sk-transparent sk-text-14-2857-657 sk-text" style="background-size: 99.9737% 1.05rem;">2030/8/28</text></view>
+                </view>
+              </view>
+            </view>
+            <view is="miniprogram_npm/lin-ui/radio/index" class="picker-index--radio">
+              <view class="radio-index--label radio-index--label-left ">
+                <view class="radio-index--radio" style="color:#157658;font-size:19px">
+                  <view class="radio-index--iconfont radio-index--icon-unselect sk-pseudo sk-pseudo-circle"></view>
+                </view>
+                <view class="picker-index--radio-inner"><text class="sk-transparent sk-text-14-2857-539 sk-text" style="background-size: 99.9826% 1.225rem;">无门槛减0.1券</text>
+                  <view class="picker-index--date"><text class="sk-transparent sk-text-14-2857-227 sk-text" style="background-size: 99.9702% 1.05rem;">2019/8/5</text><text class="sk-transparent sk-opacity">-</text><text class="sk-transparent sk-text-14-2857-440 sk-text" style="background-size: 99.9702% 1.05rem;">2031/8/5</text></view>
+                </view>
+              </view>
+            </view>
+            <view is="miniprogram_npm/lin-ui/radio/index" class="picker-index--radio">
+              <view class="radio-index--label radio-index--label-left radio-index--label-disabled ">
+                <view class="radio-index--radio" style="color:#ccc;font-size:19px">
+                  <view class="radio-index--iconfont radio-index--icon-unselect sk-pseudo sk-pseudo-circle"></view>
+                </view>
+                <view class="picker-index--radio-inner picker-index--disabled"><text class="sk-transparent sk-text-14-2857-119 sk-text" style="background-size: 99.9829% 1.225rem;">满500减100券</text>
+                  <view class="picker-index--date"><text class="sk-transparent sk-text-14-2857-650 sk-text" style="background-size: 99.9702% 1.05rem;">2019/8/5</text><text class="sk-transparent sk-opacity">-</text><text class="sk-transparent sk-text-14-2857-197 sk-text" style="background-size: 99.9702% 1.05rem;">2030/8/5</text></view>
+                </view>
+              </view>
+            </view>
+            <view is="miniprogram_npm/lin-ui/radio/index" class="picker-index--radio">
+              <view class="radio-index--label radio-index--label-left radio-index--label-disabled ">
+                <view class="radio-index--radio" style="color:#ccc;font-size:19px">
+                  <view class="radio-index--iconfont radio-index--icon-unselect sk-pseudo sk-pseudo-circle"></view>
+                </view>
+                <view class="picker-index--radio-inner picker-index--disabled"><text class="sk-transparent sk-text-14-2857-199 sk-text" style="background-size: 99.9843% 1.225rem;">满1000减230券</text>
+                  <view class="picker-index--date"><text class="sk-transparent sk-text-14-2857-541 sk-text" style="background-size: 99.9702% 1.05rem;">2019/8/5</text><text class="sk-transparent sk-opacity">-</text><text class="sk-transparent sk-text-14-2857-250 sk-text" style="background-size: 99.9702% 1.05rem;">2030/3/5</text></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="bottom">
+    <view class="price-container"><text class="sk-transparent sk-text-14-2857-97 sk-text" style="background-size: 100% 1.225rem;">合计</text>
+      <view is="miniprogram_npm/lin-ui/price/index">
+        <view class="price-index--price-container " style="color: #157658"><text style="color: rgb(21, 118, 88); font-size: 15px; font-weight: 500; background-size: 100% 1.3125rem; background-position-x: 50%;" class="sk-transparent sk-text-14-2857-21 sk-text">￥</text><text style="color: rgb(21, 118, 88); font-size: 15px; font-weight: 500; background-size: 100% 1.3125rem; background-position-x: 50%;"
+            class="sk-transparent sk-text-14-2857-986 sk-text">466</text></view>
+      </view>
+    </view>
+    <view is="miniprogram_npm/lin-ui/button/index"><label for="lin"><view class="button-index--l-btn button-index--l-btn-medium button-index--l-btn-default button-index--l-btn-circle submit sk-transparent sk-text-34-0909-768 sk-text" hover-class="btn-hover l-hover-class" hover-start-time="20" hover-stay-time="70" style="min-width: 100px; height: 44px; line-height: 44px; background-color: rgb(21, 118, 88); background-size: 63.6364% 2.75rem;">
+        提交订单
+    </view></label></view>
+  </view>
+</view>
+</view>

@@ -51,6 +51,15 @@ class Order {
     return price
   }
 
+  getOrderSkuInfoList() {
+    return this.orderItems.map((item) => {
+      return {
+        id: item.skuId,
+        count: item.count
+      }
+    })
+  }
+  
   _isEmpty() {
     if (this.orderItems.length === 0) {
       throw new OrderException('订单中没有任何商品', OrderExceptionType.EMPTY)

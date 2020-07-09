@@ -1,5 +1,6 @@
 import { Cart } from '../../components/model/cart'
 import { Calculator } from '../../components/model/calculator'
+import { ShoppingWay } from '../../core/enum'
 const cart = new Cart()
 
 // pages/cart/index.js
@@ -73,7 +74,7 @@ Page({
   onSettle () {
     if (this.data.totalSkuCount <= 0) return
     wx.navigateTo({
-      url: '/pages/order/index',
+      url: `/pages/order/index?way=${ShoppingWay.CART}`,
     })
   },
 

@@ -1,6 +1,10 @@
-<view class="container">
+<!-- 骨架屏 -->
+<include wx-if="{{loading}}" src="./index.skeleton.wxml"/>
+
+<!-- 主体 -->
+<view wx:if="{{!loading}}" class="container">
   <!-- 地址选择 -->
-  <s-address></s-address>
+  <s-address bind:address="onChooseAddress"></s-address>
   <!-- 商品列表 -->
   <view class="order-item-container">
     <block wx:for="{{orderItems}}" wx:key="{{item.sku.id}}">
@@ -38,5 +42,9 @@
       width="200">
         提交订单
     </l-button>
+  </view>
 </view>
-</view>
+
+
+<!-- Loading -->
+<l-loading></l-loading>

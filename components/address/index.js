@@ -56,6 +56,7 @@ Component({
           hasChosen: true
         })
         wx.setStorageSync('address', res)
+        this.triggerEvent('address', { address: res })
       }
     },
     async onDialogConfirm() {

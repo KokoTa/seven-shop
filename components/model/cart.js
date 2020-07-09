@@ -86,6 +86,11 @@ class Cart {
     return this.cartData.items.filter((item) => item.checked)
   }
 
+  removeCheckedItems() {
+    this.cartData.items = this.cartData.items.filter((item) => !item.checked)
+    wx.setStorageSync(Cart.CART_KEY, this.cartData)
+  }
+
   getCheckedSkuIds() {
     return this.cartData.items.filter((item) => item.checked).map((item) => item.skuId)
   }

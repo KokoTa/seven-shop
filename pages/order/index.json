@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "s-order-sku-item": "/components/order-sku-item/index",
-    "s-coupon-picker": "/components/coupon-picker/index"
+    "s-coupon-picker": "/components/coupon-picker/index",
+    "l-loading": "/miniprogram_npm/lin-ui/loading/index"
   }
 }

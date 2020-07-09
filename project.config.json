@@ -19,16 +19,16 @@
 		"checkInvalidKey": true,
 		"checkSiteMap": true,
 		"uploadWithSourceMap": true,
+		"compileHotReLoad": false,
 		"babelSetting": {
 			"ignore": [],
 			"disablePlugins": [],
 			"outputPath": ""
 		},
 		"bundle": false,
+		"useIsolateContext": true,
 		"useCompilerModule": false,
-		"userConfirmedUseCompilerModuleSwitch": false,
-		"compileHotReLoad": false,
-		"useIsolateContext": true
+		"userConfirmedUseCompilerModuleSwitch": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.11.3",
@@ -114,10 +114,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 7,
 					"name": "pages/order/index",
 					"pathName": "pages/order/index",
-					"query": "",
+					"query": "way=cart",
 					"scene": null
 				}
 			]
