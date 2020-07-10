@@ -63,6 +63,15 @@ const CouponType = {
   NO_THRESHOLD_MINUS: 3 // 无门槛
 }
 
+const OrderStatus = {
+  ALL: 0,
+  UNPAID: 1,
+  PAID: 2,
+  DELIVERED: 3,
+  FINISHED: 4,
+  CANCELED: 5,
+}
+
 export {
   CellStatus,
   ShoppingWay,
@@ -73,5 +82,6 @@ export {
   CouponCenterType,
   CouponStatus,
   CouponOperate,
-  CouponType
+  CouponType,
+  OrderStatus
 }

@@ -43,10 +43,20 @@ Page({
     const address = wx.getStorageSync('address')
     if (address) this.setData({ address })
 
-    // 这里不获取缓存中的 sku 项，而是获取 sku id 数组，从服务端那边同步数据，因为缓存的数据可能不是最新的
-    const skuIds = cart.getCheckedSkuIds()
-    const orderItems = await this.getCartOrderItems(skuIds)
-    const localItemCount = skuIds.length
+    let skuIds = []
+    let orderItems = []
+    let localItemCount = 0
+    if (shoppingWay === ShoppingWay.CART) {
+      // 这里不获取缓存中的 sku 项，而是获取 sku id 数组，从服务端那边同步数据，因为缓存的数据可能不是最新的
+      skuIds = cart.getCheckedSkuIds()
+      orderItems = await this.getCartOrderItems(skuIds)
+      localItemCount = skuIds.length
+    } else if (shoppingWay === ShoppingWay.BUY) {
+      const skuId = options.skuId
+      const count = options.count
+      orderItems = await this.getBuyOrderItems(skuId, count)
+      localItemCount = 1
+    }
 
     const order = new Order(orderItems, localItemCount)
     const totalPrice = order.getTotalPrice() // 还未用优惠券时的订单价格
@@ -92,6 +102,11 @@ Page({
     })
 
     return orderItems
+  },
+
+  async getBuyOrderItems(skuId, count) {
+    const skus = await Sku.getSkuByIds(skuId)
+    return [new OrderItem(skus[0], count)]
   },
 
   async getCoupons(order) {
@@ -202,7 +217,7 @@ Page({
       })
     } catch (e) {
       const error = { errMsg: 'requestPayment:fail cancel' } // 支付取消/失败
-      const payStatus = P
+      const payStatus = 1
       wx.redirectTo({
         url: `/pages/my-order/index?key=${1}`, // 传参为订单状态
       })

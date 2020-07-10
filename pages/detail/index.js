@@ -75,13 +75,18 @@ Page({
     console.log(data.detail)
     const { orderWay, sku, skuCount, spuId } = data.detail
 
-    if (orderWay === Cart.CART_KEY) { // 加入购物车
+    if (orderWay === ShoppingWay.CART) { // 加入购物车
       const cart = new Cart()
       const cartItem = new CartItem(sku, skuCount)
       cart.addItem(cartItem)
+      this.updateCartCount()
     }
 
-    this.updateCartCount()
+    if (orderWay === ShoppingWay.BUY) { // 立即购买
+      wx.navigateTo({
+        url: `/pages/order/index?skuId=${sku.id}&count=${skuCount}&way=${ShoppingWay.BUY}`,
+      })
+    }
   },
 
   // 获取购物车购买总数

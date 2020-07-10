@@ -1,66 +1,98 @@
-// pages/my-order/index.js
+// pages/my-order/my-order.js
+
+const { OrderRequest } = require("../../model/order")
+const { OrderStatus } = require("../../core/enum")
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    activeKey: OrderStatus.ALL,
+    items: [],
+    loadingType: 'loading',
+    bottomLoading: true,
+    paging: null,
+    empty: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-
+  onLoad: async function (options) {
+    const activeKey = options.key
+    this.data.activeKey = options.key
+    this.initItems(activeKey)
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onShow() {
+    this.initItems(this.data.activeKey)
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+  async initItems(activeKey) {
 
+    this.setData({
+      activeKey,
+      items: []
+    })
+    this.data.paging = this.getPaging(activeKey)
+    const data = await this.data.paging.getMoreData()
+    console.log(data)
+    if (!data) {
+      return
+    }
+    this.bindItems(data)
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  getPaging(activeKey) {
+    activeKey = parseInt(activeKey)
+    switch (activeKey) {
+      case OrderStatus.ALL:
+        return OrderRequest.getPagingByStatus(OrderStatus.ALL)
+      case OrderStatus.UNPAID:
+        return OrderRequest.getPagingUnpaid()
+      case OrderStatus.PAID:
+        return OrderRequest.getPagingByStatus(OrderStatus.PAID)
+      case OrderStatus.DELIVERED:
+        return OrderRequest.getPagingByStatus(OrderStatus.DELIVERED)
+      case OrderStatus.FINISHED:
+        return OrderRequest.getPagingByStatus(OrderStatus.FINISHED)
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  bindItems(data) {
+    if (data.empty) {
+      this.setData({ empty: true })
+      return
+    }
+    if (data.accumulator.length !== 0) {
+      this.setData({
+        items: data.accumulator,
+        bottomLoading: true
+      });
+    }
+    if (!data.moreData) {
+      this.setData({
+        loadingType: 'end'
+      })
+    }
   },
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
+  onSegmentChange(event) {
+    const activeKey = event.detail.activeKey
+    this.initItems(activeKey)
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
+  async onReachBottom() {
+    const data = await this.data.paging.getMoreData()
+    this.bindItems(data)
   },
 
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  onPaySuccess(event) {
+    const oid = event.detail.oid
+    wx.navigateTo({
+      url: `/pages/pay-success/index?oid=${oid}`
+    })
   }
 })

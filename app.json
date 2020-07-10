@@ -42,7 +42,9 @@
     "s-address": "/components/address/index",
     "s-coupon": "/components/coupon/index",
     "l-radio-group": "/miniprogram_npm/lin-ui/radio-group/index",
-    "l-radio": "/miniprogram_npm/lin-ui/radio/index"
+    "l-radio": "/miniprogram_npm/lin-ui/radio/index",
+    "l-avatar": "/miniprogram_npm/lin-ui/avatar/index",
+    "l-list": "/miniprogram_npm/lin-ui/list/index"
   },
   "tabBar": {
     "borderStyle": "black",
