@@ -3,16 +3,21 @@
  * 订单详情
  */
 
+import { OrderStatus } from "../../core/enum"
+import { accSubtract } from "../../utils/number"
+import { getSlashYMDHMS } from "../../utils/date"
+
 class OrderDetail {
   leftPeriod = 0
   statusText = ''
   discountPrice = 0
-  createTime = null
+  placedTime = null
+  period = 3600
   constructor(orderDetail) {
     Object.assign(this, orderDetail)
+    this.placedTime = getSlashYMDHMS(orderDetail.placed_time)
     this.correctOrderStatus()
-    this.calDiscountPrice()
-    this.createTime = getSlashYMDHMS(orderDetail.create_time)
+    this.calDiscountPrice() 
   }
 
   orderStatusText(status) {
@@ -37,10 +42,10 @@ class OrderDetail {
   correctOrderStatus() {
     if (this.status == OrderStatus.UNPAID) {
       const currentTimestamp = new Date().getTime();
-      const createTimestamp = this.create_time;
+      const placedTimestamp = new Date(this.placedTime).getTime();
       const periodMill = this.period * 1000;
-      if ((createTimestamp + periodMill) > currentTimestamp) {
-        const mill = (createTimestamp + periodMill) - currentTimestamp
+      if ((placedTimestamp + periodMill) > currentTimestamp) {
+        const mill = (placedTimestamp + periodMill) - currentTimestamp
         this.leftPeriod = Math.round(mill / 1000)
       } else {
         this.status = OrderStatus.CANCELED

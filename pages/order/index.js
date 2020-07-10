@@ -181,8 +181,8 @@ Page({
     // 提交订单到服务器
     let oid = null
     try {
-      // const res = await OrderRequest.postOrderToServer(orderPost)
-      const res = { id: 325 }
+      const res = await OrderRequest.postOrderToServer(orderPost)
+      // const res = { id: 325 }
       if (!res.id) {
         showToast(res.message)
         this.setData({ submitBtnDisable: false })

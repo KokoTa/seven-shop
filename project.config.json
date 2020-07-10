@@ -126,6 +126,13 @@
 					"pathName": "pages/my/index",
 					"query": "way=cart",
 					"scene": null
+				},
+				{
+					"id": 9,
+					"name": "pages/my-order/index",
+					"pathName": "pages/my-order/index",
+					"query": "key=0",
+					"scene": null
 				}
 			]
 		}

@@ -2,6 +2,7 @@
 
 const { OrderRequest } = require("../../model/order")
 const { OrderStatus } = require("../../core/enum")
+const { showToast } = require("../../utils/ui")
 
 Page({
 
@@ -13,8 +14,7 @@ Page({
     items: [],
     loadingType: 'loading',
     bottomLoading: true,
-    paging: null,
-    empty: false
+    paging: null
   },
 
   /**
@@ -31,17 +31,16 @@ Page({
   },
 
   async initItems(activeKey) {
-
     this.setData({
       activeKey,
       items: []
     })
+
     this.data.paging = this.getPaging(activeKey)
     const data = await this.data.paging.getMoreData()
     console.log(data)
-    if (!data) {
-      return
-    }
+
+    if (!data) return
     this.bindItems(data)
   },
 
@@ -62,8 +61,7 @@ Page({
   },
 
   bindItems(data) {
-    if (data.empty) {
-      this.setData({ empty: true })
+    if (!data) {
       return
     }
     if (data.accumulator.length !== 0) {
@@ -92,7 +90,7 @@ Page({
   onPaySuccess(event) {
     const oid = event.detail.oid
     wx.navigateTo({
-      url: `/pages/pay-success/index?oid=${oid}`
+      url:`/pages/order-detail/index?oid=${oid}`
     })
   }
 })

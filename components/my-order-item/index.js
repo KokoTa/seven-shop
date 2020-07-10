@@ -66,12 +66,13 @@ Component({
         fullScreen: true,
         color: "#157658"
       })
-      const payParams = await Payment.getPayParms(oid)
-      let res
+
+      // const payParams = await Payment.getPayParams(oid)
+      let result
       try {
-        res = await Payment.pay(payParams)
+        // result = await wx.requestPayment(params)
+        result = { errMsg: 'requestPayment:ok' } // 支付成功
         wx.lin.hideLoading()
-        console.log(res)
         this.triggerEvent('paysuccess', {
           oid
         })

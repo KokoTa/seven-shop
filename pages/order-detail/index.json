@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "s-order-address": "/components/order-address/index",
+    "s-order-sku-item": "/components/order-sku-item/index"
+  }
 }

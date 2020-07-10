@@ -21,7 +21,7 @@ class OrderRequest {
   // 获取待支付数量
   static async getUnpaidCount() {
     const orderPage = await Http.request({
-      url: `/order/by/status/${OrderStatus.PAID}`,
+      url: `/order/status/unpaid`,
       data: {
         start: 0,
         count: 1
@@ -33,7 +33,7 @@ class OrderRequest {
   // 获取待发货数量
   static async getPaidCount() {
     const orderPage = await Http.request({
-      url: `/order/status/unpaid`,
+      url: `/order/by/status/${OrderStatus.PAID}`,
       data: {
         start: 0,
         count: 1
@@ -57,7 +57,7 @@ class OrderRequest {
   // 获取对应状态的订单
   static getPagingByStatus(status) {
     return new Paging({
-        url:`/order/by/status/${status}`
+      url: `/order/by/status/${status}`
     })
   }
 
@@ -65,6 +65,13 @@ class OrderRequest {
   static getPagingUnpaid() {
     return new Paging({
       url: `/order/status/unpaid`
+    })
+  }
+
+  // 获取订单详情
+  static async getDetail(oid) {
+    return Http.request({
+      url: `/order/detail/${oid}`
     })
   }
 }

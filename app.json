@@ -44,7 +44,8 @@
     "l-radio-group": "/miniprogram_npm/lin-ui/radio-group/index",
     "l-radio": "/miniprogram_npm/lin-ui/radio/index",
     "l-avatar": "/miniprogram_npm/lin-ui/avatar/index",
-    "l-list": "/miniprogram_npm/lin-ui/list/index"
+    "l-list": "/miniprogram_npm/lin-ui/list/index",
+    "l-countdown": "/miniprogram_npm/lin-ui/countdown/index"
   },
   "tabBar": {
     "borderStyle": "black",

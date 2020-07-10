@@ -1,0 +1,20 @@
+<view class="container">
+	<view class="address-inner">
+		<view class="left">
+			<view class="base-info">
+				<l-icon name="address1" l-class="sleeve"></l-icon>
+				<text class="name">{{address.user_name}}</text>
+				<text>{{address.mobile}}</text>
+			</view>
+			<view class="address-info">
+				<text>{{address.province}}</text>
+				<text> {{address.city}}</text>
+				<text> {{address.county}}</text>
+				<text> {{address.detail}}</text>
+			</view>
+		</view>
+		<view class="icon-container">
+			*_*
+		</view>
+	</view>
+</view>
